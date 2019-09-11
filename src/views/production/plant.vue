@@ -218,8 +218,9 @@ export default {
             this.dialogTaskInfo.selectOptions = res.data
             this.dialogTaskInfo.tableTitleList = [
               { prop: 'number', name: '编号' },
-              { prop: 'name', name: '名称' },
-              { prop: 'description', name: '描述' }
+              { prop: 'description', name: '描述' },
+              { prop: 'quantity', name: '数量' },
+              { prop: 'unitDict', name: '单位' },
             ] // 表格头信息
             this.$refs.dialogTaskSelectTable.showTable()
           }

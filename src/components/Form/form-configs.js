@@ -338,6 +338,7 @@ export const productionOrderFormConfigs = [
 ]
 // 工单
 export const workOrderFormConfigs = [
+  { type: 'dialog', formItemProp: { label: '生产订单', prop: 'productionOrderNumber', id: 'productionOrder' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '编号', prop: 'number' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '描述', prop: 'description' }, elementProp: { size: 'medium' }},
   { type: 'dialog', formItemProp: { label: '产品', prop: 'productName', id: 'product' }, elementProp: { size: 'medium' }},
@@ -367,30 +368,34 @@ export const taskTypeFormConfigs = [
 ]
 // 任务
 export const taskFormConfigs = [
-  { type: 'input', formItemProp: { label: '工单', prop: 'workOrderId' }, elementProp: { size: 'medium' }},
+  { type: 'dialog', formItemProp: { label: '工单', prop: 'workOrderNumber', id: 'workOrder' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '任务编号', prop: 'number' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '任务描述', prop: 'description' }, elementProp: { size: 'medium' }},
-  { type: 'dialog', formItemProp: { label: '任务类型', prop: 'taskTypeName', id: 'taskType' }, elementProp: { size: 'medium' }},
+  {
+    type: 'select',
+    formItemProp: { label: '任务类型', prop: 'taskTypeDict' },
+    optionList: setArrayMapVal(JSON.parse(localStorage.getItem('TASK_TYPE')))
+  },
   {
     type: 'select',
     formItemProp: { label: '状态', prop: 'statusDict' },
     optionList: setArrayMapVal(JSON.parse(localStorage.getItem('DISPATCH_LIST_STATUS')))
   },
   { type: 'dialog', formItemProp: { label: '产品', prop: 'productName', id: 'product' }, elementProp: { size: 'medium' }},
-  { type: 'dialog', formItemProp: { label: '物料', prop: 'materialName', id: 'material' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '数量', prop: 'quantity' }, elementProp: { size: 'medium' }},
   {
     type: 'select',
     formItemProp: { label: '单位', prop: 'unitDict' },
     optionList: setArrayMapVal(JSON.parse(localStorage.getItem('QUANTITY_UNIT_DICT')))
   },
-  { type: 'datePicker', formItemProp: { label: '任务生成时间', prop: 'generateTime' }, elementProp: { size: 'medium' }},
-  { type: 'datePicker', formItemProp: { label: '发布时间', prop: 'issuedTime' }, elementProp: { size: 'medium' }},
-  { type: 'datePicker', formItemProp: { label: '完成时间', prop: 'completeTime' }, elementProp: { size: 'medium' }},
+  // { type: 'datePicker', formItemProp: { label: '任务生成时间', prop: 'generateTime' }, elementProp: { size: 'medium' }},
+  // { type: 'datePicker', formItemProp: { label: '发布时间', prop: 'issuedTime' }, elementProp: { size: 'medium' }},
+  // { type: 'datePicker', formItemProp: { label: '完成时间', prop: 'completeTime' }, elementProp: { size: 'medium' }},
   { type: 'datePicker', formItemProp: { label: '计划开始时间', prop: 'planBeginTime' }, elementProp: { size: 'medium' }},
   { type: 'datePicker', formItemProp: { label: '计划结束时间', prop: 'planEndTime' }, elementProp: { size: 'medium' }},
   { type: 'datePicker', formItemProp: { label: '实际开始时间', prop: 'beginTime' }, elementProp: { size: 'medium' }},
-  { type: 'datePicker', formItemProp: { label: '实际结束时间', prop: 'endTime' }, elementProp: { size: 'medium' }}
+  { type: 'datePicker', formItemProp: { label: '实际结束时间', prop: 'endTime' }, elementProp: { size: 'medium' }},
+  { type: 'dialog', formItemProp: { label: '物料', prop: 'materialName', id: 'material' }, elementProp: { size: 'medium' }}
 ]
 // 公司
 export const companyFormConfigs = [
@@ -901,7 +906,8 @@ export const packagingFormConfigs = [
 
 // 种植
 export const plantFormConfigs = [
-  { type: 'dialog', formItemProp: { label: '任务', prop: 'taskNumber', id: 'task' }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '任务', prop: 'taskNumber' }, elementProp: { size: 'medium' }},
+  // { type: 'input', formItemProp: { label: '任务', prop: 'taskNumber', id: 'task' }, elementProp: { size: 'medium' }},
   { type: 'dialog', formItemProp: { label: '生产单元', prop: 'productionCellNumber', id: 'productionCell' }, elementProp: { size: 'medium' }},
   { type: 'dialog', formItemProp: { label: '产品', prop: 'productName', id: 'product' }, elementProp: { size: 'medium' }},
   { type: 'dialog', formItemProp: { label: '责任人', prop: 'managerName', id: 'manager' }, elementProp: { size: 'medium' }},
