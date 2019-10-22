@@ -18,23 +18,23 @@ const companyRouter = {
       name: 'Warehouse',
       meta: { title: '库房' }
     },
-    {
-      path: 'warehouse-area',
-      component: () => import('@/views/warehousing/warehouse-area'),
-      name: 'WarehouseArea',
-      meta: { title: '库区' }
-    },
-    {
-      path: 'warehouse-location',
-      component: () => import('@/views/warehousing/warehouse-location'),
-      name: 'WarehouseLocation',
-      meta: { title: '库位' }
-    },
+    // {
+    //   path: 'warehouse-area',
+    //   component: () => import('@/views/warehousing/warehouse-area'),
+    //   name: 'WarehouseArea',
+    //   meta: { title: '库区' }
+    // },
+    // {
+    //   path: 'warehouse-location',
+    //   component: () => import('@/views/warehousing/warehouse-location'),
+    //   name: 'WarehouseLocation',
+    //   meta: { title: '库位' }
+    // },
     {
       path: 'stock',
       component: () => import('@/views/warehousing/stock'),
       name: 'Stock',
-      meta: { title: '库存' },
+      meta: { title: '库存' }
     }
     // ,
     // {

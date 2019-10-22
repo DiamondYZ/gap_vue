@@ -59,7 +59,7 @@
         <el-button type="primary" size="small" icon="view" @click="add()"><i class="el-icon-plus" />新增
         </el-button>
         <el-button type="primary" size="small" icon="view" :disabled="deleteBtnDisabled" @click="deleteSelectedRow()">
-          批量删除
+          <i class="el-icon-delete" />删除
         </el-button>
       </div>
 
@@ -111,7 +111,7 @@
 <script>
 
 import ShowDetailForm from '@/components/Form/show-detail-form.vue'
-import { consumerFormConfigs, formData } from '../../components/Form/form-configs.js'
+import { consumerFormConfigs } from '../../components/Form/form-configs.js'
 
 export default {
   components: {
@@ -130,14 +130,15 @@ export default {
       showForm: false, // 是否显示表单0
       formStatus: '', // 表单状态  是否可点击
       tableTitleList: [
+        { prop: 'lineNumber', name: '行号' },
+        { prop: 'number', name: '编号' },
         { prop: 'name', name: '名称' },
-        { prop: 'number', name: '账号' },
         { prop: 'description', name: '描述' },
         { prop: 'statusDict', name: '状态' },
+        { prop: 'companyTypeDict', name: '企业类型' },
         { prop: 'contactName', name: '联系人名称' },
         { prop: 'contactPhone', name: '联系人电话' },
-        { prop: 'registrationDate', name: '注册日期' },
-        { prop: 'companyTypeDict', name: '企业类型dict' }
+        { prop: 'registrationDate', name: '注册日期' }
       ], // 表格头信息
       tableData: [], // 表格数据
       formData: {}, // 表单数据
@@ -154,10 +155,18 @@ export default {
   mounted() {
     this.getList()
   },
+  created() {
+    this.$store.dispatch('common/getPullDownList', { classCode: 'ENTERPRISE_STATUS_DICT' }) // 状态
+    this.$store.dispatch('common/getPullDownList', { classCode: 'ENTERPRISE_TYPE_DICT' }) // 企业类型
+  },
   methods: {
     formatRole(row, column) {
-      if (column.property === '1') {
-        return row[column.property]
+      if (column.property === 'statusDict') {
+        const statusArr = JSON.parse(localStorage.getItem('ENTERPRISE_STATUS_DICT'))
+        return this.getArrayMapVal(statusArr, row[column.property])
+      } else if (column.property === 'companyTypeDict') {
+        const statusArr = JSON.parse(localStorage.getItem('ENTERPRISE_TYPE_DICT'))
+        return this.getArrayMapVal(statusArr, row[column.property])
       } else {
         return row[column.property]
       }

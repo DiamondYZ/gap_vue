@@ -13,6 +13,7 @@
               <el-button
                 style="float: right"
                 type="primary"
+                icon="el-icon-search"
                 size="small"
                 @click="getList()"
               >
@@ -51,8 +52,14 @@
       <div style="float: right;margin:20px 30px">
         <el-button type="primary" size="small" icon="view" @click="add()"><i class="el-icon-plus" />新增
         </el-button>
-        <el-button type="primary" size="small" icon="view" :disabled="deleteBtnDisabled" @click="deleteSelectedRow()">
-          批量删除
+        <el-button
+          type="danger"
+          icon="el-icon-delete"
+          size="small"
+          :disabled="deleteBtnDisabled"
+          @click="deleteSelectedRow()"
+        >
+          删除
         </el-button>
       </div>
 
@@ -77,6 +84,7 @@
               v-for="(item,index) in tableTitleList"
               :prop="item.prop"
               :label="item.name"
+              :formatter="formatRole"
               align="center"
             />
           </el-table>
@@ -96,6 +104,18 @@
         :form-configs="stockFormConfigs"
         @getList="getList()"
       />
+      <dialog-table
+        ref="dialogMaterialSelectTable"
+        :dialog-info="dialogMaterialInfo"
+        :form-configs="stockFormConfigs"
+        :table-title="tableTitle"
+      />
+      <dialog-table
+        ref="dialogWarehouseSelectTable"
+        :dialog-info="dialogWarehouseInfo"
+        :form-configs="stockFormConfigs"
+        :table-title="tableTitle"
+      />
     </el-card>
   </div>
 </template>
@@ -103,11 +123,13 @@
 <script>
 
 import ShowDetailForm from '@/components/Form/show-detail-form.vue'
+import DialogTable from '@/components/Form/dialog-table.vue'
 import { stockFormConfigs, formData } from '../../components/Form/form-configs.js'
 
 export default {
   components: {
-    'show-detail-form': ShowDetailForm
+    'show-detail-form': ShowDetailForm,
+    'dialog-table': DialogTable
   },
   data() {
     return {
@@ -116,18 +138,41 @@ export default {
         listTitle: '库存列表',
         detailTitle: '库存详细信息'
       }, // 页面信息
+      dialogWarehouseInfo: {
+        selectDialogTitle: '选择仓库',
+        dialogAxiosName: 'warehouse',
+        dialogId: 'warehouseId',
+        selectOptions: [],
+        tableTitleList: [
+          { prop: 'number', name: '仓库编号' },
+          { prop: 'description', name: '仓库描述' },
+          { prop: 'position', name: '数量' }
+        ]
+      },
+      dialogMaterialInfo: {
+        selectDialogTitle: '选择物料',
+        dialogAxiosName: 'material',
+        dialogId: 'materialId',
+        selectOptions: [],
+        tableTitleList: [
+          { prop: 'materialTypeName', name: '仓库编号' },
+          { prop: 'number', name: '物料名称' },
+          { prop: 'name', name: '数量' },
+          { prop: 'description', name: '单位dict' }
+        ]
+      },
       search_data: {}, // 搜索条件
       clickLineId: '', // 当前点击行id
       deleteBtnDisabled: true, // 删除id
       showForm: false, // 是否显示表单0
       formStatus: '', // 表单状态  是否可点击
       tableTitleList: [
+        { prop: 'warehouseNumber', name: '仓库编号' },
+        { prop: 'materialId', name: '物料名称' },
         { prop: 'quantity', name: '数量' },
         { prop: 'unitDict', name: '单位dict' },
         { prop: 'availableQuantity', name: '可用数量' },
-        { prop: 'freezeQuantity', name: '冻结数量' },
-        { prop: 'warehouseNumber', name: '仓库编号' },
-        { prop: 'materialId', name: '物料名称' }
+        { prop: 'freezeQuantity', name: '冻结数量' }
       ], // 表格头信息
       tableData: [], // 表格数据
       formData: {}, // 表单数据
@@ -137,14 +182,65 @@ export default {
       pageSize: 10, // 每页显示多少条
       pageTotal: 0, // 总条数
       activeNames: [],
-      stockFormConfigs
+      stockFormConfigs,
+      tableTitle: []
     }
   },
-  computed: {},
+  computed: {
+    listeningClickDialog() {
+      return this.$store.state.common.selectToGetOptionsProp
+    }
+  },
+  watch: {
+    listeningClickDialog(val) {
+      if (val) {
+        let param
+        param = { url: val + '/getPullDownList' }
+        this.$store.dispatch('common/getSelectOptionsList', param).then((res) => {
+          if (val === 'material') {
+            this.dialogMaterialInfo.selectOptions = res.data
+            // this.dialogInfo.tableTitleList = [
+            //     { prop: 'number', name: '编号' },
+            //     { prop: 'name', name: '名称' },
+            //     { prop: 'description', name: '描述' },
+            //     { prop: 'departmentName', name: '部门' },
+            //     { prop: 'position', name: '职位' },
+            //     { prop: 'entryDate', name: '入职日期' }
+            // ] // 表格头信息
+            this.$refs.dialogMaterialSelectTable.showTable()
+          }
+          if (val === 'warehouse') {
+            this.dialogWarehouseInfo.selectOptions = res.data
+            // this.dialogProductionBaseInfo.tableTitleList = [
+            //     { prop: 'number', name: '编号' },
+            //     { prop: 'name', name: '名称' },
+            //     { prop: 'description', name: '描述' },
+            //     { prop: 'managerName', name: '负责人' }
+            // ] // 表格头信息
+            this.$refs.dialogWarehouseSelectTable.showTable()
+          }
+        })
+          .catch(() => {
+
+          })
+      }
+    }
+  },
   mounted() {
     this.getList()
   },
+  created() {
+    this.$store.dispatch('common/getPullDownList', { classCode: 'QUANTITY_UNIT_DICT' }) // 数量单位
+  },
   methods: {
+    formatRole(row, column) {
+      if (column.property === 'unitDict') {
+        const statusArr = JSON.parse(localStorage.getItem('QUANTITY_UNIT_DICT'))
+        return this.getArrayMapVal(statusArr, row[column.property])
+      } else {
+        return row[column.property]
+      }
+    },
     // 设置表头颜色
     setHeaderRowStyle({ row, rowIndex }) {
       if (rowIndex === 0) {

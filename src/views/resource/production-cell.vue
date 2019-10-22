@@ -179,7 +179,6 @@ export default {
       return this.$store.state.common.selectToGetOptionsProp
     }
   },
-
   watch: {
     listeningClickDialog(val) {
       if (val) {

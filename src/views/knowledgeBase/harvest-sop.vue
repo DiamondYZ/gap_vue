@@ -12,6 +12,7 @@
               <el-button
                 style="float: right"
                 type="primary"
+                icon="el-icon-search"
                 size="small"
                 @click="getList()"
               >
@@ -39,8 +40,8 @@
       <div style="float: right;margin:20px 30px">
         <el-button type="primary" size="small" icon="view" @click="add()"><i class="el-icon-plus" />新增
         </el-button>
-        <el-button type="primary" size="small" icon="view" :disabled="deleteBtnDisabled" @click="deleteSelectedRow()">
-          批量删除
+        <el-button type="danger" size="small" icon="el-icon-delete" :disabled="deleteBtnDisabled" @click="deleteSelectedRow()">
+          删除
         </el-button>
       </div>
 
@@ -84,6 +85,12 @@
         :form-configs="harvestSopFormConfigs"
         @getList="getList()"
       />
+      <dialog-table
+        ref="dialogSelectTable"
+        :dialog-info="dialogInfo"
+        :form-configs="harvestSopFormConfigs"
+        :table-title="tableTitle"
+      />
     </el-card>
   </div>
 </template>
@@ -91,11 +98,13 @@
 <script>
 
 import ShowDetailForm from '@/components/Form/show-detail-form.vue'
+import DialogTable from '@/components/Form/dialog-table.vue'
 import { harvestSopFormConfigs, formData } from '../../components/Form/form-configs.js'
 
 export default {
   components: {
-    'show-detail-form': ShowDetailForm
+    'show-detail-form': ShowDetailForm,
+    'dialog-table': DialogTable
   },
   data() {
     return {
@@ -104,6 +113,13 @@ export default {
         listTitle: '采收SOP列表',
         detailTitle: '采收SOP详细信息'
       }, // 页面信息
+      dialogInfo: {
+        selectDialogTitle: '选择产品',
+        dialogAxiosName: 'product',
+        dialogId: 'productId',
+        selectOptions: [],
+        tableTitleList: []
+      },
       search_data: {}, // 搜索条件
       clickLineId: '', // 当前点击行id
       deleteBtnDisabled: true, // 删除id
@@ -122,10 +138,39 @@ export default {
       pageSize: 10, // 每页显示多少条
       pageTotal: 0, // 总条数
       activeNames: [],
-      harvestSopFormConfigs
+      harvestSopFormConfigs,
+      tableTitle: []
     }
   },
-  computed: {},
+  computed: {
+    listeningClickDialog() {
+      return this.$store.state.common.selectToGetOptionsProp
+    }
+  },
+  watch: {
+    listeningClickDialog(val) {
+      if (val) {
+        const param = {
+          url: val + '/getPullDownList'
+        }
+        this.$store.dispatch('common/getSelectOptionsList', param).then((res) => {
+          this.dialogInfo.selectOptions = res.data
+          if (val === 'product') {
+            this.dialogInfo.tableTitleList = [
+              { prop: 'number', name: '编号' },
+              { prop: 'name', name: '名称' },
+              { prop: 'description', name: '描述' },
+              { prop: 'productTypeName', name: '产品类型' }
+            ] // 表格头信息
+          }
+          this.$refs.dialogSelectTable.showTable()
+        })
+          .catch(() => {
+
+          })
+      }
+    }
+  },
   mounted() {
     this.getList()
   },
