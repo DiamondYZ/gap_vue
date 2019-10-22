@@ -18,12 +18,12 @@ const companyRouter = {
       name: 'ProductionBase',
       meta: { title: '生产基地' }
     },
-    {
-      path: 'production-base-staff',
-      component: () => import('@/views/resource/production-base-staff'),
-      name: 'ProductionBaseStaff',
-      meta: { title: '生产基地员工' }
-    },
+    // {
+    //   path: 'production-base-staff',
+    //   component: () => import('@/views/resource/production-base-staff'),
+    //   name: 'ProductionBaseStaff',
+    //   meta: { title: '生产基地员工' }
+    // },
     {
       path: 'production-cell',
       component: () => import('@/views/resource/production-cell'),
@@ -37,16 +37,16 @@ const companyRouter = {
       meta: { title: '设备类型' }
     },
     {
-      path: 'equipment',
-      component: () => import('@/views/resource/equipment'),
-      name: 'Equipment',
-      meta: { title: '设备' }
-    },
-    {
       path: 'equipment-model',
       component: () => import('@/views/resource/equipment-model'),
       name: 'EquipmentModel',
       meta: { title: '设备型号' }
+    },
+    {
+      path: 'equipment',
+      component: () => import('@/views/resource/equipment'),
+      name: 'Equipment',
+      meta: { title: '设备' }
     },
     {
       path: 'machinery-type',

@@ -13,8 +13,8 @@ import {
 
 const state = {
   upload_qiniu_addr: 'http://pz90rgn4x.bkt.clouddn.com/',
-  selectToGetOptionsProp: "",   //判断点击选择弹出dialog
-  selectedValue: "",   // 存储选择的ID及name
+  selectToGetOptionsProp: '', // 判断点击选择弹出dialog
+  selectedValue: '' // 存储选择的ID及name
 }
 
 const mutations = {
@@ -36,17 +36,17 @@ const mutations = {
   },
   // 清空下拉属性
   set_options_empty_value(state) {
-    state.selectToGetOptionsProp = ""
+    state.selectToGetOptionsProp = ''
   },
   // 清空下拉属性
   setSelectedValue(state, param) {
-    state.selectedValue = param;
+    state.selectedValue = param
   }
 }
 
 const actions = {
   // user login
-  getList({commit}, param) {
+  getList({ commit }, param) {
     return new Promise((resolve, reject) => {
       getList(param).then(response => {
         resolve(response)
@@ -55,7 +55,7 @@ const actions = {
       })
     })
   },
-  getDetail({commit}, param) {
+  getDetail({ commit }, param) {
     return new Promise((resolve, reject) => {
       getDetail(param).then(response => {
         resolve(response)
@@ -64,7 +64,7 @@ const actions = {
       })
     })
   },
-  deleteDetail({commit}, param) {
+  deleteDetail({ commit }, param) {
     return new Promise((resolve, reject) => {
       deleteDetail(param).then(response => {
         resolve(response)
@@ -73,7 +73,7 @@ const actions = {
       })
     })
   },
-  saveDetail({commit}, param) {
+  saveDetail({ commit }, param) {
     return new Promise((resolve, reject) => {
       saveDetail(param).then(response => {
         resolve(response)
@@ -82,7 +82,7 @@ const actions = {
       })
     })
   },
-  editDetail({commit}, param) {
+  editDetail({ commit }, param) {
     return new Promise((resolve, reject) => {
       editDetail(param).then(response => {
         resolve(response)
@@ -91,12 +91,12 @@ const actions = {
       })
     })
   },
-  getPullDownList({commit}, param) {
+  getPullDownList({ commit }, param) {
     commit('getPullDownList', param)
   },
 
   // 二级表格
-  selectSecondLevelTableList({dispatch, commit}, param) {
+  selectSecondLevelTableList({ dispatch, commit }, param) {
     return new Promise((resolve, reject) => {
       selectSecondLevelTableList(param).then(response => {
         resolve(response)
@@ -106,8 +106,8 @@ const actions = {
     })
   },
 
-  //部门下拉
-  getSelectList({dispatch, commit}, param) {
+  // 部门下拉
+  getSelectList({ dispatch, commit }, param) {
     return new Promise((resolve, reject) => {
       getSelectList(param.url).then(response => {
         const newArr = []
@@ -131,8 +131,8 @@ const actions = {
       })
     })
   },
-  //取下拉数据
-  getSelectOptionsList({dispatch, commit}, param) {
+  // 取下拉数据
+  getSelectOptionsList({ dispatch, commit }, param) {
     return new Promise((resolve, reject) => {
       getSelectList(param.url).then(response => {
         resolve(response)
@@ -142,7 +142,7 @@ const actions = {
     })
   },
   // 该数据状态
-  setDataState({commit}, param) {
+  setDataState({ commit }, param) {
     return new Promise((resolve, reject) => {
       setDataState(param).then(response => {
         resolve(response)
@@ -152,7 +152,7 @@ const actions = {
     })
   },
   // 该数据状态
-  getQiniuToken({commit}, param) {
+  getQiniuToken({ commit }, param) {
     return new Promise((resolve, reject) => {
       getQiniuToken(param).then(response => {
         resolve(response)
@@ -162,16 +162,16 @@ const actions = {
     })
   },
   // 该数据状态
-  set_options_value({commit}, prop) {
+  set_options_value({ commit }, prop) {
     console.log(prop)
     commit('set_options_value', prop)
   },
   // 该数据状态
-  set_options_empty_value({commit}) {
+  set_options_empty_value({ commit }) {
     commit('set_options_empty_value')
   },
   // 清空下拉属性
-  setSelectedValue({commit}, param) {
+  setSelectedValue({ commit }, param) {
     commit('setSelectedValue', param)
   }
 }
