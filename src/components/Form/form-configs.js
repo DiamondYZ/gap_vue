@@ -902,7 +902,7 @@ export const packagingFormConfigs = [
 // 种植
 export const plantFormConfigs = [
   { type: 'dialog', formItemProp: { label: '任务', prop: 'taskNumber', id: 'task' }, elementProp: { size: 'medium' }},
-  { type: 'dialog', formItemProp: { label: '生产单元', prop: 'productionCellNumber', id: 'productCell' }, elementProp: { size: 'medium' }},
+  { type: 'dialog', formItemProp: { label: '生产单元', prop: 'productionCellNumber', id: 'productionCell' }, elementProp: { size: 'medium' }},
   { type: 'dialog', formItemProp: { label: '产品', prop: 'productName', id: 'product' }, elementProp: { size: 'medium' }},
   { type: 'dialog', formItemProp: { label: '责任人', prop: 'managerName', id: 'manager' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '数量', prop: 'quantity' }, elementProp: { size: 'medium' }},

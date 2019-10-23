@@ -205,9 +205,9 @@ export default {
         let urlValue
         if (val === 'manager') {
           urlValue = 'staff'
-        } else if (val === 'productBase') {
+        } else if (val === 'productionBase') {
           urlValue = 'production-base'
-        } else if (val === 'productCell') {
+        } else if (val === 'productionCell') {
           urlValue = 'production-cell'
         } else {
           urlValue = val
@@ -235,7 +235,7 @@ export default {
             ] // 表格头信息
             this.$refs.dialogStaffSelectTable.showTable()
           }
-          if (val === 'productCell') {
+          if (val === 'productionCell') {
             this.dialogProductionCellInfo.selectOptions = res.data
             this.dialogProductionCellInfo.tableTitleList = [
               { prop: 'number', name: '编号' },
