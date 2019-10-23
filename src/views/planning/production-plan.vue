@@ -13,6 +13,7 @@
               <el-button
                 style="float: right"
                 type="primary"
+                icon="el-icon-search"
                 size="small"
                 @click="getList()"
               >
@@ -79,8 +80,8 @@
         </el-button>
         <el-button type="primary" size="small" icon="view" @click="add()"><i class="el-icon-plus" />新增
         </el-button>
-        <el-button type="primary" size="small" icon="view" :disabled="deleteBtnDisabled" @click="deleteSelectedRow()">
-          批量删除
+        <el-button type="danger" size="small" icon="el-icon-delete" :disabled="deleteBtnDisabled" @click="deleteSelectedRow()">
+          删除
         </el-button>
       </div>
 

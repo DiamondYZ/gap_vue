@@ -4,14 +4,14 @@ import {
   deleteCompanyDetail,
   saveCompanyDetail,
   editCompanyDetail,
-  //部门
+  // 部门
   getDepartmentList,
   getDepartmentDetail,
   deleteDepartmentDetail,
   saveDepartmentDetail,
   editDepartmentDetail,
-  
-	//人员
+
+	// 人员
   getStaffList,
   getStaffDetail,
   deleteStaffDetail,
@@ -137,8 +137,8 @@ const actions = {
       })
     })
   },
-  
-  //人员
+
+  // 人员
   getStaffList({ commit }, param) {
     return new Promise((resolve, reject) => {
       getStaffList(param).then(response => {

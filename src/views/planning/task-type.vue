@@ -13,6 +13,7 @@
               <el-button
                 style="float: right"
                 type="primary"
+                icon="el-icon-search"
                 size="small"
                 @click="getList()"
               >
@@ -44,8 +45,8 @@
       <div style="float: right;margin:20px 30px">
         <el-button type="primary" size="small" icon="view" @click="add()"><i class="el-icon-plus" />新增
         </el-button>
-        <el-button type="primary" size="small" icon="view" :disabled="deleteBtnDisabled" @click="deleteSelectedRow()">
-          批量删除
+        <el-button type="danger" size="small" icon="el-icon-delete" :disabled="deleteBtnDisabled" @click="deleteSelectedRow()">
+          删除
         </el-button>
       </div>
 
@@ -115,6 +116,7 @@ export default {
       showForm: false, // 是否显示表单0
       formStatus: '', // 表单状态  是否可点击
       tableTitleList: [
+        { prop: 'lineNumber', name: '行号' },
         { prop: 'number', name: '编号' },
         { prop: 'name', name: '名称' },
         { prop: 'description', name: '描述' },

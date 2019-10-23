@@ -35,7 +35,7 @@ const productionRouter = {
       component: () => import('@/views/production/packaging'),
       name: 'Packaging',
       meta: { title: '包装' }
-    },
+    }
     // {
     //   path: 'storage',
     //   component: () => import('@/views/production/storage'),
