@@ -99,12 +99,6 @@
         :table-title="tableTitle"
       />
       <dialog-table
-        ref="dialogProductionBaseSelectTable"
-        :dialog-info="dialogProductionBaseInfo"
-        :form-configs="plantFormConfigs"
-        :table-title="tableTitle"
-      />
-      <dialog-table
         ref="dialogProductionCellSelectTable"
         :dialog-info="dialogProductionCellInfo"
         :form-configs="plantFormConfigs"
@@ -151,13 +145,6 @@ export default {
         selectOptions: [],
         tableTitleList: []
       },
-      dialogProductionBaseInfo: {
-        selectDialogTitle: '生产基地',
-        dialogAxiosName: 'productionBase',
-        dialogId: 'productionBaseId',
-        selectOptions: [],
-        tableTitleList: []
-      },
       dialogProductionCellInfo: {
         selectDialogTitle: '生产单元',
         dialogAxiosName: 'productionCell',
@@ -186,8 +173,9 @@ export default {
       formStatus: '', // 表单状态  是否可点击
       tableTitleList: [
         { prop: 'taskNumber', name: '任务编号' },
-        { prop: 'productBaseName', name: '生产基地' },
-        { prop: 'productCellNumber', name: '生产单元' },
+        { prop: 'taskDescription', name: '任务描述' },
+        // { prop: 'productionBaseName', name: '生产基地' },
+        { prop: 'productionCellNumber', name: '生产单元' },
         { prop: 'managerName', name: '责任人' },
         { prop: 'productName', name: '产品' },
         { prop: 'quantity', name: '数量' },
@@ -217,9 +205,9 @@ export default {
         let urlValue
         if (val === 'manager') {
           urlValue = 'staff'
-        } else if (val === 'productionBase') {
+        } else if (val === 'productBase') {
           urlValue = 'production-base'
-        } else if (val === 'productionCell') {
+        } else if (val === 'productCell') {
           urlValue = 'production-cell'
         } else {
           urlValue = val
@@ -247,17 +235,7 @@ export default {
             ] // 表格头信息
             this.$refs.dialogStaffSelectTable.showTable()
           }
-          if (val === 'productionBase') {
-            this.dialogProductionBaseInfo.selectOptions = res.data
-            this.dialogProductionBaseInfo.tableTitleList = [
-              { prop: 'number', name: '编号' },
-              { prop: 'name', name: '名称' },
-              { prop: 'description', name: '描述' },
-              { prop: 'managerName', name: '负责人' }
-            ] // 表格头信息
-            this.$refs.dialogProductionBaseSelectTable.showTable()
-          }
-          if (val === 'productionCell') {
+          if (val === 'productCell') {
             this.dialogProductionCellInfo.selectOptions = res.data
             this.dialogProductionCellInfo.tableTitleList = [
               { prop: 'number', name: '编号' },
@@ -287,17 +265,12 @@ export default {
     this.getList()
   },
   created() {
-    this.$store.dispatch('common/getPullDownList', { classCode: 'PRODUCTION_CELL_STATUS_DICT' }) // 生产单元状态
-    this.$store.dispatch('common/getPullDownList', { classCode: 'AREA_UNIT_DICT' }) // 面积单位
+    this.$store.dispatch('common/getPullDownList', { classCode: 'QUANTITY_UNIT_DICT' }) // 数量单位
   },
   methods: {
     formatRole(row, column) {
-      if (column.property === 'statusDict') {
-        const statusArr = JSON.parse(localStorage.getItem('PRODUCTION_CELL_STATUS_DICT'))
-        return this.getArrayMapVal(statusArr, row[column.property])
-      }
-      if (column.property === 'areaUnitDict') {
-        const statusArr = JSON.parse(localStorage.getItem('AREA_UNIT_DICT'))
+      if (column.property === 'unitDict') {
+        const statusArr = JSON.parse(localStorage.getItem('QUANTITY_UNIT_DICT'))
         return this.getArrayMapVal(statusArr, row[column.property])
       } else {
         return row[column.property]

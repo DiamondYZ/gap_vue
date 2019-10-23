@@ -902,9 +902,9 @@ export const packagingFormConfigs = [
 // 种植
 export const plantFormConfigs = [
   { type: 'dialog', formItemProp: { label: '任务', prop: 'taskNumber', id: 'task' }, elementProp: { size: 'medium' }},
-  { type: 'dialog', formItemProp: { label: '生产基地', prop: 'productionBaseName', id: 'productionBase' }, elementProp: { size: 'medium' }},
-  { type: 'dialog', formItemProp: { label: '生产单元', prop: 'productionCellNumber', id: 'productionCell' }, elementProp: { size: 'medium' }},
+  { type: 'dialog', formItemProp: { label: '生产单元', prop: 'productionCellNumber', id: 'productCell' }, elementProp: { size: 'medium' }},
   { type: 'dialog', formItemProp: { label: '产品', prop: 'productName', id: 'product' }, elementProp: { size: 'medium' }},
+  { type: 'dialog', formItemProp: { label: '责任人', prop: 'managerName', id: 'manager' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '数量', prop: 'quantity' }, elementProp: { size: 'medium' }},
   {
     type: 'select',
@@ -913,9 +913,8 @@ export const plantFormConfigs = [
   },
   { type: 'datePicker', formItemProp: { label: '开始时间', prop: 'beginTime' }, elementProp: { size: 'medium' }},
   { type: 'datePicker', formItemProp: { label: '结束时间', prop: 'endTime' }, elementProp: { size: 'medium' }},
-  { type: 'dialog', formItemProp: { label: '责任人', prop: 'managerName', id: 'manager' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '备注', prop: 'remark' }, elementProp: { size: 'medium' }},
-  { type: 'img', formItemProp: { label: '图片', prop: 'picPath' }, elementProp: { size: 'medium' }}
+  { type: 'img', formItemProp: { label: '图片', prop: 'picPath' }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '备注', prop: 'remark' }, elementProp: { size: 'medium' }}
 ]
 
 // 加工
