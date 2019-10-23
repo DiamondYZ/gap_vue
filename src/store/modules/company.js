@@ -11,7 +11,7 @@ import {
   saveDepartmentDetail,
   editDepartmentDetail,
 
-	// 人员
+  // 人员
   getStaffList,
   getStaffDetail,
   deleteStaffDetail,
@@ -91,7 +91,7 @@ const actions = {
       })
     })
   },
-  //部门
+  // 部门
   getDepartmentList({ commit }, param) {
     return new Promise((resolve, reject) => {
       getDepartmentList(param).then(response => {
@@ -183,7 +183,7 @@ const actions = {
         reject(error)
       })
     })
-  },
+  }
 }
 
 export default {

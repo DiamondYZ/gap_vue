@@ -193,7 +193,7 @@ export default {
           this.dialogInfo.selectOptions = res.data
           if (val === 'department') {
             this.dialogInfo.tableTitleList = [
-              {prop: 'lineNumber', name: '行号'},
+              { prop: 'lineNumber', name: '行号' },
               { prop: 'number', name: '编号' },
               { prop: 'name', name: '名称' },
               { prop: 'description', name: '描述' },
