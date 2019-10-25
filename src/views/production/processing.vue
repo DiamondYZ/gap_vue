@@ -39,8 +39,8 @@
       <div style="float: right;margin:20px 30px">
         <el-button type="primary" size="small" icon="view" @click="add()"><i class="el-icon-plus" />新增
         </el-button>
-        <el-button type="primary" size="small" icon="view" :disabled="deleteBtnDisabled" @click="deleteSelectedRow()">
-          批量删除
+        <el-button type="danger" size="small" icon="el-icon-delete" :disabled="deleteBtnDisabled" @click="deleteSelectedRow()">
+          删除
         </el-button>
       </div>
 
@@ -110,13 +110,14 @@ export default {
       showForm: false, // 是否显示表单0
       formStatus: '', // 表单状态  是否可点击
       tableTitleList: [
-        { prop: 'taskNumber', name: '任务编号' },
-        { prop: 'productBaseName', name: '生产基地' },
-        { prop: 'productCellNumber', name: '生产单元' },
-        { prop: 'operatorId', name: '操作人' },
-        { prop: 'productName', name: '产品' },
-        { prop: 'quantity', name: '数量' },
-        { prop: 'unitDict', name: '单位' }
+          {prop: 'taskNumber', name: '任务编号'},
+          {prop: 'taskDescription', name: '任务描述'},
+          {prop: 'productionCellNumber', name: '生产单元'},
+          {prop: 'managerName', name: '责任人'},
+          {prop: 'productName', name: '产品'},
+          {prop: 'taskQuantity', name: '任务数量'},
+          {prop: 'quantity', name: '本次完成数量'},
+          {prop: 'unitDict', name: '单位'}
 
       ], // 表格头信息
       tableData: [], // 表格数据

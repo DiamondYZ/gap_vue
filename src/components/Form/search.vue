@@ -25,7 +25,7 @@
       <el-button type="primary" size="mini" icon="view" @click='add()'><i class="el-icon-plus"/>新增
       </el-button>
       <el-button type="primary" size="mini" icon="view" @click='deleteSelectedRow()' :disabled="deleteBtnDisabled">
-        批量删除
+        删除
       </el-button>
     </div>
   </div>

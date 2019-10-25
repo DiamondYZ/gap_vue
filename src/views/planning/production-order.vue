@@ -183,9 +183,9 @@ export default {
         { prop: 'number', name: '编号' },
         { prop: 'description', name: '描述' },
         { prop: 'statusDict', name: '状态' },
-        { prop: 'productDescription', name: '产品描述' },
-        { prop: 'productionBaseName', name: '生产基地名称' },
-        { prop: 'productName', name: '产品名称' },
+        // { prop: 'productDescription', name: '产品' },
+        { prop: 'productionBaseName', name: '生产基地' },
+        { prop: 'productName', name: '产品' },
         { prop: 'quantity', name: '数量' },
         { prop: 'unitDict', name: '单位' }
       ], // 表格头信息

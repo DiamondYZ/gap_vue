@@ -4,6 +4,7 @@
       in-line="true"
       ref="form"
       :model="form"
+      :rules="rules"
       v-bind="formBind"
       v-on="$listeners"
     >
@@ -14,19 +15,26 @@
             v-bind="getFormItemBind(item.formItemProp)">
             <el-input
               v-if="item.type == 'input'"
-              :disabled="formStatus==='show'"
+              :disabled="formStatus==='show' || item.formItemProp.disable"
               v-bind="getElementBind(item.elementProp)"
-              v-model="form[item.formItemProp.prop]"></el-input>
+              v-model="form[item.formItemProp.prop]"
+            ></el-input>
+            <el-input
+              v-if="item.type == 'input-number'"
+              :disabled="formStatus==='show' || item.formItemProp.disable"
+              v-bind="getElementBind(item.elementProp)"
+              v-model="form[item.formItemProp.prop]"
+            ></el-input>
             <el-input
               v-if="item.type == 'dialog'"
-              :disabled="formStatus==='show'"
+              :disabled="formStatus==='show' || item.formItemProp.disable"
               readonly
               @click.native="setSelectId(item.formItemProp.id)"
               v-bind="getElementBind(item.elementProp)"
               v-model="form[item.formItemProp.prop]"></el-input>
             <el-select
               v-else-if="item.type==='select'"
-              :disabled="formStatus==='show'"
+              :disabled="formStatus==='show' || item.formItemProp.disable"
               v-bind="getElementBind(item.elementProp)"
               v-model="form[item.formItemProp.prop]">
               <el-option
@@ -36,13 +44,15 @@
             </el-select>
             <el-date-picker
               v-else-if="item.type==='datePicker'"
-              :disabled="formStatus==='show'"
+              :disabled="formStatus==='show' || item.formItemProp.disable"
               value-format="yyyy-MM-dd"
               v-bind="getElementBind(item.elementProp)"
               v-model="form[item.formItemProp.prop]"/>
             <el-switch
               v-else-if="item.type === 'switch'"
-              :disabled="formStatus==='show'"
+              :disabled="formStatus==='show' || item.formItemProp.disable"
+              active-value="1"
+              inactive-value="0"
               v-bind="getElementBind(item.elementProp)"
               v-model="form[item.formItemProp.prop]"/>
             <el-checkbox-group

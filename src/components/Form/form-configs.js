@@ -125,7 +125,6 @@ export const consumerFormConfigs = [
     formItemProp: { label: '状态', prop: 'statusDict' },
     optionList: setArrayMapVal(JSON.parse(localStorage.getItem('ENTERPRISE_STATUS_DICT')))
   },
-  // { type: 'input', formItemProp: { label: '状态', prop: 'statusDict' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '联系人名称', prop: 'contactName' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '联系人电话', prop: 'contactPhone' }, elementProp: { size: 'medium' }},
   {
@@ -339,7 +338,7 @@ export const productionOrderFormConfigs = [
 // 工单
 export const workOrderFormConfigs = [
   { type: 'dialog', formItemProp: { label: '生产订单', prop: 'productionOrderNumber', id: 'productionOrder' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '编号', prop: 'number' }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '编号', prop: 'number' }, elementProp: { size: 'medium', disable: true }},
   { type: 'input', formItemProp: { label: '描述', prop: 'description' }, elementProp: { size: 'medium' }},
   { type: 'dialog', formItemProp: { label: '产品', prop: 'productName', id: 'product' }, elementProp: { size: 'medium' }},
   { type: 'dialog', formItemProp: { label: '生产单元', prop: 'productionCellNumber', id: 'productionCell' }, elementProp: { size: 'medium' }},
@@ -351,11 +350,11 @@ export const workOrderFormConfigs = [
   },
   { type: 'datePicker', formItemProp: { label: '计划开始时间', prop: 'planBeginTime' }, elementProp: { size: 'medium' }},
   { type: 'datePicker', formItemProp: { label: '计划结束时间', prop: 'planEndTime' }, elementProp: { size: 'medium' }},
-  { type: 'datePicker', formItemProp: { label: '实际开始时间', prop: 'beginTime' }, elementProp: { size: 'medium' }},
-  { type: 'datePicker', formItemProp: { label: '实际结束时间', prop: 'endTime' }, elementProp: { size: 'medium' }},
+  { type: 'datePicker', formItemProp: { label: '实际开始时间', prop: 'beginTime', disable: true }, elementProp: { size: 'medium' }},
+  { type: 'datePicker', formItemProp: { label: '实际结束时间', prop: 'endTime', disable: true }, elementProp: { size: 'medium' }},
   {
     type: 'select',
-    formItemProp: { label: '状态', prop: 'statusDict' },
+    formItemProp: { label: '状态', prop: 'statusDict', disable: true },
     optionList: setArrayMapVal(JSON.parse(localStorage.getItem('DISPATCH_LIST_STATUS')))
   }
 ]
@@ -378,23 +377,23 @@ export const taskFormConfigs = [
   },
   {
     type: 'select',
-    formItemProp: { label: '状态', prop: 'statusDict' },
-    optionList: setArrayMapVal(JSON.parse(localStorage.getItem('DISPATCH_LIST_STATUS')))
+    formItemProp: { label: '状态', prop: 'statusDict', disable: true },
+    optionList: setArrayMapVal(JSON.parse(localStorage.getItem('PRODUCTION_TASK_STATUS')))
   },
   { type: 'dialog', formItemProp: { label: '产品', prop: 'productName', id: 'product' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '数量', prop: 'quantity' }, elementProp: { size: 'medium' }},
+  { type: 'input-number', formItemProp: { label: '数量', prop: 'quantity' }, elementProp: { size: 'medium' }},
   {
     type: 'select',
     formItemProp: { label: '单位', prop: 'unitDict' },
     optionList: setArrayMapVal(JSON.parse(localStorage.getItem('QUANTITY_UNIT_DICT')))
   },
-  // { type: 'datePicker', formItemProp: { label: '任务生成时间', prop: 'generateTime' }, elementProp: { size: 'medium' }},
-  // { type: 'datePicker', formItemProp: { label: '发布时间', prop: 'issuedTime' }, elementProp: { size: 'medium' }},
-  // { type: 'datePicker', formItemProp: { label: '完成时间', prop: 'completeTime' }, elementProp: { size: 'medium' }},
   { type: 'datePicker', formItemProp: { label: '计划开始时间', prop: 'planBeginTime' }, elementProp: { size: 'medium' }},
   { type: 'datePicker', formItemProp: { label: '计划结束时间', prop: 'planEndTime' }, elementProp: { size: 'medium' }},
-  { type: 'datePicker', formItemProp: { label: '实际开始时间', prop: 'beginTime' }, elementProp: { size: 'medium' }},
-  { type: 'datePicker', formItemProp: { label: '实际结束时间', prop: 'endTime' }, elementProp: { size: 'medium' }},
+  { type: 'datePicker', formItemProp: { label: '实际开始时间', prop: 'beginTime', disable: true }, elementProp: { size: 'medium' }},
+  { type: 'datePicker', formItemProp: { label: '实际结束时间', prop: 'endTime', disable: true }, elementProp: { size: 'medium' }},
+  { type: 'datePicker', formItemProp: { label: '生成时间', prop: 'generateTime', disable: true }, elementProp: { size: 'medium' }},
+  { type: 'datePicker', formItemProp: { label: '发布时间', prop: 'issuedTime', disable: true }, elementProp: { size: 'medium' }},
+  { type: 'datePicker', formItemProp: { label: '完成时间', prop: 'completeTime', disable: true }, elementProp: { size: 'medium' }},
   { type: 'dialog', formItemProp: { label: '物料', prop: 'materialName', id: 'material' }, elementProp: { size: 'medium' }}
 ]
 // 公司
@@ -768,33 +767,33 @@ export const productionCellFormConfigs = [
 export const warehouseFormConfigs = [
   { type: 'input', formItemProp: { label: '编号', prop: 'number' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '描述', prop: 'description' }, elementProp: { size: 'medium' }},
+  // {
+  //   type: 'switch',
+  //   formItemProp: { label: '必须满足存储条件', prop: 'isMustStoreCondition' },
+  //   elementProp: { size: 'small' }
+  // },
   {
     type: 'select',
     formItemProp: { label: '状态', prop: 'statusDict' },
     optionList: setArrayMapVal(JSON.parse(localStorage.getItem('WAREHOUSE_STATUS')))
   },
-  { type: 'input', formItemProp: { label: '位置', prop: 'position' }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '位置', prop: 'position' }, elementProp: { size: 'medium', disable: true }},
   {
     type: 'select',
     formItemProp: { label: '类型', prop: 'typeDict' },
     optionList: setArrayMapVal(JSON.parse(localStorage.getItem('WAREHOUSE_TYPE')))
   },
+  {
+    type: 'switch',
+    formItemProp: { label: '库位控制', prop: 'isLocationControlled' },
+    elementProp: { size: 'small' }
+  },
   // { type: 'input', formItemProp: { label: '存储条件id', prop: 'storeConditionId' }, elementProp: { size: 'medium' }}, // todo 是否下拉
   // { type: 'input', formItemProp: { label: '仓库日历id', prop: 'calendarModelId' }, elementProp: { size: 'medium' }}, // todo 是否下拉
   {
-    type: 'select',
-    formItemProp: { label: '是否必须满足存储条件', prop: 'isMustStoreCondition' },
-    optionList: setArrayMapVal(JSON.parse(localStorage.getItem('IS_VALID')))
-  },
-  {
-    type: 'select',
-    formItemProp: { label: '是否库位控制', prop: 'isLocationControlled' },
-    optionList: setArrayMapVal(JSON.parse(localStorage.getItem('IS_VALID')))
-  },
-  {
-    type: 'select',
-    formItemProp: { label: '是否参与物料需求计划运算', prop: 'isParticipatePlan' },
-    optionList: setArrayMapVal(JSON.parse(localStorage.getItem('IS_VALID')))
+    type: 'switch',
+    formItemProp: { label: '参与计划运算', prop: 'isParticipatePlan' },
+    elementProp: { size: 'small' }
   }
 
 ]
@@ -888,70 +887,82 @@ export const packagingFormConfigs = [
   { type: 'input', formItemProp: { label: '包装', prop: 'packing' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '生产单位', prop: 'productionUnit' }, elementProp: { size: 'medium' }},
   { type: 'datePicker', formItemProp: { label: '日期', prop: 'packingTime' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '合格证', prop: 'certificateUrl' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '备注', prop: 'remark' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '任务编号', prop: 'taskId' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '生产基地', prop: 'productBaseId' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '生产单元', prop: 'productCellId' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '责任人', prop: 'managerId' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '产品', prop: 'productId' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '产品', prop: 'productId' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '数量', prop: 'quantity' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '单位', prop: 'unitDict' }, elementProp: { size: 'medium' }},
-  { type: 'datePicker', formItemProp: { label: '开始时间', prop: 'beginTime' }, elementProp: { size: 'medium' }},
-  { type: 'datePicker', formItemProp: { label: '结束时间', prop: 'endTime' }, elementProp: { size: 'medium' }},
-  { type: 'img', formItemProp: { label: '图片', prop: 'picPath' }, elementProp: { size: 'medium' }}
-
-]
-
-// 种植
-export const plantFormConfigs = [
-  { type: 'input', formItemProp: { label: '任务', prop: 'taskNumber' }, elementProp: { size: 'medium' }},
-  // { type: 'input', formItemProp: { label: '任务', prop: 'taskNumber', id: 'task' }, elementProp: { size: 'medium' }},
-  { type: 'dialog', formItemProp: { label: '生产单元', prop: 'productionCellNumber', id: 'productionCell' }, elementProp: { size: 'medium' }},
-  { type: 'dialog', formItemProp: { label: '产品', prop: 'productName', id: 'product' }, elementProp: { size: 'medium' }},
-  { type: 'dialog', formItemProp: { label: '责任人', prop: 'managerName', id: 'manager' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '数量', prop: 'quantity' }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '生产基地', prop: 'productionBaseNumber', disable: true }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '生产单元', prop: 'productionCellNumber', disable: true }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '产品', prop: 'productName', disable: true }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '责任人', prop: 'managerName', disable: true }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '本次完成百分比', prop: 'percent', disable: true }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '本次完成数量', prop: 'quantity' }, elementProp: { size: 'medium' }},
   {
     type: 'select',
-    formItemProp: { label: '单位', prop: 'unitDict' },
+    formItemProp: { label: '单位', prop: 'unitDict', disable: true },
     optionList: setArrayMapVal(JSON.parse(localStorage.getItem('QUANTITY_UNIT_DICT')))
   },
   { type: 'datePicker', formItemProp: { label: '开始时间', prop: 'beginTime' }, elementProp: { size: 'medium' }},
   { type: 'datePicker', formItemProp: { label: '结束时间', prop: 'endTime' }, elementProp: { size: 'medium' }},
   { type: 'img', formItemProp: { label: '图片', prop: 'picPath' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '备注', prop: 'remark' }, elementProp: { size: 'medium' }}
+  { type: 'img', formItemProp: { label: '合格证', prop: 'certificateUrl' }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '备注', prop: 'remark' }, elementProp: { type: 'textarea' }}
+]
+
+// 种植
+export const plantFormConfigs = [
+  { type: 'input', formItemProp: { label: '任务', prop: 'taskNumber' }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '生产基地', prop: 'productionBaseNumber', disable: true }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '生产单元', prop: 'productionCellNumber', disable: true }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '产品', prop: 'productName', disable: true }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '责任人', prop: 'managerName', disable: true }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '本次完成百分比', prop: 'percent', disable: true }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '本次完成数量', prop: 'quantity' }, elementProp: { size: 'medium' }},
+  {
+    type: 'select',
+    formItemProp: { label: '单位', prop: 'unitDict', disable: true },
+    optionList: setArrayMapVal(JSON.parse(localStorage.getItem('QUANTITY_UNIT_DICT')))
+  },
+  { type: 'datePicker', formItemProp: { label: '开始时间', prop: 'beginTime' }, elementProp: { size: 'medium' }},
+  { type: 'datePicker', formItemProp: { label: '结束时间', prop: 'endTime' }, elementProp: { size: 'medium' }},
+  { type: 'img', formItemProp: { label: '图片', prop: 'picPath' }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '备注', prop: 'remark' }, elementProp: { type: 'textarea' }}
 ]
 
 // 加工
 export const processingFormConfigs = [
-  { type: 'input', formItemProp: { label: '任务编号', prop: 'taskId' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '生产基地', prop: 'productBaseId' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '生产单元', prop: 'productCellId' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '操作人', prop: 'operatorId' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '产品', prop: 'productId' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '数量', prop: 'quantity' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '单位', prop: 'unitDict' }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '任务', prop: 'taskNumber' }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '生产基地', prop: 'productionBaseNumber', disable: true }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '生产单元', prop: 'productionCellNumber', disable: true }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '产品', prop: 'productName', disable: true }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '责任人', prop: 'managerName', disable: true }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '本次完成百分比', prop: 'percent', disable: true }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '本次完成数量', prop: 'quantity' }, elementProp: { size: 'medium' }},
+  {
+    type: 'select',
+    formItemProp: { label: '单位', prop: 'unitDict', disable: true },
+    optionList: setArrayMapVal(JSON.parse(localStorage.getItem('QUANTITY_UNIT_DICT')))
+  },
   { type: 'datePicker', formItemProp: { label: '开始时间', prop: 'beginTime' }, elementProp: { size: 'medium' }},
   { type: 'datePicker', formItemProp: { label: '结束时间', prop: 'endTime' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '备注', prop: 'remark' }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '备注', prop: 'remark' }, elementProp: { type: 'textarea' }},
   { type: 'img', formItemProp: { label: '图片', prop: 'picPath' }, elementProp: { size: 'medium' }}
 ]
 
 // 采收
 export const harvestFormConfigs = [
-  { type: 'input', formItemProp: { label: '任务编号', prop: 'taskId' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '生产基地', prop: 'productBaseId' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '生产单元', prop: 'productCellId' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '责任人', prop: 'managerId' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '产品', prop: 'productId' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '数量', prop: 'quantity' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '单位', prop: 'unitDict' }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '任务', prop: 'taskNumber' }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '生产基地', prop: 'productionBaseNumber', disable: true }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '生产单元', prop: 'productionCellNumber', disable: true }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '产品', prop: 'productName', disable: true }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '责任人', prop: 'managerName', disable: true }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '本次完成百分比', prop: 'percent', disable: true }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '本次完成数量', prop: 'quantity' }, elementProp: { size: 'medium' }},
+  {
+    type: 'select',
+    formItemProp: { label: '单位', prop: 'unitDict', disable: true },
+    optionList: setArrayMapVal(JSON.parse(localStorage.getItem('QUANTITY_UNIT_DICT')))
+  },
   { type: 'datePicker', formItemProp: { label: '开始时间', prop: 'beginTime' }, elementProp: { size: 'medium' }},
   { type: 'datePicker', formItemProp: { label: '结束时间', prop: 'endTime' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '备注', prop: 'remark' }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '备注', prop: 'remark' }, elementProp: { type: 'textarea' }},
   { type: 'img', formItemProp: { label: '图片', prop: 'picPath' }, elementProp: { size: 'medium' }}
-
 ]
 
 // 种植SOP

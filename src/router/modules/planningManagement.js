@@ -30,12 +30,12 @@ const planningRouter = {
       name: 'WorkOrder',
       meta: { title: '工单' }
     },
-    {
-      path: 'task-type',
-      component: () => import('@/views/planning/task-type'),
-      name: 'TaskType',
-      meta: { title: '任务类型' }
-    },
+    // {
+    //   path: 'task-type',
+    //   component: () => import('@/views/planning/task-type'),
+    //   name: 'TaskType',
+    //   meta: { title: '任务类型' }
+    // },
     {
       path: 'task',
       component: () => import('@/views/planning/task'),

@@ -28,7 +28,7 @@
                 重置
               </el-button>
             </div>
-            <div style="margin-top: 15px">
+            <div style="margin-top: 5px">
               <el-form :inline="true" :model="search_data" size="small" label-width="140px">
                 <el-form-item label="输入搜索：">
                   <el-input
@@ -59,7 +59,7 @@
                   />
                 </el-form-item>
                 <el-form-item label="任务类型：">
-                  <el-select v-model="search_data.taskTypeId" class="item-choose" size="small">
+                  <el-select v-model="search_data.taskTypeDict" class="item-choose" size="small">
                     <el-option label="" value=""/>
                     <el-option label="任务类型1" value="0"/>
                     <el-option label="任务类型2" value="1"/>
@@ -160,6 +160,7 @@
         ref="detailForm"
         :page-info="pageInfo"
         :form-configs="taskFormConfigs"
+        :rules="rules"
         @getList="getList(nowPage)"
       />
       <dialog-table
@@ -171,12 +172,6 @@
       <dialog-table
         ref="dialogProductSelectTable"
         :dialog-info="dialogProductInfo"
-        :form-configs="taskFormConfigs"
-        :table-title="tableTitle"
-      />
-      <dialog-table
-        ref="dialogTaskTypeSelectTable"
-        :dialog-info="dialogTaskTypeInfo"
         :form-configs="taskFormConfigs"
         :table-title="tableTitle"
       />
@@ -222,13 +217,6 @@
                     selectOptions: [],
                     tableTitleList: []
                 },
-                dialogTaskTypeInfo: {
-                    selectDialogTitle: '任务类型',
-                    dialogAxiosName: 'taskType',
-                    dialogId: 'taskTypeId',
-                    selectOptions: [],
-                    tableTitleList: []
-                },
                 dialogWorkOrderInfo: {
                     selectDialogTitle: '工单',
                     dialogAxiosName: 'workOrder',
@@ -242,11 +230,11 @@
                 showForm: false, // 是否显示表单0
                 formStatus: '', // 表单状态  是否可点击
                 tableTitleList: [
-                    {prop: 'workOrderNumber', name: '工单'},
+                    // {prop: 'workOrderNumber', name: '工单编号'},
                     {prop: 'number', name: '编号'},
                     {prop: 'description', name: '描述'},
                     {prop: 'taskTypeDict', name: '任务类型'},
-                    {prop: 'productName', name: '产品名称'},
+                    {prop: 'productName', name: '产品'},
                     {prop: 'quantity', name: '数量'},
                     {prop: 'unitDict', name: '单位'},
                     {prop: 'statusDict', name: '状态'},
@@ -277,9 +265,7 @@
                 if (val) {
                     let param
                     let urlValue
-                    if (val === 'taskType') {
-                        urlValue = 'task-type'
-                    } else if (val === 'workOrder') {
+                    if (val === 'workOrder') {
                         urlValue = 'work-order'
                     } else {
                         urlValue = val
