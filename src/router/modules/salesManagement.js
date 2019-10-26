@@ -23,6 +23,12 @@ const companyRouter = {
       component: () => import('@/views/sale/sale-orders'),
       name: 'SaleOrders',
       meta: { title: '销售订单' }
+    },
+    {
+      path: 'sale-order-detail',
+      component: () => import('@/views/sale/sale-order-detail'),
+      name: 'SaleOrderDetails',
+      meta: { title: '销售订单明细' }
     }
   ]
 }

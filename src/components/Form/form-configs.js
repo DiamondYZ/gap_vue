@@ -237,11 +237,11 @@ export const consumerFormConfigs = [
 export const saleOrderFormConfigs = [
   { type: 'input', formItemProp: { label: '订单编号', prop: 'number' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '订单描述', prop: 'description' }, elementProp: { size: 'medium' }},
-  // {
-  //   type: 'select',
-  //   formItemProp: { label: '状态', prop: 'statusDict' },
-  //   optionList: setArrayMapVal(JSON.parse(localStorage.getItem('SALE_ORDER_STATUS')))
-  // },
+  {
+    type: 'select',
+    formItemProp: { label: '状态', prop: 'statusDict', disable: true },
+    optionList: setArrayMapVal(JSON.parse(localStorage.getItem('SALE_ORDER_STATUS')))
+  },
   { type: 'dialog', formItemProp: { label: '客户', prop: 'consumerName', id: 'consumer' }, elementProp: { size: 'medium' }},
   { type: 'dialog', formItemProp: { label: '销售方', prop: 'supplierName', id: 'supplier' }, elementProp: { size: 'medium' }},
   { type: 'dialog', formItemProp: { label: '负责人', prop: 'salesmanName', id: 'salesman' }, elementProp: { size: 'medium' }},
@@ -253,6 +253,17 @@ export const saleOrderFormConfigs = [
   { type: 'input', formItemProp: { label: '联系电话', prop: 'linkPhone' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '联系地址', prop: 'linkAddress' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '收货地址', prop: 'receiverAddress' }, elementProp: { size: 'medium' }}
+]
+// 销售订单明细
+export const saleOrderDetailFormConfigs = [
+  { type: 'dialog', formItemProp: { label: '销售订单', prop: 'saleOrderNumber', id: 'saleOrder' }, elementProp: { size: 'medium' }},
+  // { type: 'input', formItemProp: { label: '订单编号', prop: 'saleOrderNumber' }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '产品', prop: 'productName' }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '数量', prop: 'quantity' }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '单位', prop: 'unitDict' }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '单价', prop: 'unitPrice' }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '总价', prop: 'totalPrice' }, elementProp: { size: 'medium' }},
+  { type: 'datePicker', formItemProp: { label: '交付时间', prop: 'deliveryTime' }, elementProp: { size: 'medium' }}
 ]
 // 供应商
 export const supplierFormConfigs = [

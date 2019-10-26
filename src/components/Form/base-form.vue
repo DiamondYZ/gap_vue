@@ -20,12 +20,6 @@
               v-model="form[item.formItemProp.prop]"
             ></el-input>
             <el-input
-              v-if="item.type == 'input-number'"
-              :disabled="formStatus==='show' || item.formItemProp.disable"
-              v-bind="getElementBind(item.elementProp)"
-              v-model="form[item.formItemProp.prop]"
-            ></el-input>
-            <el-input
               v-if="item.type == 'dialog'"
               :disabled="formStatus==='show' || item.formItemProp.disable"
               readonly

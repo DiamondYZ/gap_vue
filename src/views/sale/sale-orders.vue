@@ -65,8 +65,8 @@
         </el-button>
         <el-button type="primary" size="small" icon="view" @click="add()"><i class="el-icon-plus" />新增
         </el-button>
-        <el-button type="error" size="small" icon="view" :disabled="deleteBtnDisabled" @click="deleteSelectedRow()">
-          <i class="el-icon-delete" />删除
+        <el-button type="danger" size="small" icon="el-icon-delete" :disabled="deleteBtnDisabled" @click="deleteSelectedRow()">
+          删除
         </el-button>
       </div>
 
@@ -91,6 +91,7 @@
               v-for="(item,index) in tableTitleList"
               :prop="item.prop"
               :label="item.name"
+              :formatter="formatRole"
               align="center"
             />
           </el-table>
@@ -136,6 +137,7 @@
                 v-for="(item,index) in secondLevelTableTitleList"
                 :prop="item.prop"
                 :label="item.name"
+                :formatter="formatRole"
                 align="center"
               />
             </el-table>

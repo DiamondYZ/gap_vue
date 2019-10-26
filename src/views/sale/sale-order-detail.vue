@@ -2,31 +2,47 @@
   <div class="app-container">
     <el-card class="operate-container" shadow="never">
       <div style="margin-bottom: 20px;">
-        <i class="el-icon-tickets" style="margin-top: 5px;font-size: 22px"></i>
-        <span style="margin-top: 5px;font-size: 22px">{{pageInfo.listTitle}}</span>
+        <i class="el-icon-tickets" style="margin-top: 5px;font-size: 22px"/>
+        <span style="margin-top: 5px;font-size: 22px">{{ pageInfo.listTitle }}</span>
       </div>
       <el-collapse v-model="activeNames">
         <el-collapse-item title="筛选搜索" name="1">
           <el-card class="filter-container" shadow="never">
             <div>
+
               <el-button
                 style="float: right"
                 type="primary"
-                @click='getList()'
-                size="small">
+                icon="el-icon-search"
+                size="small"
+                @click="getList()"
+              >
                 查询
               </el-button>
               <el-button
                 style="float: right;margin-right: 15px"
-                size="small" @click='refreshSearch()'>
-                <i class="el-icon-refresh"></i>
+                size="small"
+                @click="refreshSearch()"
+              >
+                <i class="el-icon-refresh"/>
                 重置
               </el-button>
             </div>
             <div style="margin-top: 15px">
               <el-form :inline="true" :model="search_data" size="small" label-width="140px">
                 <el-form-item label="输入搜索：">
-                  <el-input style="width: 203px" v-model="search_data.customCondition" placeholder="账号或公司名称"></el-input>
+                  <el-input
+                    v-model="search_data.customCondition"
+                    style="width: 203px"
+                    placeholder="订单编号"
+                  />
+                </el-form-item>
+                <el-form-item label="状态：">
+                  <el-select v-model="search_data.statusDict" class="item-choose" size="small">
+                    <el-option label="" value=""/>
+                    <el-option label="状态1" value="0"/>
+                    <el-option label="状态2" value="1"/>
+                  </el-select>
                 </el-form-item>
               </el-form>
             </div>
@@ -34,38 +50,60 @@
         </el-collapse-item>
       </el-collapse>
       <div style="float: right;margin:20px 30px">
-        <el-button type="primary" size="small" icon="view" @click='add()'><i class="el-icon-plus"/>新增
+        <el-button type="primary" size="small" icon="view" @click="add()"><i class="el-icon-plus"/>新增
         </el-button>
-        <el-button type="primary" size="small" icon="view" @click='deleteSelectedRow()' :disabled="deleteBtnDisabled">
+        <el-button type="danger" size="small" icon="el-icon-delete" :disabled="deleteBtnDisabled"
+                   @click="deleteSelectedRow()">
           删除
         </el-button>
       </div>
 
       <div class="fillcontain">
         <div class="table_container">
-          <el-table v-loading="loading" :data="tableData" :cell-style="rowStyle" ref="handSelect_multipleTable"
-                    border style="width: 100%" max-height="500"
-                    @row-click="showRowDetail" align='center' @select="selectTable" @select-all="selectAll"
-                    :header-cell-style="setHeaderRowStyle">
-            <el-table-column type="selection" align='center' width="60">
-            </el-table-column>
-            <el-table-column :prop="item.prop" :label="item.name" v-for="(item,index) in tableTitleList"
-                             :formatter="formatRole" align='center'></el-table-column>
+          <el-table
+            ref="handSelect_multipleTable"
+            v-loading="loading"
+            :data="tableData"
+            :cell-style="rowStyle"
+            border
+            style="width: 100%"
+            max-height="500"
+            align="center"
+            :header-cell-style="setHeaderRowStyle"
+            @row-click="showRowDetail"
+            @select="selectTable"
+            @select-all="selectAll"
+          >
+            <el-table-column type="selection" align="center" width="60"/>
+            <el-table-column
+              v-for="(item,index) in tableTitleList"
+              :prop="item.prop"
+              :label="item.name"
+              align="center"
+            />
           </el-table>
           <div class="pagination">
             <el-pagination
               background
-              @current-change="handleCurrentChange"
               layout="total,prev, pager, next"
-              :total=pageTotal>
-            </el-pagination>
+              :total="pageTotal"
+              @current-change="handleCurrentChange"
+            />
           </div>
         </div>
       </div>
-      <show-detail-form ref="detailForm" :pageInfo=pageInfo
-                        :formConfigs="companyFormConfigs"
-                        @getList="getList()">
-      </show-detail-form>
+      <show-detail-form
+        ref="detailForm"
+        :page-info="pageInfo"
+        :form-configs="saleOrderDetailFormConfigs"
+        @getList="getList(nowPage)"
+      />
+      <dialog-table
+        ref="dialogSalesmanSelectTable"
+        :dialog-info="dialogSalesmanInfo"
+        :form-configs="saleOrderDetailFormConfigs"
+        :table-title="tableTitle"
+      />
     </el-card>
   </div>
 </template>
@@ -73,55 +111,94 @@
 <script>
 
     import ShowDetailForm from '@/components/Form/show-detail-form.vue'
-    import {companyFormConfigs, formData} from '../../components/Form/form-configs.js'
+    import DialogTable from '@/components/Form/dialog-table.vue'
+    import {saleOrderDetailFormConfigs} from '../../components/Form/form-configs.js'
 
     export default {
+        components: {
+            'show-detail-form': ShowDetailForm,
+            'dialog-table': DialogTable
+        },
         data() {
             return {
                 pageInfo: {
-                    interfaceName: 'company',   //接口名称
-                    listTitle: '公司列表',
-                    detailTitle: '公司详细信息'
-                },   //页面信息
-                search_data: {},          //搜索条件
-                clickLineId: '',       //当前点击行id
-                deleteBtnDisabled: true, //删除id
-                showForm: false,       //是否显示表单0
-                formStatus: '',        //表单状态  是否可点击
+                    interfaceName: 'sale-order-detail', // 接口名称
+                    listTitle: '销售订单明细列表',
+                    detailTitle: '销售订单详细信息',
+                    listDetailTitle: '销售订单明细列表'
+                }, // 页面信息
+                search_data: {}, // 搜索条件
+                clickLineId: '', // 当前点击行id
+                deleteBtnDisabled: true, // 删除id
+                showForm: false, // 是否显示表单0
+                formStatus: '', // 表单状态  是否可点击
                 tableTitleList: [
-                    {prop: 'address', name: '企业地址'},
-                    {prop: 'code', name: '公司代码'},
-                    {prop: 'companyTypeDict', name: '企业类型'},
-                    {prop: 'description', name: '描述'},
-                    {prop: 'foundDate', name: '成立日期'},
-                    {prop: 'legalRepresentative', name: '法定代表人'},
-                    {prop: 'name', name: '公司名称'},
-                    {prop: 'registeredCapital', name: '注册资金'},
-                    {prop: 'registrationDate', name: '注册日期'},
-                    {prop: 'staffsNumber', name: '员工人数'},
-                    {prop: 'statusDict', name: '状态'}
-                ],  //表格头信息
-                tableData: [],    //表格数据
-                formData: {},   //表单数据
+                    {prop: 'lineNumber', name: '行号'},
+                    {prop: 'saleOrderNumber', name: '订单编号'},
+                    {prop: 'productName', name: '产品'},
+                    {prop: 'quantity', name: '数量'},
+                    {prop: 'unitDict', name: '单位'},
+                    {prop: 'unitPrice', name: '单价'},
+                    {prop: 'totalPrice', name: '总价'},
+                    {prop: 'deliveryTime', name: '交付日期'}
+                ], // 表格头信息
+                tableData: [], // 表格数据
+                formData: {}, // 表单数据
                 loading: false,
-                rowIds: [],      //选中的行id数组
-                nowPage: 1, //当前页
-                pageSize: 10, //每页显示多少条
-                pageTotal: 0, //总条数
+                rowIds: [], // 选中的行id数组
+                nowPage: 1, // 当前页
+                pageSize: 10, // 每页显示多少条
+                pageTotal: 0, // 总条数
+                statusDict: '', // 控制状态按钮  状态
                 activeNames: [],
-                companyFormConfigs
+                saleOrderDetailFormConfigs,
+                tableTitle: [],
+                tableDetailData: [], // 表格单条数据
             }
         },
-        components: {
-            'show-detail-form': ShowDetailForm
+        computed: {
+            listeningClickDialog() {
+                return this.$store.state.common.selectToGetOptionsProp
+            }
         },
-        computed: {},
-        created() {
-            this.$store.dispatch('common/getPullDownList', {classCode: 'ENTERPRISE_TYPE_DICT'})   // 企业类型
-            this.$store.dispatch('common/getPullDownList', {classCode: 'ENTERPRISE_STATUS_DICT'})   // 企业状态
+        watch: {
+            listeningClickDialog(val) {
+                if (val) {
+                    let param
+                    let urlValue
+                    if (val === 'salesman') {
+                        urlValue = 'staff'
+                    } else if (val === 'consumer') {
+                        urlValue = 'consumer'
+                    } else {
+                        urlValue = val
+                    }
+                    param = {url: urlValue + '/getPullDownList'}
+                    this.$store.dispatch('common/getSelectOptionsList', param).then((res) => {
+                        if (val === 'salesman') {
+                            this.dialogSalesmanInfo.selectOptions = res.data
+                            this.dialogSalesmanInfo.tableTitleList = [
+                                {prop: 'number', name: '编号'},
+                                {prop: 'name', name: '名称'},
+                                {prop: 'description', name: '描述'},
+                                {prop: 'departmentName', name: '部门'},
+                                {prop: 'position', name: '职位'},
+                                {prop: 'entryDate', name: '入职日期'}
+                            ] // 表格头信息
+                            this.$refs.dialogSalesmanSelectTable.showTable()
+                        }
+                    })
+                        .catch(() => {
+
+                        })
+                }
+            }
         },
         mounted() {
             this.getList()
+        },
+        created() {
+            this.$store.dispatch('common/getPullDownList', {classCode: 'SALE_ORDER_STATUS'}) // 销售订单状态
         },
         methods: {
             formatRole(row, column) {
