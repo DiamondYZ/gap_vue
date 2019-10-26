@@ -2,19 +2,19 @@
   <Button @click="hello">Hello World</Button>
 </template>
 <script>
-import Button from 'kpc/components/button'
-import Message from 'kpc/components/message'
+    import Button from 'kpc/components/button';
+    import Message from 'kpc/components/message';
 
-export default {
-  name: 'HelloButton',
-  components: {
-    Button
-  },
+    export default {
+        name: 'helloButton',
+        components: {
+            Button
+        },
 
-  methods: {
-    hello() {
-      Message.success('Welcome to kpc world!')
+        methods: {
+            hello() {
+                Message.success('Welcome to kpc world!');
+            }
+        }
     }
-  }
-}
 </script>
