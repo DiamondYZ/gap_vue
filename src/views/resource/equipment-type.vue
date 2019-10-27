@@ -13,6 +13,7 @@
               <el-button
                 style="float: right"
                 type="primary"
+                icon="el-icon-search"
                 size="small"
                 @click="getList()"
               >
@@ -38,9 +39,8 @@
                 </el-form-item>
                 <el-form-item label="是否可用：">
                   <el-select v-model="search_data.isValid" class="item-choose" size="small">
-                    <el-option label="" value="" />
-                    <el-option label="可用" value="0" />
-                    <el-option label="不可用" value="1" />
+                    <el-option label="可用" value="1" />
+                    <el-option label="不可用" value="0" />
                   </el-select>
                 </el-form-item>
               </el-form>
@@ -51,8 +51,8 @@
       <div style="float: right;margin:20px 30px">
         <el-button type="primary" size="small" icon="view" @click="add()"><i class="el-icon-plus" />新增
         </el-button>
-        <el-button type="primary" size="small" icon="view" :disabled="deleteBtnDisabled" @click="deleteSelectedRow()">
-          <i class="el-icon-delete" />删除
+        <el-button type="danger" size="small" icon="el-icon-delete" :disabled="deleteBtnDisabled" @click="deleteSelectedRow()">
+          删除
         </el-button>
       </div>
 

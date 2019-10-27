@@ -35,6 +35,12 @@ const companyRouter = {
       component: () => import('@/views/warehousing/stock'),
       name: 'Stock',
       meta: { title: '库存' }
+    },
+    {
+      path: 'stock-detail',
+      component: () => import('@/views/warehousing/stock-detail'),
+      name: 'StockDetail',
+      meta: { title: '库存明细' }
     }
     // ,
     // {

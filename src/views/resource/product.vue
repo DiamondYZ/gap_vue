@@ -12,6 +12,7 @@
               <el-button
                 style="float: right"
                 type="primary"
+                icon="el-icon-search"
                 size="small"
                 @click="getList()"
               >
@@ -46,8 +47,8 @@
       <div style="float: right;margin:20px 30px">
         <el-button type="primary" size="small" icon="view" @click="add()"><i class="el-icon-plus" />新增
         </el-button>
-        <el-button type="primary" size="small" icon="view" :disabled="deleteBtnDisabled" @click="deleteSelectedRow()">
-          <i class="el-icon-delete" />删除
+        <el-button type="danger" size="small" icon="el-icon-delete" :disabled="deleteBtnDisabled" @click="deleteSelectedRow()">
+          删除
         </el-button>
       </div>
 
@@ -92,6 +93,12 @@
         :form-configs="productFormConfigs"
         @getList="getList(nowPage)"
       />
+      <dialog-table
+        ref="dialogSelectTable"
+        :dialog-info="dialogInfo"
+        :form-configs="productFormConfigs"
+        :table-title="tableTitle"
+      />
     </el-card>
   </div>
 </template>
@@ -99,11 +106,13 @@
 <script>
 
 import ShowDetailForm from '@/components/Form/show-detail-form.vue'
+import DialogTable from '@/components/Form/dialog-table.vue'
 import { productFormConfigs, formData } from '../../components/Form/form-configs.js'
 
 export default {
   components: {
-    'show-detail-form': ShowDetailForm
+    'show-detail-form': ShowDetailForm,
+      'dialog-table': DialogTable
   },
   data() {
     return {
@@ -112,6 +121,13 @@ export default {
         listTitle: '产品列表',
         detailTitle: '产品详细信息'
       }, // 页面信息
+        dialogInfo: {
+            selectDialogTitle: '产品类型',
+            dialogAxiosName: 'productType',
+            dialogId: 'productTypeId',
+            selectOptions: [],
+            tableTitleList: []
+        },
       search_data: {}, // 搜索条件
       clickLineId: '', // 当前点击行id
       deleteBtnDisabled: true, // 删除id
@@ -132,18 +148,53 @@ export default {
       pageSize: 10, // 每页显示多少条
       pageTotal: 0, // 总条数
       activeNames: [],
-      productFormConfigs
+      productFormConfigs,
+        tableTitle: []
     }
   },
-  computed: {},
+  computed: {
+      listeningClickDialog() {
+          return this.$store.state.common.selectToGetOptionsProp
+      }
+  },
+    watch: {
+        listeningClickDialog(val) {
+            if (val) {
+                let urlValue = val
+                if(val === 'productType'){
+                    urlValue = 'product-type'
+                }
+                const param = {
+                    url: urlValue + '/getPullDownList'
+                }
+                this.$store.dispatch('common/getSelectOptionsList', param).then((res) => {
+                    this.dialogInfo.selectOptions = res.data
+                    if (val === 'productType') {
+                        this.dialogInfo.tableTitleList = [
+                            { prop: 'lineNumber', name: '行号' },
+                            { prop: 'number', name: '编号' },
+                            { prop: 'name', name: '名称' },
+                            { prop: 'description', name: '描述' },
+                            { prop: 'managerName', name: '负责人' },
+                            { prop: 'staffsNumber', name: '人数' }
+                        ] // 表格头信息
+                    }
+                    this.$refs.dialogSelectTable.showTable()
+                })
+                    .catch(() => {
+
+                    })
+            }
+        }
+    },
   created() {
     this.$store.dispatch('common/getPullDownList', { classCode: 'TEMPERATURE_UNIT' }) // 温度单位
     this.$store.dispatch('common/getPullDownList', { classCode: 'IS_VALID' }) // 是否特殊需求
-    const param = {
-      url: 'product-type/getList',
-      storageName: 'productTypeSelect'
-    }
-    this.$store.dispatch('common/getSelectList', param) // 产品类型下拉
+    // const param = {
+    //   url: 'product-type/getList',
+    //   storageName: 'productTypeSelect'
+    // }
+    // this.$store.dispatch('common/getSelectList', param) // 产品类型下拉
   },
   mounted() {
     this.getList()

@@ -197,7 +197,7 @@ export default {
               { prop: 'number', name: '编号' },
               { prop: 'name', name: '名称' },
               { prop: 'description', name: '描述' },
-              { prop: 'managerName', name: '负责' },
+              { prop: 'managerName', name: '负责人' },
               { prop: 'staffsNumber', name: '人数' }
             ] // 表格头信息
           }

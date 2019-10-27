@@ -6,62 +6,56 @@
         <span style="margin-top: 5px;font-size: 22px">{{ pageInfo.listTitle }}</span>
       </div>
       <el-collapse v-model="activeNames">
-        <el-collapse-item title="筛选搜索" name="1">
-          <el-card class="filter-container" shadow="never">
-            <div>
+<!--        <el-collapse-item title="筛选搜索" name="1">-->
+<!--          <el-card class="filter-container" shadow="never">-->
+<!--            <div>-->
 
-              <el-button
-                style="float: right"
-                type="primary"
-                icon="el-icon-search"
-                size="small"
-                @click="getList()"
-              >
-                查询
-              </el-button>
-              <el-button
-                style="float: right;margin-right: 15px"
-                size="small"
-                @click="refreshSearch()"
-              >
-                <i class="el-icon-refresh" />
-                重置
-              </el-button>
-            </div>
-            <div style="margin-top: 15px">
-              <el-form :inline="true" :model="search_data" size="small" label-width="140px">
-                <el-form-item label="库房：">
-                  <el-select v-model="search_data.warehouseId" class="item-choose" size="small">
-                    <el-option label="" value="" />
-                    <el-option label="库房1" value="0" />
-                    <el-option label="库房2" value="1" />
-                  </el-select>
-                </el-form-item>
-                <el-form-item label="物料：">
-                  <el-select v-model="search_data.materialId" class="item-choose" size="small">
-                    <el-option label="" value="" />
-                    <el-option label="物料1" value="0" />
-                    <el-option label="物料2" value="1" />
-                  </el-select>
-                </el-form-item>
-              </el-form>
-            </div>
-          </el-card>
-        </el-collapse-item>
+<!--              <el-button-->
+<!--                style="float: right"-->
+<!--                type="primary"-->
+<!--                icon="el-icon-search"-->
+<!--                size="small"-->
+<!--                @click="getList()"-->
+<!--              >-->
+<!--                查询-->
+<!--              </el-button>-->
+<!--              <el-button-->
+<!--                style="float: right;margin-right: 15px"-->
+<!--                size="small"-->
+<!--                @click="refreshSearch()"-->
+<!--              >-->
+<!--                <i class="el-icon-refresh" />-->
+<!--                重置-->
+<!--              </el-button>-->
+<!--            </div>-->
+<!--            <div style="margin-top: 15px">-->
+<!--              <el-form :inline="true" :model="search_data" size="small" label-width="140px">-->
+<!--                <el-form-item label="库房：">-->
+<!--                  <el-select v-model="search_data.warehouseId" class="item-choose" size="small">-->
+<!--                    <el-option label="" value="" />-->
+<!--                    <el-option label="库房1" value="0" />-->
+<!--                    <el-option label="库房2" value="1" />-->
+<!--                  </el-select>-->
+<!--                </el-form-item>-->
+<!--                <el-form-item label="物料：">-->
+<!--                  <el-select v-model="search_data.materialId" class="item-choose" size="small">-->
+<!--                    <el-option label="" value="" />-->
+<!--                    <el-option label="物料1" value="0" />-->
+<!--                    <el-option label="物料2" value="1" />-->
+<!--                  </el-select>-->
+<!--                </el-form-item>-->
+<!--              </el-form>-->
+<!--            </div>-->
+<!--          </el-card>-->
+<!--        </el-collapse-item>-->
       </el-collapse>
-      <div style="float: right;margin:20px 30px">
-        <el-button type="primary" size="small" icon="view" @click="add()"><i class="el-icon-plus" />新增
-        </el-button>
-        <el-button
-          type="danger"
-          icon="el-icon-delete"
-          size="small"
-          :disabled="deleteBtnDisabled"
-          @click="deleteSelectedRow()"
-        >
-          删除
-        </el-button>
-      </div>
+<!--      <div style="float: right;margin:20px 30px">-->
+<!--        <el-button type="primary" size="small" icon="view" @click="add()"><i class="el-icon-plus" />新增-->
+<!--        </el-button>-->
+<!--        <el-button  type="danger" size="small" icon="el-icon-delete" :disabled="deleteBtnDisabled" @click="deleteSelectedRow()">-->
+<!--          删除-->
+<!--        </el-button>-->
+<!--      </div>-->
 
       <div class="fillcontain">
         <div class="table_container">
@@ -168,9 +162,11 @@ export default {
       formStatus: '', // 表单状态  是否可点击
       tableTitleList: [
         { prop: 'warehouseNumber', name: '仓库编号' },
-        { prop: 'materialId', name: '物料名称' },
+        { prop: 'warehouseDescription', name: '仓库描述' },
+        { prop: 'materialNumber', name: '物料编号' },
+        { prop: 'materialName', name: '物料名称' },
         { prop: 'quantity', name: '数量' },
-        { prop: 'unitDict', name: '单位dict' },
+        { prop: 'unitDict', name: '单位' },
         { prop: 'availableQuantity', name: '可用数量' },
         { prop: 'freezeQuantity', name: '冻结数量' }
       ], // 表格头信息

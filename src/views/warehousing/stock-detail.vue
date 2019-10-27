@@ -69,7 +69,7 @@
         </div>
       </div>
       <show-detail-form ref="detailForm" :pageInfo=pageInfo
-                        :formConfigs="productionBaseFormConfigs"
+                        :formConfigs="stockDetailFormConfigs"
                         @getList="getList(nowPage)">
       </show-detail-form>
     </el-card>
@@ -79,15 +79,15 @@
 <script>
 
   import ShowDetailForm from '@/components/Form/show-detail-form.vue'
-  import { productionBaseFormConfigs, formData } from '../../components/Form/form-configs.js'
+  import { stockDetailFormConfigs, formData } from '../../components/Form/form-configs.js'
 
   export default {
     data() {
       return {
         pageInfo: {
-          interfaceName: 'production-base',   //接口名称
-          listTitle: '生产基地列表',
-          detailTitle: '生产基地详细信息'
+          interfaceName: 'stock-detail',   //接口名称
+          listTitle: '库存明细列表',
+          detailTitle: '库存明细详细信息'
         },   //页面信息
         search_data: {},          //搜索条件
         clickLineId: '',       //当前点击行id
@@ -95,25 +95,22 @@
         showForm: false,       //是否显示表单0
         formStatus: '',        //表单状态  是否可点击
         tableTitleList: [
-          { prop: 'altitude', name: '海拔' },
-          { prop: 'area', name: '总面积' },
-          { prop: 'areaUnit', name: '面积单位' },
-          { prop: 'city', name: '城市' },
-          { prop: 'description', name: '基地描述' },
-          { prop: 'district', name: '区/县' },
-          { prop: 'id', name: '主键ID' },
-          { prop: 'lat', name: '纬度' },
-          { prop: 'lineNumber', name: '行号' },
-          { prop: 'lng', name: '经度' },
-          { prop: 'managerDescription', name: '负责人描述' },
-          { prop: 'managerId', name: '负责人id' },
-          { prop: 'managerName', name: '负责人名称' },
-          { prop: 'managerNumber', name: '负责人编号' },
-          { prop: 'name', name: '基地名称' },
-          { prop: 'number', name: '基地编号' },
-          { prop: 'overview', name: '简介' },
-          { prop: 'province', name: '省份' },
-          { prop: 'street', name: '街道(乡镇)' }
+            { prop: 'warehouseNumber', name: '仓库编号' },
+            { prop: 'warehouseDescription', name: '仓库描述' },
+            { prop: 'materialNumber', name: '物料编号' },
+            { prop: 'materialDescription', name: '物料描述' },
+            { prop: 'quantity', name: '数量' },
+            { prop: 'unitDict', name: '单位' },
+            { prop: 'unitPrice', name: '单价' },
+            { prop: 'totalPrice', name: '总价' },
+            { prop: 'operateTime', name: '操作时间' },
+            { prop: 'operateTypeDict', name: '操作类型' },
+            { prop: 'productDate', name: '生产日期' },
+            { prop: 'expireDate', name: '过期日期' },
+            { prop: 'operatorNumber', name: '操作人' },
+            { prop: 'isFirstEntryRecord', name: '操作人' },
+            { prop: 'availableQuantity', name: '可出库数量' },
+            { prop: 'costQuantity', name: '成本数量' }
         ],  //表格头信息
         tableData: [],    //表格数据
         formData: {},   //表单数据
@@ -123,7 +120,7 @@
         pageSize: 10, //每页显示多少条
         pageTotal: 0, //总条数
         activeNames: [],
-        productionBaseFormConfigs
+        stockDetailFormConfigs
       }
     },
     components: {

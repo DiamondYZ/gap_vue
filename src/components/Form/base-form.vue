@@ -4,7 +4,6 @@
       in-line="true"
       ref="form"
       :model="form"
-      :rules="rules"
       v-bind="formBind"
       v-on="$listeners"
     >

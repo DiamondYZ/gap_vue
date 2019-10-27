@@ -58,8 +58,8 @@
       <div style="float: right;margin:20px 30px">
         <el-button type="primary" size="small" icon="view" @click="add()"><i class="el-icon-plus" />新增
         </el-button>
-        <el-button type="primary" size="small" icon="view" :disabled="deleteBtnDisabled" @click="deleteSelectedRow()">
-          <i class="el-icon-delete" />删除
+        <el-button  type="danger" size="small" icon="el-icon-delete" :disabled="deleteBtnDisabled" @click="deleteSelectedRow()">
+          删除
         </el-button>
       </div>
 
@@ -121,8 +121,8 @@ export default {
     return {
       pageInfo: {
         interfaceName: 'warehouse', // 接口名称
-        listTitle: '库房列表',
-        detailTitle: '库房详细信息'
+        listTitle: '仓库列表',
+        detailTitle: '仓库详细信息'
       }, // 页面信息
       search_data: {}, // 搜索条件
       clickLineId: '', // 当前点击行id
@@ -134,7 +134,9 @@ export default {
         { prop: 'description', name: '描述' },
         { prop: 'statusDict', name: '状态' },
         { prop: 'position', name: '位置' },
-        { prop: 'typeDict', name: '类型' }
+        { prop: 'typeDict', name: '类型' },
+        { prop: 'isLocationControlled', name: '是否库位控制' },
+        { prop: 'isParticipatePlan', name: '是否参与物料需求与计划运算' },
       ], // 表格头信息
       tableData: [], // 表格数据
       formData: {}, // 表单数据
