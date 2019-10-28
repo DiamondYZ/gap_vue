@@ -12,6 +12,7 @@
               <el-button
                 style="float: right"
                 type="primary"
+                icon="el-icon-search"
                 @click='getList()'
                 size="small">
                 查询
@@ -37,7 +38,7 @@
       <div style="float: right;margin:20px 30px">
         <el-button type="primary" size="small" icon="view" @click='add()'><i class="el-icon-plus"/>新增
         </el-button>
-        <el-button type="primary" size="small" icon="view" @click='deleteSelectedRow()' :disabled="deleteBtnDisabled">
+        <el-button type="danger" size="small" icon="el-icon-delete" @click='deleteSelectedRow()' :disabled="deleteBtnDisabled">
           删除
         </el-button>
       </div>
@@ -103,6 +104,7 @@
                 showForm: false,       //是否显示表单0
                 formStatus: '',        //表单状态  是否可点击
                 tableTitleList: [
+                    {prop: 'companyName', name: '公司'},
                     {prop: 'number', name: '编号'},
                     {prop: 'name', name: '名称'},
                     {prop: 'description', name: '描述'},
@@ -146,7 +148,6 @@
                         this.dialogInfo.selectOptions = res.data
                         if (val === 'manager') {
                             this.dialogInfo.tableTitleList = [
-                                { prop: 'lineNumber', name: '行号' },
                                 { prop: 'number', name: '编号' },
                                 { prop: 'name', name: '名称' },
                                 { prop: 'description', name: '描述' },

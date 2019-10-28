@@ -258,7 +258,8 @@ export const saleOrderFormConfigs = [
 export const saleOrderDetailFormConfigs = [
   { type: 'dialog', formItemProp: { label: '销售订单', prop: 'saleOrderNumber', id: 'saleOrder' }, elementProp: { size: 'medium' }},
   // { type: 'input', formItemProp: { label: '订单编号', prop: 'saleOrderNumber' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '产品', prop: 'productName' }, elementProp: { size: 'medium' }},
+  { type: 'dialog', formItemProp: { label: '产品', prop: 'productName', id: 'product' }, elementProp: { size: 'medium' }},
+  // { type: 'input', formItemProp: { label: '产品', prop: 'productName' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '数量', prop: 'quantity' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '单位', prop: 'unitDict' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '单价', prop: 'unitPrice' }, elementProp: { size: 'medium' }},
@@ -392,7 +393,7 @@ export const taskFormConfigs = [
     optionList: setArrayMapVal(JSON.parse(localStorage.getItem('PRODUCTION_TASK_STATUS')))
   },
   { type: 'dialog', formItemProp: { label: '产品', prop: 'productName', id: 'product' }, elementProp: { size: 'medium' }},
-  { type: 'input-number', formItemProp: { label: '数量', prop: 'quantity' }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '数量', prop: 'quantity' }, elementProp: { size: 'medium' }},
   {
     type: 'select',
     formItemProp: { label: '单位', prop: 'unitDict' },
@@ -410,7 +411,7 @@ export const taskFormConfigs = [
 // 公司
 export const companyFormConfigs = [
   { type: 'input', formItemProp: { label: '公司名称', prop: 'name' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '默认账号', prop: 'account' }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '默认账号', prop: 'account', disable: true }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '企业地址', prop: 'address' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '经营范围', prop: 'businessScope' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '公司代码', prop: 'code' }, elementProp: { size: 'medium' }},
@@ -424,16 +425,8 @@ export const companyFormConfigs = [
   { type: 'input', formItemProp: { label: '描述', prop: 'description' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '邮箱', prop: 'email' }, elementProp: { size: 'medium' }},
   { type: 'datePicker', formItemProp: { label: '成立日期', prop: 'foundDate' }, elementProp: { size: 'medium' }},
-  {
-    type: 'input',
-    formItemProp: { label: '法定代表人', prop: 'legalRepresentative' },
-    elementProp: { size: 'medium' }
-  },
-  {
-    type: 'input',
-    formItemProp: { label: '营业执照编号', prop: 'licenseNumber' },
-    elementProp: { size: 'medium' }
-  },
+  { type: 'input', formItemProp: { label: '法定代表人', prop: 'legalRepresentative' }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '营业执照编号', prop: 'licenseNumber' }, elementProp: { size: 'medium' }},
   {
     type: 'select',
     formItemProp: { label: '状态', prop: 'statusDict' },
@@ -876,30 +869,32 @@ export const warehouseLocationFormConfigs = [
 ]
 // 库存
 export const stockFormConfigs = [
-  { type: 'input', formItemProp: { label: '数量', prop: 'quantity' }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '数量', prop: 'quantity', disable: true }, elementProp: { size: 'medium' }},
   {
     type: 'select',
-    formItemProp: { label: '单位', prop: 'unitDict' },
+    formItemProp: { label: '单位', prop: 'unitDict', disable: true },
     optionList: setArrayMapVal(JSON.parse(localStorage.getItem('QUANTITY_UNIT_DICT')))
   },
   {
     type: 'input',
-    formItemProp: { label: '可用数量', prop: 'availableQuantity' },
+    formItemProp: { label: '可用数量', prop: 'availableQuantity', disable: true },
     elementProp: { size: 'medium' }
   },
   {
     type: 'input',
-    formItemProp: { label: '冻结数量', prop: 'freezeQuantity' },
+    formItemProp: { label: '冻结数量', prop: 'freezeQuantity', disable: true },
     elementProp: { size: 'medium' }
   },
-  { type: 'dialog', formItemProp: { label: '仓库', prop: 'warehouseDescription', id: 'warehouse' }, elementProp: { size: 'medium' }},
-  { type: 'dialog', formItemProp: { label: '物料', prop: 'materialName', id: 'material' }, elementProp: { size: 'medium' }}
+  { type: 'input', formItemProp: { label: '仓库', prop: 'warehouseDescription', disable: true }, elementProp: { size: 'medium' }},
+  // { type: 'dialog', formItemProp: { label: '仓库', prop: 'warehouseDescription', id: 'warehouse', disable: true }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '物料', prop: 'materialName', disable: true }, elementProp: { size: 'medium' }},
+  // { type: 'dialog', formItemProp: { label: '物料', prop: 'materialName', id: 'material', disable: true }, elementProp: { size: 'medium' }}
 ]
 
 // 库存明细
 export const stockDetailFormConfigs = [
   { type: 'dialog', formItemProp: { label: '仓库', prop: 'warehouseNumber', id: 'warehouse' }, elementProp: { size: 'medium' }},
-  { type: 'dialog', formItemProp: { label: '物料', prop: 'materialName', id: 'material' }, elementProp: { size: 'medium' }},
+  { type: 'dialog', formItemProp: { label: '物料', prop: 'materialNumber', id: 'material' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '数量', prop: 'quantity' }, elementProp: { size: 'medium' }},
   { type: 'select', formItemProp: { label: '单位', prop: 'unitDict', disable: true }, optionList: setArrayMapVal(JSON.parse(localStorage.getItem('QUANTITY_UNIT_DICT'))) },
   { type: 'input', formItemProp: { label: '单价', prop: 'unitPrice' }, elementProp: { size: 'medium' }},
@@ -925,12 +920,12 @@ export const packagingFormConfigs = [
   { type: 'input', formItemProp: { label: '包装', prop: 'packing' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '生产单位', prop: 'productionUnit' }, elementProp: { size: 'medium' }},
   { type: 'datePicker', formItemProp: { label: '日期', prop: 'packingTime' }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '本次完成数量', prop: 'quantity' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '生产基地', prop: 'productionBaseNumber', disable: true }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '生产单元', prop: 'productionCellNumber', disable: true }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '产品', prop: 'productName', disable: true }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '责任人', prop: 'managerName', disable: true }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '本次完成百分比', prop: 'percent', disable: true }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '本次完成数量', prop: 'quantity' }, elementProp: { size: 'medium' }},
   {
     type: 'select',
     formItemProp: { label: '单位', prop: 'unitDict', disable: true },
@@ -939,7 +934,7 @@ export const packagingFormConfigs = [
   { type: 'datePicker', formItemProp: { label: '开始时间', prop: 'beginTime' }, elementProp: { size: 'medium' }},
   { type: 'datePicker', formItemProp: { label: '结束时间', prop: 'endTime' }, elementProp: { size: 'medium' }},
   { type: 'img', formItemProp: { label: '图片', prop: 'picPath' }, elementProp: { size: 'medium' }},
-  { type: 'img', formItemProp: { label: '合格证', prop: 'certificateUrl' }, elementProp: { size: 'medium' }},
+  // { type: 'img', formItemProp: { label: '合格证', prop: 'certificateUrl' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '备注', prop: 'remark' }, elementProp: { type: 'textarea' }}
 ]
 
@@ -1008,12 +1003,11 @@ export const plantSopFormConfigs = [
   { type: 'input', formItemProp: { label: '编号', prop: 'number' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '描述', prop: 'description' }, elementProp: { size: 'medium' }},
   { type: 'dialog', formItemProp: { label: '产品', prop: 'productName', id: 'product' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '内容', prop: 'content' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '方法', prop: 'method' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '周期', prop: 'period' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '工具', prop: 'tools' }, elementProp: { size: 'medium' }},
-  { type: 'img', formItemProp: { label: '图片', prop: 'picPath' }, elementProp: { size: 'medium' }}
-
+  { type: 'img', formItemProp: { label: '图片', prop: 'picPath' }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '内容', prop: 'content' }, elementProp: { size: 'medium', type: 'textarea' }}
 ]
 
 // 存储SOP
@@ -1036,8 +1030,8 @@ export const storeSopFormConfigs = [
     formItemProp: { label: '湿度单位', prop: 'humidityUnitDict' },
     optionList: setArrayMapVal(JSON.parse(localStorage.getItem('HUMIDITY_UNIT_DICT')))
   },
-  { type: 'input', formItemProp: { label: '内容', prop: 'content' }, elementProp: { size: 'medium' }},
-  { type: 'img', formItemProp: { label: '图片', prop: 'picPath' }, elementProp: { size: 'medium' }}
+  { type: 'img', formItemProp: { label: '图片', prop: 'picPath' }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '内容', prop: 'content' }, elementProp: { size: 'large', type: 'textarea' }}
 ]
 
 // 加工sop
@@ -1045,12 +1039,12 @@ export const herbalProcessingSopFormConfigs = [
   { type: 'input', formItemProp: { label: '编号', prop: 'number' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '描述', prop: 'description' }, elementProp: { size: 'medium' }},
   { type: 'dialog', formItemProp: { label: '产品', prop: 'productName', id: 'product' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '内容', prop: 'content' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '方法', prop: 'method' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '周期', prop: 'period' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '工具', prop: 'tools' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '存装', prop: 'store' }, elementProp: { size: 'medium' }},
-  { type: 'img', formItemProp: { label: '图片', prop: 'picPath' }, elementProp: { size: 'medium' }}
+  { type: 'img', formItemProp: { label: '图片', prop: 'picPath' }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '内容', prop: 'content' }, elementProp: { size: 'medium', type: 'textarea' }}
 ]
 
 // 采收sop
@@ -1058,12 +1052,12 @@ export const harvestSopFormConfigs = [
   { type: 'input', formItemProp: { label: '编号', prop: 'number' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '描述', prop: 'description' }, elementProp: { size: 'medium' }},
   { type: 'dialog', formItemProp: { label: '产品', prop: 'productName', id: 'product' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '内容', prop: 'content' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '方法', prop: 'method' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '周期', prop: 'period' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '工具', prop: 'tools' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '存装', prop: 'store' }, elementProp: { size: 'medium' }},
-  { type: 'img', formItemProp: { label: '图片', prop: 'picPath' }, elementProp: { size: 'medium' }}
+  { type: 'img', formItemProp: { label: '图片', prop: 'picPath' }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '内容', prop: 'content' }, elementProp: { size: 'medium', type: 'textarea' }}
 ]
 
 // 用户组别
@@ -1076,9 +1070,9 @@ export const staffGroupFormConfigs = [
 // 用户
 export const usersFormConfigs = [
   { type: 'input', formItemProp: { label: '账户', prop: 'account' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '密码', prop: 'password' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '确认密码', prop: 'confirmPassword' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '地址', prop: 'address' }, elementProp: { size: 'medium' }},
+  // { type: 'input', formItemProp: { label: '密码', prop: 'password' }, elementProp: { size: 'medium' }},
+  // { type: 'input', formItemProp: { label: '确认密码', prop: 'confirmPassword' }, elementProp: { size: 'medium' }},
+  // { type: 'input', formItemProp: { label: '地址', prop: 'address' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '编号', prop: 'number' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '名称', prop: 'name' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '描述', prop: 'description' }, elementProp: { size: 'medium' }}
@@ -1098,7 +1092,7 @@ export const tracingFormConfigs = [
   { type: 'datePicker', formItemProp: { label: '开始时间', prop: 'beginTime' }, elementProp: { size: 'medium' }},
   { type: 'datePicker', formItemProp: { label: '结束时间', prop: 'endTime' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '记录人', prop: 'recorderId' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '图片', prop: 'picPath' }, elementProp: { size: 'medium' }},
+  { type: 'img', formItemProp: { label: '图片', prop: 'picPath' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '备注', prop: 'remark' }, elementProp: { size: 'medium' }}
 ]
 

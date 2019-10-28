@@ -99,8 +99,14 @@
         @getList="getList(nowPage)"
       />
       <dialog-table
-        ref="dialogSalesmanSelectTable"
-        :dialog-info="dialogSalesmanInfo"
+        ref="dialogProductSelectTable"
+        :dialog-info="dialogProductInfo"
+        :form-configs="saleOrderDetailFormConfigs"
+        :table-title="tableTitle"
+      />
+      <dialog-table
+        ref="dialogSaleOrderSelectTable"
+        :dialog-info="dialogSaleOrderInfo"
         :form-configs="saleOrderDetailFormConfigs"
         :table-title="tableTitle"
       />
@@ -127,6 +133,20 @@
                     detailTitle: '销售订单详细信息',
                     listDetailTitle: '销售订单明细列表'
                 }, // 页面信息
+                dialogSaleOrderInfo: {
+                    selectDialogTitle: '销售订单',
+                    dialogAxiosName: 'saleOrder',
+                    dialogId: 'saleOrderId',
+                    selectOptions: [],
+                    tableTitleList: []
+                },
+                dialogProductInfo: {
+                    selectDialogTitle: '产品',
+                    dialogAxiosName: 'product',
+                    dialogId: 'productId',
+                    selectOptions: [],
+                    tableTitleList: []
+                },
                 search_data: {}, // 搜索条件
                 clickLineId: '', // 当前点击行id
                 deleteBtnDisabled: true, // 删除id
@@ -166,26 +186,32 @@
                 if (val) {
                     let param
                     let urlValue
-                    if (val === 'salesman') {
-                        urlValue = 'staff'
-                    } else if (val === 'consumer') {
-                        urlValue = 'consumer'
+                    if (val === 'saleOrder') {
+                        urlValue = 'sale-order'
                     } else {
                         urlValue = val
                     }
                     param = {url: urlValue + '/getPullDownList'}
                     this.$store.dispatch('common/getSelectOptionsList', param).then((res) => {
-                        if (val === 'salesman') {
-                            this.dialogSalesmanInfo.selectOptions = res.data
-                            this.dialogSalesmanInfo.tableTitleList = [
+                        if (val === 'product') {
+                            this.dialogProductInfo.selectOptions = res.data
+                            this.dialogProductInfo.tableTitleList = [
                                 {prop: 'number', name: '编号'},
                                 {prop: 'name', name: '名称'},
                                 {prop: 'description', name: '描述'},
-                                {prop: 'departmentName', name: '部门'},
-                                {prop: 'position', name: '职位'},
-                                {prop: 'entryDate', name: '入职日期'}
                             ] // 表格头信息
-                            this.$refs.dialogSalesmanSelectTable.showTable()
+                            this.$refs.dialogProductSelectTable.showTable()
+                        }
+                        if (val === 'saleOrder') {
+                            this.dialogSaleOrderInfo.selectOptions = res.data
+                            this.dialogSaleOrderInfo.tableTitleList = [
+                                {prop: 'number', name: '订单编号'},
+                                {prop: 'description', name: '订单描述'},
+                                {prop: 'consumerName', name: '客户'},
+                                {prop: 'salesmanName', name: '业务员'},
+                                {prop: 'signingDate', name: '签订日期'}
+                            ] // 表格头信息
+                            this.$refs.dialogSaleOrderSelectTable.showTable()
                         }
                     })
                         .catch(() => {

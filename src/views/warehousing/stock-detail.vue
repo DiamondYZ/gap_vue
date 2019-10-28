@@ -64,6 +64,7 @@
             style="width: 100%"
             max-height="500"
             align="center"
+            size="mini"
             :header-cell-style="setHeaderRowStyle"
             @row-click="showRowDetail"
             @select="selectTable"

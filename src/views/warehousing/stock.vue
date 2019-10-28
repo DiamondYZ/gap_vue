@@ -2,60 +2,60 @@
   <div class="app-container">
     <el-card class="operate-container" shadow="never">
       <div style="margin-bottom: 20px;">
-        <i class="el-icon-tickets" style="margin-top: 5px;font-size: 22px" />
+        <i class="el-icon-tickets" style="margin-top: 5px;font-size: 22px"/>
         <span style="margin-top: 5px;font-size: 22px">{{ pageInfo.listTitle }}</span>
       </div>
       <el-collapse v-model="activeNames">
-<!--        <el-collapse-item title="筛选搜索" name="1">-->
-<!--          <el-card class="filter-container" shadow="never">-->
-<!--            <div>-->
+        <!--        <el-collapse-item title="筛选搜索" name="1">-->
+        <!--          <el-card class="filter-container" shadow="never">-->
+        <!--            <div>-->
 
-<!--              <el-button-->
-<!--                style="float: right"-->
-<!--                type="primary"-->
-<!--                icon="el-icon-search"-->
-<!--                size="small"-->
-<!--                @click="getList()"-->
-<!--              >-->
-<!--                查询-->
-<!--              </el-button>-->
-<!--              <el-button-->
-<!--                style="float: right;margin-right: 15px"-->
-<!--                size="small"-->
-<!--                @click="refreshSearch()"-->
-<!--              >-->
-<!--                <i class="el-icon-refresh" />-->
-<!--                重置-->
-<!--              </el-button>-->
-<!--            </div>-->
-<!--            <div style="margin-top: 15px">-->
-<!--              <el-form :inline="true" :model="search_data" size="small" label-width="140px">-->
-<!--                <el-form-item label="库房：">-->
-<!--                  <el-select v-model="search_data.warehouseId" class="item-choose" size="small">-->
-<!--                    <el-option label="" value="" />-->
-<!--                    <el-option label="库房1" value="0" />-->
-<!--                    <el-option label="库房2" value="1" />-->
-<!--                  </el-select>-->
-<!--                </el-form-item>-->
-<!--                <el-form-item label="物料：">-->
-<!--                  <el-select v-model="search_data.materialId" class="item-choose" size="small">-->
-<!--                    <el-option label="" value="" />-->
-<!--                    <el-option label="物料1" value="0" />-->
-<!--                    <el-option label="物料2" value="1" />-->
-<!--                  </el-select>-->
-<!--                </el-form-item>-->
-<!--              </el-form>-->
-<!--            </div>-->
-<!--          </el-card>-->
-<!--        </el-collapse-item>-->
+        <!--              <el-button-->
+        <!--                style="float: right"-->
+        <!--                type="primary"-->
+        <!--                icon="el-icon-search"-->
+        <!--                size="small"-->
+        <!--                @click="getList()"-->
+        <!--              >-->
+        <!--                查询-->
+        <!--              </el-button>-->
+        <!--              <el-button-->
+        <!--                style="float: right;margin-right: 15px"-->
+        <!--                size="small"-->
+        <!--                @click="refreshSearch()"-->
+        <!--              >-->
+        <!--                <i class="el-icon-refresh" />-->
+        <!--                重置-->
+        <!--              </el-button>-->
+        <!--            </div>-->
+        <!--            <div style="margin-top: 15px">-->
+        <!--              <el-form :inline="true" :model="search_data" size="small" label-width="140px">-->
+        <!--                <el-form-item label="库房：">-->
+        <!--                  <el-select v-model="search_data.warehouseId" class="item-choose" size="small">-->
+        <!--                    <el-option label="" value="" />-->
+        <!--                    <el-option label="库房1" value="0" />-->
+        <!--                    <el-option label="库房2" value="1" />-->
+        <!--                  </el-select>-->
+        <!--                </el-form-item>-->
+        <!--                <el-form-item label="物料：">-->
+        <!--                  <el-select v-model="search_data.materialId" class="item-choose" size="small">-->
+        <!--                    <el-option label="" value="" />-->
+        <!--                    <el-option label="物料1" value="0" />-->
+        <!--                    <el-option label="物料2" value="1" />-->
+        <!--                  </el-select>-->
+        <!--                </el-form-item>-->
+        <!--              </el-form>-->
+        <!--            </div>-->
+        <!--          </el-card>-->
+        <!--        </el-collapse-item>-->
       </el-collapse>
-<!--      <div style="float: right;margin:20px 30px">-->
-<!--        <el-button type="primary" size="small" icon="view" @click="add()"><i class="el-icon-plus" />新增-->
-<!--        </el-button>-->
-<!--        <el-button  type="danger" size="small" icon="el-icon-delete" :disabled="deleteBtnDisabled" @click="deleteSelectedRow()">-->
-<!--          删除-->
-<!--        </el-button>-->
-<!--      </div>-->
+      <!--      <div style="float: right;margin:20px 30px">-->
+      <!--        <el-button type="primary" size="small" icon="view" @click="add()"><i class="el-icon-plus" />新增-->
+      <!--        </el-button>-->
+      <!--        <el-button  type="danger" size="small" icon="el-icon-delete" :disabled="deleteBtnDisabled" @click="deleteSelectedRow()">-->
+      <!--          删除-->
+      <!--        </el-button>-->
+      <!--      </div>-->
 
       <div class="fillcontain">
         <div class="table_container">
@@ -73,7 +73,7 @@
             @select="selectTable"
             @select-all="selectAll"
           >
-            <el-table-column type="selection" align="center" width="60" />
+            <el-table-column type="selection" align="center" width="60"/>
             <el-table-column
               v-for="(item,index) in tableTitleList"
               :prop="item.prop"
@@ -98,330 +98,346 @@
         :form-configs="stockFormConfigs"
         @getList="getList()"
       />
-      <dialog-table
-        ref="dialogMaterialSelectTable"
-        :dialog-info="dialogMaterialInfo"
-        :form-configs="stockFormConfigs"
-        :table-title="tableTitle"
-      />
-      <dialog-table
-        ref="dialogWarehouseSelectTable"
-        :dialog-info="dialogWarehouseInfo"
-        :form-configs="stockFormConfigs"
-        :table-title="tableTitle"
-      />
+      <!--      <dialog-table-->
+      <!--        ref="dialogMaterialSelectTable"-->
+      <!--        :dialog-info="dialogMaterialInfo"-->
+      <!--        :form-configs="stockFormConfigs"-->
+      <!--        :table-title="tableTitle"-->
+      <!--      />-->
+      <!--      <dialog-table-->
+      <!--        ref="dialogWarehouseSelectTable"-->
+      <!--        :dialog-info="dialogWarehouseInfo"-->
+      <!--        :form-configs="stockFormConfigs"-->
+      <!--        :table-title="tableTitle"-->
+      <!--      />-->
     </el-card>
   </div>
 </template>
 
 <script>
 
-import ShowDetailForm from '@/components/Form/show-detail-form.vue'
-import DialogTable from '@/components/Form/dialog-table.vue'
-import { stockFormConfigs, formData } from '../../components/Form/form-configs.js'
+    import ShowDetailForm from '@/components/Form/show-detail-form.vue'
+    import DialogTable from '@/components/Form/dialog-table.vue'
+    import {stockFormConfigs, formData} from '../../components/Form/form-configs.js'
 
-export default {
-  components: {
-    'show-detail-form': ShowDetailForm,
-    'dialog-table': DialogTable
-  },
-  data() {
-    return {
-      pageInfo: {
-        interfaceName: 'stock', // 接口名称
-        listTitle: '库存列表',
-        detailTitle: '库存详细信息'
-      }, // 页面信息
-      dialogWarehouseInfo: {
-        selectDialogTitle: '选择仓库',
-        dialogAxiosName: 'warehouse',
-        dialogId: 'warehouseId',
-        selectOptions: [],
-        tableTitleList: [
-          { prop: 'number', name: '仓库编号' },
-          { prop: 'description', name: '仓库描述' },
-          { prop: 'position', name: '数量' }
-        ]
-      },
-      dialogMaterialInfo: {
-        selectDialogTitle: '选择物料',
-        dialogAxiosName: 'material',
-        dialogId: 'materialId',
-        selectOptions: [],
-        tableTitleList: [
-          { prop: 'materialTypeName', name: '仓库编号' },
-          { prop: 'number', name: '物料名称' },
-          { prop: 'name', name: '数量' },
-          { prop: 'description', name: '单位dict' }
-        ]
-      },
-      search_data: {}, // 搜索条件
-      clickLineId: '', // 当前点击行id
-      deleteBtnDisabled: true, // 删除id
-      showForm: false, // 是否显示表单0
-      formStatus: '', // 表单状态  是否可点击
-      tableTitleList: [
-        { prop: 'warehouseNumber', name: '仓库编号' },
-        { prop: 'warehouseDescription', name: '仓库描述' },
-        { prop: 'materialNumber', name: '物料编号' },
-        { prop: 'materialName', name: '物料名称' },
-        { prop: 'quantity', name: '数量' },
-        { prop: 'unitDict', name: '单位' },
-        { prop: 'availableQuantity', name: '可用数量' },
-        { prop: 'freezeQuantity', name: '冻结数量' }
-      ], // 表格头信息
-      tableData: [], // 表格数据
-      formData: {}, // 表单数据
-      loading: false,
-      rowIds: [], // 选中的行id数组
-      nowPage: 1, // 当前页
-      pageSize: 10, // 每页显示多少条
-      pageTotal: 0, // 总条数
-      activeNames: [],
-      stockFormConfigs,
-      tableTitle: []
-    }
-  },
-  computed: {
-    listeningClickDialog() {
-      return this.$store.state.common.selectToGetOptionsProp
-    }
-  },
-  watch: {
-    listeningClickDialog(val) {
-      if (val) {
-        let param
-        param = { url: val + '/getPullDownList' }
-        this.$store.dispatch('common/getSelectOptionsList', param).then((res) => {
-          if (val === 'material') {
-            this.dialogMaterialInfo.selectOptions = res.data
-            // this.dialogInfo.tableTitleList = [
-            //     { prop: 'number', name: '编号' },
-            //     { prop: 'name', name: '名称' },
-            //     { prop: 'description', name: '描述' },
-            //     { prop: 'departmentName', name: '部门' },
-            //     { prop: 'position', name: '职位' },
-            //     { prop: 'entryDate', name: '入职日期' }
-            // ] // 表格头信息
-            this.$refs.dialogMaterialSelectTable.showTable()
-          }
-          if (val === 'warehouse') {
-            this.dialogWarehouseInfo.selectOptions = res.data
-            // this.dialogProductionBaseInfo.tableTitleList = [
-            //     { prop: 'number', name: '编号' },
-            //     { prop: 'name', name: '名称' },
-            //     { prop: 'description', name: '描述' },
-            //     { prop: 'managerName', name: '负责人' }
-            // ] // 表格头信息
-            this.$refs.dialogWarehouseSelectTable.showTable()
-          }
-        })
-          .catch(() => {
+    export default {
+        components: {
+            'show-detail-form': ShowDetailForm,
+            'dialog-table': DialogTable
+        },
+        data() {
+            return {
+                pageInfo: {
+                    interfaceName: 'stock', // 接口名称
+                    listTitle: '库存列表',
+                    detailTitle: '库存详细信息'
+                }, // 页面信息
+                // dialogWarehouseInfo: {
+                //   selectDialogTitle: '选择仓库',
+                //   dialogAxiosName: 'warehouse',
+                //   dialogId: 'warehouseId',
+                //   selectOptions: [],
+                //   tableTitleList: [
+                //     { prop: 'number', name: '仓库编号' },
+                //     { prop: 'description', name: '仓库描述' },
+                //     { prop: 'position', name: '数量' }
+                //   ]
+                // },
+                // dialogMaterialInfo: {
+                //   selectDialogTitle: '选择物料',
+                //   dialogAxiosName: 'material',
+                //   dialogId: 'materialId',
+                //   selectOptions: [],
+                //   tableTitleList: [
+                //     { prop: 'materialTypeName', name: '仓库编号' },
+                //     { prop: 'number', name: '物料名称' },
+                //     { prop: 'name', name: '数量' },
+                //     { prop: 'description', name: '单位dict' }
+                //   ]
+                // },
+                search_data: {}, // 搜索条件
+                clickLineId: '', // 当前点击行id
+                deleteBtnDisabled: true, // 删除id
+                showForm: false, // 是否显示表单0
+                formStatus: '', // 表单状态  是否可点击
+                tableTitleList: [
+                    {prop: 'warehouseNumber', name: '仓库编号'},
+                    {prop: 'warehouseDescription', name: '仓库描述'},
+                    {prop: 'materialNumber', name: '物料编号'},
+                    {prop: 'materialName', name: '物料名称'},
+                    {prop: 'quantity', name: '数量'},
+                    {prop: 'unitDict', name: '单位'},
+                    {prop: 'availableQuantity', name: '可用数量'},
+                    {prop: 'freezeQuantity', name: '冻结数量'}
+                ], // 表格头信息
+                tableData: [], // 表格数据
+                formData: {}, // 表单数据
+                loading: false,
+                rowIds: [], // 选中的行id数组
+                nowPage: 1, // 当前页
+                pageSize: 10, // 每页显示多少条
+                pageTotal: 0, // 总条数
+                activeNames: [],
+                stockFormConfigs,
+                tableTitle: []
+            }
+        },
+        computed: {
+            listeningClickDialog() {
+                return this.$store.state.common.selectToGetOptionsProp
+            }
+        },
+        watch: {
+            listeningClickDialog(val) {
+                if (val) {
+                    let param
+                    param = {url: val + '/getPullDownList'}
+                    this.$store.dispatch('common/getSelectOptionsList', param).then((res) => {
+                        if (val === 'material') {
+                            this.dialogMaterialInfo.selectOptions = res.data
+                            // this.dialogInfo.tableTitleList = [
+                            //     { prop: 'number', name: '编号' },
+                            //     { prop: 'name', name: '名称' },
+                            //     { prop: 'description', name: '描述' },
+                            //     { prop: 'departmentName', name: '部门' },
+                            //     { prop: 'position', name: '职位' },
+                            //     { prop: 'entryDate', name: '入职日期' }
+                            // ] // 表格头信息
+                            this.$refs.dialogMaterialSelectTable.showTable()
+                        }
+                        if (val === 'warehouse') {
+                            this.dialogWarehouseInfo.selectOptions = res.data
+                            // this.dialogProductionBaseInfo.tableTitleList = [
+                            //     { prop: 'number', name: '编号' },
+                            //     { prop: 'name', name: '名称' },
+                            //     { prop: 'description', name: '描述' },
+                            //     { prop: 'managerName', name: '负责人' }
+                            // ] // 表格头信息
+                            this.$refs.dialogWarehouseSelectTable.showTable()
+                        }
+                    })
+                        .catch(() => {
 
-          })
-      }
-    }
-  },
-  mounted() {
-    this.getList()
-  },
-  created() {
-    this.$store.dispatch('common/getPullDownList', { classCode: 'QUANTITY_UNIT_DICT' }) // 数量单位
-  },
-  methods: {
-    formatRole(row, column) {
-      if (column.property === 'unitDict') {
-        const statusArr = JSON.parse(localStorage.getItem('QUANTITY_UNIT_DICT'))
-        return this.getArrayMapVal(statusArr, row[column.property])
-      } else {
-        return row[column.property]
-      }
-    },
-    // 设置表头颜色
-    setHeaderRowStyle({ row, rowIndex }) {
-      if (rowIndex === 0) {
-        return 'background:#eef2fe'
-      } else {
-        return ''
-      }
-    },
-    // 隔行换色
-    rowStyle: function({ row, rowIndex }) {
-      if (rowIndex % 2 === 1) {
-        return 'background:#ebf1fb'
-      } else {
-        return 'background:#fff'
-      }
-    },
-    refreshSearch: function() {
-      this.search_data = {}
-    },
-    // 新增详细
-    add() {
-      this.$refs.detailForm.add()
-    },
-    // 获取表格数据
-    getList() {
-      const data = {
-        'entity': this.search_data,
-        'orders': [{
-          'asc': false,
-          'column': 'crt_time'
-        }],
-        'pageNum': this.nowPage,
-        'pageSize': this.pageSize
-      }
-      const param = {
-        name: this.pageInfo.interfaceName,
-        data: data
-      }
-      this.$store.dispatch('common/getList', param)
-        .then((res) => {
-          console.log(res)
-          this.tableData = res.data.records
-          this.pageTotal = res.data.total
-        })
-        .catch(() => {
+                        })
+                }
+            },
+            selectData(data){
+                this.selectRow = []
+                if (data.length > 0){
+                    data.foreach((item,index) => this.selectRow.push(this.tableData.indexOf(item)))
+                }
+            }
+        },
+        mounted() {
+            this.getList()
+        },
+        created() {
+            this.$store.dispatch('common/getPullDownList', {classCode: 'QUANTITY_UNIT_DICT'}) // 数量单位
+        },
+        methods: {
+            formatRole(row, column) {
+                if (column.property === 'unitDict') {
+                    const statusArr = JSON.parse(localStorage.getItem('QUANTITY_UNIT_DICT'))
+                    return this.getArrayMapVal(statusArr, row[column.property])
+                } else {
+                    return row[column.property]
+                }
+            },
+            // 设置表头颜色
+            setHeaderRowStyle({row, rowIndex}) {
+                if (rowIndex === 0) {
+                    return 'background:#eef2fe'
+                } else {
+                    return ''
+                }
+            },
+            // 隔行换色
+            rowStyle: function ({row, rowIndex}) {
+                if (rowIndex % 2 === 1) {
+                    return 'background:#ebf1fb'
+                } else {
+                    return 'background:#fff'
+                }
+            },
+            handleSelectionChange(data) {
+                this.selectData = data
+            },
+            rowClass({row, rowIndex}) {
+                if (this.selectRow.includes(rowIndex)) {
+                    return {"background-color": "rgba(185,221,249,0.75)"}
+                }
+            },
+            refreshSearch: function () {
+                this.search_data = {}
+            },
+            // 新增详细
+            add() {
+                this.$refs.detailForm.add()
+            },
+            // 获取表格数据
+            getList() {
+                const data = {
+                    'entity': this.search_data,
+                    'orders': [{
+                        'asc': false,
+                        'column': 'crt_time'
+                    }],
+                    'pageNum': this.nowPage,
+                    'pageSize': this.pageSize
+                }
+                const param = {
+                    name: this.pageInfo.interfaceName,
+                    data: data
+                }
+                this.$store.dispatch('common/getList', param)
+                    .then((res) => {
+                        console.log(res)
+                        this.tableData = res.data.records
+                        this.pageTotal = res.data.total
+                    })
+                    .catch(() => {
 
-        })
-    },
-    // 点击row显示详细数据
-    showRowDetail(row) {
-      // 点击选中复选框
-      //    this.$refs.handSelect_multipleTable.toggleRowSelection(row);
-      this.clickLineId = row.id
-      this.$refs.detailForm.getDetailData(row.id)
-    },
-    // 获取编辑信息
-    editDetail(row) {
-      window.event ? window.event.cancelBubble = true : e.stopPropagation()
-      const data = {
-        'entity': {
-          'id': this.clickLineId
+                    })
+            },
+            // 点击row显示详细数据
+            showRowDetail(row) {
+                // 点击选中复选框
+                //    this.$refs.handSelect_multipleTable.toggleRowSelection(row);
+                this.clickLineId = row.id
+                this.getIndex = row.index
+                console.log(row, "row");
+                // this.$refs.detailForm.getDetailData(row.id)
+            },
+            // 获取编辑信息
+            editDetail(row) {
+                window.event ? window.event.cancelBubble = true : e.stopPropagation()
+                const data = {
+                    'entity': {
+                        'id': this.clickLineId
+                    }
+                }
+                const param = {
+                    name: this.pageInfo.interfaceName,
+                    data: data
+                }
+                this.$store.dispatch('common/getDetail', param)
+                    .then((res) => {
+                        this.showForm = true
+                        this.formStatus = 'edit'
+                        this.formData = res.data
+                    })
+                    .catch(() => {
+
+                    })
+            },
+            // 新增或修改数据
+            saveDetail() {
+                this.$refs.baseForm.validate(data => {
+                    this.formData = data
+                    console.log(data)
+                })
+                const data = this.formData
+
+                if (this.formStatus === 'edit') {
+                    data.id = this.clickLineId
+                    console.log(data)
+                    const param = {
+                        name: this.pageInfo.interfaceName,
+                        data: data
+                    }
+                    this.$store.dispatch('common/editDetail', param)
+                        .then((res) => {
+                            this.refresh('更新成功！')
+                            this.formStatus = 'show'
+                        })
+                        .catch(() => {
+
+                        })
+                } else {
+                    const param = {
+                        name: this.pageInfo.interfaceName,
+                        data: data
+                    }
+                    this.$store.dispatch('common/saveDetail', param)
+                        .then((res) => {
+                            this.refresh('保存成功！')
+                        })
+                        .catch(() => {
+
+                        })
+                }
+            },
+            // 操作完成提示信息  并刷新表格
+            refresh(info) {
+                this.$notify({
+                    title: '成功',
+                    message: info,
+                    type: 'success'
+                })
+                this.getList()
+            },
+            // 上下分页
+            handleCurrentChange(val) {
+                this.nowPage = val
+                this.getList()
+            },
+            deleteSelectedRow() {
+                console.log(this.rowIds)
+                this.$confirm('确认批量删除记录吗?', '提示', {
+                    type: 'warning'
+                })
+                    .then(() => {
+                        const data = {
+                            'idsList': this.rowIds
+                        }
+                        const param = {
+                            name: this.pageInfo.interfaceName,
+                            data: data
+                        }
+                        this.$store.dispatch('common/deleteDetail', param)
+                            .then((res) => {
+                                this.deleteBtnDisabled = true
+                                this.refresh('删除成功！')
+                            })
+                            .catch(() => {
+
+                            })
+                    })
+                    .catch(() => {
+                    })
+            },
+            // 当用户手动勾选数据行的 Checkbox 时触发的事件
+            selectTable(rows, row) {
+                const selected = rows.length && rows.indexOf(row) !== -1
+                if (selected) {
+                    this.rowIds.push(row.id)
+                } else {
+                    this.rowIds.splice(this.rowIds.indexOf(row.id), 1)
+                }
+                this.setDeleteBtn()
+            },
+            // 用户全选checkbox时触发该事件
+            selectAll(val) {
+                console.log(val)
+                if (val.length !== 0) {
+                    val.forEach((item) => {
+                        this.rowIds.push(item.id)
+                    })
+                } else {
+                    this.rowIds = []
+                }
+
+                this.setDeleteBtn()
+            },
+            setDeleteBtn() {
+                if (this.rowIds.length === 0) {
+                    this.deleteBtnDisabled = true
+                } else {
+                    this.deleteBtnDisabled = false
+                }
+            }
         }
-      }
-      const param = {
-        name: this.pageInfo.interfaceName,
-        data: data
-      }
-      this.$store.dispatch('common/getDetail', param)
-        .then((res) => {
-          this.showForm = true
-          this.formStatus = 'edit'
-          this.formData = res.data
-        })
-        .catch(() => {
-
-        })
-    },
-    // 新增或修改数据
-    saveDetail() {
-      this.$refs.baseForm.validate(data => {
-        this.formData = data
-        console.log(data)
-      })
-      const data = this.formData
-
-      if (this.formStatus === 'edit') {
-        data.id = this.clickLineId
-        console.log(data)
-        const param = {
-          name: this.pageInfo.interfaceName,
-          data: data
-        }
-        this.$store.dispatch('common/editDetail', param)
-          .then((res) => {
-            this.refresh('更新成功！')
-            this.formStatus = 'show'
-          })
-          .catch(() => {
-
-          })
-      } else {
-        const param = {
-          name: this.pageInfo.interfaceName,
-          data: data
-        }
-        this.$store.dispatch('common/saveDetail', param)
-          .then((res) => {
-            this.refresh('保存成功！')
-          })
-          .catch(() => {
-
-          })
-      }
-    },
-    // 操作完成提示信息  并刷新表格
-    refresh(info) {
-      this.$notify({
-        title: '成功',
-        message: info,
-        type: 'success'
-      })
-      this.getList()
-    },
-    // 上下分页
-    handleCurrentChange(val) {
-      this.nowPage = val
-      this.getList()
-    },
-    deleteSelectedRow() {
-      console.log(this.rowIds)
-      this.$confirm('确认批量删除记录吗?', '提示', {
-        type: 'warning'
-      })
-        .then(() => {
-          const data = {
-            'idsList': this.rowIds
-          }
-          const param = {
-            name: this.pageInfo.interfaceName,
-            data: data
-          }
-          this.$store.dispatch('common/deleteDetail', param)
-            .then((res) => {
-              this.deleteBtnDisabled = true
-              this.refresh('删除成功！')
-            })
-            .catch(() => {
-
-            })
-        })
-        .catch(() => {
-        })
-    },
-    // 当用户手动勾选数据行的 Checkbox 时触发的事件
-    selectTable(rows, row) {
-      const selected = rows.length && rows.indexOf(row) !== -1
-      if (selected) {
-        this.rowIds.push(row.id)
-      } else {
-        this.rowIds.splice(this.rowIds.indexOf(row.id), 1)
-      }
-      this.setDeleteBtn()
-    },
-    // 用户全选checkbox时触发该事件
-    selectAll(val) {
-      console.log(val)
-      if (val.length !== 0) {
-        val.forEach((item) => {
-          this.rowIds.push(item.id)
-        })
-      } else {
-        this.rowIds = []
-      }
-
-      this.setDeleteBtn()
-    },
-    setDeleteBtn() {
-      if (this.rowIds.length === 0) {
-        this.deleteBtnDisabled = true
-      } else {
-        this.deleteBtnDisabled = false
-      }
     }
-  }
-}
 </script>
 
 <style scoped>
@@ -444,6 +460,28 @@ export default {
 
   .el-table .success-row {
     background: #ebf1fb;
+  }
+
+  .el-table tr.current-row > td {
+    background-color: #fdf3ea;
+    color: #f19944;
+  }
+
+  /* 用来设置当前页面element全局table的内间距 */
+  .el-table__row td {
+    padding: 0;
+  }
+
+  /* 用来设置当前页面element全局table 选中某行时的背景色*/
+  .el-table__body tr.current-row > td {
+    background-color: #f19944 !important;
+    /* color: #f19944; */ /* 设置文字颜色，可以选择不设置 */
+  }
+
+  /* 用来设置当前页面element全局table 鼠标移入某行时的背景色*/
+  .el-table--enable-row-hover .el-table__body tr:hover > td {
+    background-color: #f19944;
+    /* color: #f19944; */ /* 设置文字颜色，可以选择不设置 */
   }
 
   .pagination {

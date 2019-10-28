@@ -12,12 +12,12 @@ const planningRouter = {
     icon: 'form'
   },
   children: [
-    {
-      path: 'production-plan',
-      component: () => import('@/views/planning/production-plan'),
-      name: 'ProductionPlan',
-      meta: { title: '生产计划' }
-    },
+    // {
+    //   path: 'production-plan',
+    //   component: () => import('@/views/planning/production-plan'),
+    //   name: 'ProductionPlan',
+    //   meta: { title: '生产计划' }
+    // },
     {
       path: 'production-order',
       component: () => import('@/views/planning/production-order'),

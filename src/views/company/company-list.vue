@@ -5,41 +5,41 @@
         <i class="el-icon-tickets" style="margin-top: 5px;font-size: 22px"></i>
         <span style="margin-top: 5px;font-size: 22px">{{pageInfo.listTitle}}</span>
       </div>
-      <el-collapse v-model="activeNames">
-        <el-collapse-item title="筛选搜索" name="1">
-          <el-card class="filter-container" shadow="never">
-            <div>
-              <el-button
-                style="float: right"
-                type="primary"
-                @click='getList()'
-                size="small">
-                查询
-              </el-button>
-              <el-button
-                style="float: right;margin-right: 15px"
-                size="small" @click='refreshSearch()'>
-                <i class="el-icon-refresh"></i>
-                重置
-              </el-button>
-            </div>
-            <div style="margin-top: 15px">
-              <el-form :inline="true" :model="search_data" size="small" label-width="140px">
-                <el-form-item label="输入搜索：">
-                  <el-input style="width: 203px" v-model="search_data.customCondition" placeholder="账号或公司名称"></el-input>
-                </el-form-item>
-              </el-form>
-            </div>
-          </el-card>
-        </el-collapse-item>
-      </el-collapse>
-      <div style="float: right;margin:20px 30px">
-        <el-button type="primary" size="small" icon="view" @click='add()'><i class="el-icon-plus"/>新增
-        </el-button>
-        <el-button type="primary" size="small" icon="view" @click='deleteSelectedRow()' :disabled="deleteBtnDisabled">
-          删除
-        </el-button>
-      </div>
+<!--      <el-collapse v-model="activeNames">-->
+<!--        <el-collapse-item title="筛选搜索" name="1">-->
+<!--          <el-card class="filter-container" shadow="never">-->
+<!--            <div>-->
+<!--              <el-button-->
+<!--                style="float: right"-->
+<!--                type="primary"-->
+<!--                @click='getList()'-->
+<!--                size="small">-->
+<!--                查询-->
+<!--              </el-button>-->
+<!--              <el-button-->
+<!--                style="float: right;margin-right: 15px"-->
+<!--                size="small" @click='refreshSearch()'>-->
+<!--                <i class="el-icon-refresh"></i>-->
+<!--                重置-->
+<!--              </el-button>-->
+<!--            </div>-->
+<!--            <div style="margin-top: 15px">-->
+<!--              <el-form :inline="true" :model="search_data" size="small" label-width="140px">-->
+<!--                <el-form-item label="输入搜索：">-->
+<!--                  <el-input style="width: 203px" v-model="search_data.customCondition" placeholder="账号或公司名称"></el-input>-->
+<!--                </el-form-item>-->
+<!--              </el-form>-->
+<!--            </div>-->
+<!--          </el-card>-->
+<!--        </el-collapse-item>-->
+<!--      </el-collapse>-->
+<!--      <div style="float: right;margin:20px 30px">-->
+<!--        <el-button type="primary" size="small" icon="view" @click='add()'><i class="el-icon-plus"/>新增-->
+<!--        </el-button>-->
+<!--        <el-button type="primary" size="small" icon="view" @click='deleteSelectedRow()' :disabled="deleteBtnDisabled">-->
+<!--          删除-->
+<!--        </el-button>-->
+<!--      </div>-->
 
       <div class="fillcontain">
         <div class="table_container">

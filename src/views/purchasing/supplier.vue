@@ -30,21 +30,21 @@
             </div>
             <div style="margin-top: 15px">
               <el-form :inline="true" :model="search_data" size="small" label-width="140px">
-                <el-form-item label="输入搜索：">
+                <el-form-item label="模糊查询">
                   <el-input
                     v-model="search_data.customCondition"
                     style="width: 203px"
                     placeholder="编号、名称、联系人名称、联系人电话、法定代表人、地址"
                   />
                 </el-form-item>
-                <el-form-item label="状态：">
-                  <el-select v-model="search_data.statusDict" class="item-choose" size="small">
-                    <el-option label="" value="" />
-                    <el-option label="状态1" value="0" />
-                    <el-option label="状态2" value="1" />
+                <el-form-item label="状态">
+                  <el-select v-model="search_data.statusDict" class="item-choose" size="mini">
+<!--                    <el-option label="" value="" />-->
+<!--                    <el-option label="状态1" value="0" />-->
+<!--                    <el-option label="状态2" value="1" />-->
                   </el-select>
                 </el-form-item>
-                <el-form-item label="公司类型：">
+                <el-form-item label="公司类型">
                   <el-select v-model="search_data.companyTypeDict" class="item-choose" size="small">
                     <el-option label="" value="" />
                     <el-option label="公司类型1" value="0" />

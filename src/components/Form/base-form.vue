@@ -139,7 +139,7 @@ export default {
       type: Array,
       default: () => []
     },
-    formStatus: 
+    formStatus: ''
   },
   data() {
     return {

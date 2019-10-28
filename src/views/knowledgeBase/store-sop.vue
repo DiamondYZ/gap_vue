@@ -30,7 +30,7 @@
             <div style="margin-top: 15px">
               <el-form :inline="true" :model="search_data" size="small" label-width="140px">
                 <el-form-item label="输入搜索：">
-                  <el-input v-model="search_data.customCondition" style="width: 203px" placeholder="账号或公司名称" />
+                  <el-input v-model="search_data.customCondition" style="width: 203px" placeholder="编号 描述" />
                 </el-form-item>
               </el-form>
             </div>
