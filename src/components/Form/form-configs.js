@@ -602,9 +602,9 @@ export const materialFormConfigs = [
 ]
 // 设备类型
 export const equipmentTypeFormConfigs = [
-  { type: 'input', formItemProp: { label: '编号', prop: 'number' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '名称', prop: 'name' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '描述', prop: 'description' }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '编号', prop: 'number' }, elementProp: {  }},
+  { type: 'input', formItemProp: { label: '名称', prop: 'name' }, elementProp: { size: 'mini' }},
+  { type: 'input', formItemProp: { label: '描述', prop: 'description' }, elementProp: { size: 'mini' }},
   {
     type: 'select',
     formItemProp: { label: 'ABC分类', prop: 'abcTypeDict' },
@@ -620,8 +620,8 @@ export const equipmentTypeFormConfigs = [
     formItemProp: { label: '设备管理类型', prop: 'manageTypeDict' },
     optionList: setArrayMapVal(JSON.parse(localStorage.getItem('EQUIPMENT_M_TYPE')))
   },
-  { type: 'input', formItemProp: { label: '监管标准', prop: 'superviseStandard' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '监管单位', prop: 'superviseDept' }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '监管标准', prop: 'superviseStandard' }, elementProp: {  }},
+  { type: 'input', formItemProp: { label: '监管单位', prop: 'superviseDept' }, elementProp: {  }},
   { type: 'input', formItemProp: { label: '备注', prop: 'remark' }, elementProp: { type: 'textarea' }},
   {
     type: 'switch',
