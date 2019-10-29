@@ -230,10 +230,10 @@
                 showForm: false, // 是否显示表单0
                 formStatus: '', // 表单状态  是否可点击
                 tableTitleList: [
-                    // {prop: 'workOrderNumber', name: '工单编号'},
-                    {prop: 'number', name: '编号'},
+                    {prop: 'workOrderNumber', name: '工单编号'},
+                    {prop: 'number', name: '任务编号'},
                     {prop: 'description', name: '描述'},
-                    {prop: 'taskTypeDict', name: '任务类型'},
+                    {prop: 'taskTypeDict', name: '类型'},
                     {prop: 'productName', name: '产品'},
                     {prop: 'quantity', name: '数量'},
                     {prop: 'unitDict', name: '单位'},

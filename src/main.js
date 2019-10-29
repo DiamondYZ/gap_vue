@@ -7,6 +7,7 @@ import 'normalize.css/normalize.css' // a modern alternative to CSS resets
 import Element from 'element-ui'
 import './styles/element-variables.scss'
 import './styles/common.scss'
+import 'element-ui/lib/theme-chalk/index.css'
 
 import '@/styles/index.scss' // global css
 
@@ -39,9 +40,10 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 Vue.use(Element, {
-  size: Cookies.get('size') || 'medium', // set element-ui default size
+  size: Cookies.get('size') || 'mini', // set element-ui default size
   i18n: (key, value) => i18n.t(key, value)
 })
+
 
 // register global utility filters
 Object.keys(filters).forEach(key => {
@@ -49,6 +51,7 @@ Object.keys(filters).forEach(key => {
 })
 
 Vue.config.productionTip = false
+Vue.config.devtools = true
 
 new Vue({
   el: '#app',

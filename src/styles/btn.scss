@@ -1,5 +1,5 @@
 @import './variables.scss';
-
+@charset "UTF-8";
 @mixin colorBtn($color) {
   background: $color;
 
@@ -97,3 +97,89 @@
   font-size: 14px;
   border-radius: 4px;
 }
+
+/*********************** 华丽分割线 *****************************/
+
+.el-button--text-orange {
+  color: #f7a023;
+  background-color: #ffffff;
+  border-color: #ffffff;
+  font-size: 12px;
+  i {
+    color: #fabf40;
+    font-size: 14px;
+  }
+  &:hover, &:focus, &:active {
+    background-color: #fff4d8;
+    border-color: #fff4d8;
+    color: #f7a023;
+  }
+}
+
+.el-button--bg-orange {
+  background-color: #fabf40;
+  border-color: #fabf40;
+  color: #ffffff;
+  &:hover, &:focus, &:active {
+    background-color: #f8ad42;
+    border-color: #f8ad42;
+    color: #ffffff;
+  }
+}
+
+.el-button--bg-black {
+  background-color: #333;
+  border-color: #333;
+  color: #ffffff;
+  &:hover, &:focus, &:active {
+    background-color: #333;
+    border-color: #333;
+    color: #ffffff;
+  }
+}
+
+.el-button--border-green {
+  background-color: #ffffff;
+  border-color: #86d762;
+  color: #7cce58;
+  i {
+    color: #86d762;
+    font-size: 14px;
+  }
+  &:hover, &:focus, &:active {
+    background-color: #ebfee2;
+    border-color: #86d762;
+    color: #7cce58;
+  }
+}
+.el-button--border-blue {
+  background-color: #ffffff;
+  border-color: #40d0fa;
+  color: #40d0fa;
+  i {
+    color: #40d0fa;
+    font-size: 14px;
+  }
+  &:hover, &:focus, &:active {
+    background-color: #e7fafe;
+    border-color: #40d0fa;
+    color: #40d0fa;
+  }
+}
+
+.el-button--border-orange {
+  background-color: #ffffff;
+  border-color: #fabf40;
+  color: #f7a023;
+  i {
+    color: #fabf40;
+    font-size: 14px;
+  }
+  &:hover, &:focus, &:active {
+    background-color: #fef3d7;
+    border-color: #fabf40;
+    color: #f7a023;
+  }
+}
+
+

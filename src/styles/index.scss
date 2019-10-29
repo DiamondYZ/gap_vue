@@ -188,3 +188,795 @@ aside {
 .multiselect--active {
   z-index: 1000 !important;
 }
+
+/*********************** 华丽分割线 *****************************/
+html, body {
+  width: 100%;
+  height: 100%;
+  min-height: 768px;
+  min-width: 1200px;
+  font-size: 12px;
+}
+body {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
+}
+html {
+  box-sizing: border-box;
+}
+
+#app{
+  height: 100%;
+  min-height: 768px;
+  min-width: 1200px;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+a,
+a:focus,
+a:hover {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+/************ override element ui css start **********************/
+.el-input, .el-textarea, .el-select{
+  max-width: 350px;
+}
+.el-tabs__content {
+  height: calc(100% - 39px);
+}
+.el-input-number--mini {
+  width: 100%;
+  max-width: 350px;
+}
+.el-input-number.is-without-controls .el-input__inner{
+  text-align: left;
+}
+.el-date-editor.el-input, .el-date-editor.el-input__inner {
+  width: 100%;
+  max-width: 350px;
+}
+.el-date-editor--daterange.el-input, .el-date-editor--daterange.el-input__inner, .el-date-editor--timerange.el-input, .el-date-editor--timerange.el-input__inner{
+  width: 100%;
+  max-width: 350px;
+}
+.el-select {
+  width: 100%;
+}
+.el-range-editor--mini.el-input__inner {
+  height: 24px;
+}
+.el-range-editor.el-input__inner {
+  padding: 0 10px;
+  max-width:640px;
+  overflow: hidden;
+}
+.el-input__inner {
+  line-height: 24px;
+}
+.el-textarea__inner:focus {
+  border-color: #FABF40;
+}
+.el-button.is-disabled, .el-button.is-disabled:focus, .el-button.is-disabled:hover {
+  background-color: transparent;
+}
+.el-input.is-active .el-input__inner, .el-input__inner:focus,
+.el-select .el-input.is-focus .el-input__inner,.el-select .el-input__inner:focus {
+  border-color: #FABF40;
+  box-shadow: 0px 0px 5px rgba(250,191,64,.35);
+}
+.el-input__inner:hover,.el-select:hover .el-input__inner {
+  border-color: #FABF40;
+}
+.el-input--mini .el-input__inner {
+  height: 28px !important;
+  line-height: 28px;
+}
+.el-input-number--mini {
+  line-height: 26px;
+}
+.el-input-group__append .el-button--mini{
+  padding: 5px 15px;
+}
+.el-input-number__decrease:hover, .el-input-number__increase:hover {
+  color: #FABF40;
+}
+.el-input-number__decrease:hover:not(.is-disabled)~.el-input .el-input__inner:not(.is-disabled), .el-input-number__increase:hover:not(.is-disabled)~.el-input .el-input__inner:not(.is-disabled) {
+  border-color: #FABF40;
+}
+.el-tabs__item,
+.el-form-item__label,
+.el-select-dropdown__item,
+.el-menu-item,
+.el-form-item__content,
+.el-radio__label,
+.el-pagination button,
+.el-pagination span:not([class*=suffix]),
+.el-pagination__sizes .el-input .el-input__inner,
+.el-pager li {
+  font-size: 12px;
+}
+.el-menu {
+  border-right: none;
+}
+.el-submenu .el-menu-item {
+  min-width: 180px;
+}
+.el-transfer-panel .el-transfer-panel__header .el-checkbox .el-checkbox__label {
+  font-size: 12px;
+}
+.el-tree-node__content {
+  min-height: 26px;
+  height: auto;
+}
+.el-form-item--mini .el-form-item__content, .el-form-item--mini .el-form-item__label {
+  line-height: 24px;
+}
+.el-input--mini .el-input__icon {
+  line-height: 24px;
+}
+.el-form-item--mini .el-checkbox__label {
+  font-size: 12px;
+}
+.el-form-item.is-success .el-input__inner, .el-form-item.is-success .el-input__inner:focus, .el-form-item.is-success .el-textarea__inner, .el-form-item.is-success .el-textarea__inner:focus{
+  border-color: #dcdfe6;
+}
+.el-button--primary:focus, .el-button--primary:hover {
+  background:#fabf40;
+}
+.el-transfer-panel__item:hover {
+  color: #fabf40;
+}
+/****************************** form start ****************************************/
+.el-radio__input.is-checked+.el-radio__label {
+  color: #606266;
+}
+.el-radio__inner:hover {
+  border-color:#fabf40
+}
+.el-radio__input.is-checked .el-radio__inner {
+  border-color: #fabf40;
+  background: #fabf40;
+}
+.el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner {
+  border-color: #fabf40;
+  background: #fabf40;
+}
+.el-checkbox__input.is-focus .el-checkbox__inner, .el-checkbox__inner:hover {
+  border-color: #fabf40;
+}
+
+
+.el-checkbox__input.is-checked+.el-checkbox__label {
+  color: #606266;
+}
+
+
+
+/****************************** form end ****************************************/
+/*************************** tab start **************************************/
+
+.el-tabs--border-card>.el-tabs__header .el-tabs__item {
+  color: #333333;
+  font-weight: bold;
+}
+.el-tabs--border-card > .el-tabs__header .el-tabs__item {
+  height: 45px;
+}
+.el-tabs--border-card>.el-tabs__header .el-tabs__item:hover {
+  color: #000000;
+}
+.el-tabs__content {
+  height: calc(100% - 45px);
+}
+.full-height .el-tabs--border-card {
+  border-top: none;
+}
+.el-tabs--border-card>.el-tabs__header {
+  background-color: #eeeeee;
+}
+.el-tabs--border-card>.el-tabs__header .el-tabs__item {
+  border-right-color: #dddddd;
+}
+
+.el-tabs--border-card>.el-tabs__header .el-tabs__item.is-active {
+  color: #fabf40;
+  box-shadow: 0px 5px 0px #fabf40 inset;
+}
+.el-tabs--border-card>.el-tabs__content {
+  padding: 0px 15px 15px 15px;
+}
+
+.el-tabs--border-card > .el-tabs__header .el-tabs__item:focus.is-active.is-focus:not(:active) {
+  color: #fabf40;
+  box-shadow: 0px 5px 0px #fabf40 inset;
+  border-radius: none;
+}
+
+.el-tabs--border-card>.el-tabs__header .el-tabs__item:not(.is-disabled):hover {
+  color: #fabf40;
+}
+
+.el-tabs--border-card {
+  border: none;
+  box-shadow: none;
+}
+/*************************** tab end *************************************/
+
+
+/************************* table css change start *************************/
+.el-table__empty-block {
+  min-height: 38px !important;
+}
+.el-table .el-table__header th{
+  background-color: #dbdbdb;
+  font-size: 14px;
+}
+.el-table, .el-table thead {
+  color: #333333;
+}
+.el-table--striped .el-table__body tr.el-table__row--striped td {
+  background-color: #f1f1f1;
+}
+.el-table--border {
+  border: 1px solid #dddddd;
+  padding: 1px 1px;
+}
+.el-table--border td, .el-table--border th, .el-table__body-wrapper .el-table--border.is-scrolling-left~.el-table__fixed {
+  border-right: 1px solid #ffffff;
+}
+.el-table--enable-row-hover .el-table__body tr:hover>td {
+  background-color: #fff5d7;
+}
+.el-table--striped .el-table__body tr.el-table__row--striped.current-row td,
+.el-table__body tr.current-row>td,
+.el-table__body tr.hover-row.current-row>td,
+.el-table__body tr.hover-row.el-table__row--striped.current-row>td {
+  background-color: #fac040;
+}
+.el-table__body tr.el-table__row.current-row:hover > td {
+  background-color: #fac040;
+}
+.el-table td, .el-table th.is-leaf {
+  border-bottom: none;
+}
+
+.el-table, table{
+  //width: auto !important;
+  min-width: 100% !important;
+
+}
+/************************* table css change end *************************/
+
+/************************* pagenation css change start *************************/
+.el-pagination {
+  padding: 10px 14px;
+}
+/************************* pagenation css change end *************************/
+/************************* modal css change end *************************/
+.el-dialog__header {
+  background-color: #333333;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  box-shadow: 0px 2px 0px #FABF40;
+  padding: 10px 20px;
+}
+.el-dialog__title {
+  color: #ffffff;
+}
+.el-dialog {
+  border-radius: 5px 5px 5px 5px;
+}
+.el-dialog__footer {
+  padding: 20px 20px 34px 20px;
+  text-align: center;
+}
+.el-dialog__footer > .dialog-footer {
+  position: relative;
+}
+.el-dialog__footer > .dialog-footer::before{
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #dddddd;
+}
+
+.el-dialog__footer .el-button+.el-button {
+  margin-left: 34px;
+}
+
+.el-dialog__footer .el-button--mini, .el-button--mini.is-round {
+  padding: 5px 22px;
+  font-size: 16px;
+}
+
+.el-message-box__header {
+  background-color: #333333;
+}
+.el-message-box__title {
+  color: #ffffff;
+}
+.el-message-box {
+  border: none;
+  padding-bottom: 34px;
+}
+
+.el-message-box__btns {
+  text-align: center;
+}
+.el-message-box__btns .el-button--default {
+  background-color: #333;
+  border-color: #333;
+  color: #ffffff;
+  &:hover, &:focus, &:active {
+    background-color: #333;
+    border-color: #333;
+    color: #ffffff;
+  }
+}
+.el-message-box__btns .el-button--primary{
+  background-color: #fabf40;
+  border-color: #fabf40;
+  color: #ffffff;
+  &:hover, &:focus, &:active {
+    background-color: #f8ad42;
+    border-color: #f8ad42;
+    color: #ffffff;
+  }
+}
+.el-message-box__btns .el-button--small, .el-message-box__btns .el-button--small.is-round {
+  padding: 5px 22px;
+  font-size: 16px;
+}
+.el-message-box__content {
+  padding: 40px 34px;
+}
+/************************* modal css change end *************************/
+
+/**************************** el-transfer start *****************************************/
+.el-transfer__button {
+  background-color: #fabf40;
+  padding: 8px 8px;
+}
+.el-button--primary.el-transfer__button {
+  border-color: #fabf40;
+}
+/**************************** el-transfer end*****************************************/
+
+/**************************** el-menu start *****************************************/
+.el-submenu__title {
+  padding-left: 14px !important;
+}
+.el-submenu__title +.el-menu .el-submenu__title {
+  padding-left: 28px !important;
+}
+.el-submenu__title +.el-menu .el-submenu__title +.el-menu .el-menu-item{
+  padding-left: 42px !important;
+}
+.el-submenu .el-menu-item {
+  line-height: 46px;
+  height: 46px;
+}
+.el-menu-item, .el-submenu__title {
+  line-height: 46px;
+  height: 46px;
+}
+.sidebar > .el-menu>.el-submenu.is-active>.el-submenu__title {
+  background-color: #545454 !important;
+  box-shadow: 4px 0px 0px #fabf40 inset;
+}
+.el-submenu.is-active>.el-submenu__title {
+  color: #fabf40 !important;
+}
+//.sidebar > .el-menu > .el-menu-item {
+//padding-left: 14px !important;
+//}
+/**************************** el-menu end *****************************************/
+/************************* page start*************************/
+.el-pager li.active, .el-pager li:hover{
+  color: #fac040;
+}
+.el-pagination button:hover {
+  color: #fac040;
+}
+.el-pagination__sizes .el-input .el-input__inner:hover {
+  border-color: #fac040;
+}
+.el-input__inner:hover, .el-select:hover .el-input__inner{
+  border-color: #fac040;
+}
+.el-select-dropdown__item.selected {
+  color: #fac040;
+}
+/************************* page end*************************/
+/****************** vbar start ******************************/
+.vb > .vb-dragger {
+  z-index: 5;
+  width: 12px;
+  right: 0;
+}
+
+.vb > .vb-dragger > .vb-dragger-styler {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: rotate3d(0,0,0,0);
+  transform: rotate3d(0,0,0,0);
+  -webkit-transition:
+    background-color 100ms ease-out,
+    margin 100ms ease-out,
+    height 100ms ease-out;
+  transition:
+    background-color 100ms ease-out,
+    margin 100ms ease-out,
+    height 100ms ease-out;
+  background-color: rgba(48, 121, 244,.1);
+  margin: 5px 5px 5px 0;
+  border-radius: 20px;
+  height: calc(100% - 10px);
+  display: block;
+}
+
+.vb.vb-scrolling-phantom > .vb-dragger > .vb-dragger-styler {
+  background-color: rgba(48, 121, 244,.3);
+}
+
+.vb > .vb-dragger:hover > .vb-dragger-styler {
+  background-color: rgba(48, 121, 244,.5);
+  margin: 0px;
+  height: 100%;
+}
+
+.vb.vb-dragging > .vb-dragger > .vb-dragger-styler {
+  background-color: rgba(48, 121, 244,.5);
+  margin: 0px;
+  height: 100%;
+}
+
+.vb.vb-dragging-phantom > .vb-dragger > .vb-dragger-styler {
+  background-color: rgba(48, 121, 244,.5);
+}
+/****************** vbar end ******************************/
+/****************** add by LiuYan start for vbar******************************/
+.vb > .vb-dragger {
+  display: none;
+}
+.vb > .vb-content:hover + .vb-dragger, .vb > .vb-dragger:hover {
+  display: block;
+}
+
+.layout-resizable--dragging::before {
+  content: "";
+  position: absolute;
+  height: 100px;
+  width: 100%;
+  top: 10px;
+  background-color: transparent;
+  z-index: 10;
+}
+.layout-resizable--dragging::after {
+  content: "";
+  position: absolute;
+  height: 100px;
+  width: 100%;
+  bottom: 10px;
+  z-index: 10;
+  background-color: transparent;
+}
+/****************** add by LiuYan end  for vbar******************************/
+/****************** add by jinhua start for tree******************************/
+.i-svg-color{
+  color: #C8C8C8;
+  margin-right: 5px;
+  font-size: 17px;
+}
+.repair-i-svg-color{
+  color: #C9C9C9;
+}
+.i-svg-color-parent{
+  margin-right:7px;
+  font-size: 17px;
+}
+.i-svg-color-child{
+  margin-right:5px;
+}
+.repair-review .el-tree-node__expand-icon{
+  color: #000;
+  font-size: 22px;
+}
+.repair-review .el-tree-node__expand-icon.is-leaf{
+  color: transparent;
+}
+.repair-review .el-tree-node__expand-icon.expanded {
+  -webkit-transform: rotate(40deg);
+  transform: rotate(40deg);
+}
+.el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content {
+  background-color: #fac040;
+}
+/****************** add by jinhua end for tree******************************/
+/************ override element ui css end **********************/
+.wis-table {
+  display: table;
+}
+.wis-row {
+  display: table-row;
+}
+.wis-cell {
+  display: table-cell;
+}
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
+.text-center {
+  text-align: center;
+}
+.text-justify {
+  text-align: justify;
+}
+.text-ellipsis {
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.full-height {
+  height: 100%;
+}
+.has-error {
+  color: #f56c6c;
+}
+.table-title {
+  height: 45px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  position: relative;
+  font-size: 16px;
+
+}
+
+.table-title::before {
+  content: "";
+  position: absolute;
+  height: 20px;
+  width: 4px;
+  top: 12.5px;
+  left: 0px;
+  background-color: #fabf40;
+}
+
+.table-title i {
+  color: #c9c9c9;
+}
+.table-title i:hover {
+  color: #fabf40;
+}
+.wis-right-line,.wis-bottom-line {
+  position: relative;
+}
+.wis-right-line::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 1px;
+  background-color: #cccccc;
+}
+.wis-right-line-offset-10::after {
+  right: 10px;
+}
+
+.wis-bottom-line::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  width: 100%;
+  background-color: #cccccc;
+}
+.common-flex-parts{
+  display: flex;
+}
+.wis-disabled-min-dialog .wis-disabled-min-dialog-input input{
+  width: 150px;
+  padding: 0 10px;
+}
+.wis-disabled-min-dialog .wis-disabled-min-dialog-select input{
+  width: 140px;
+  padding: 0 10px;
+}
+.wis-disabled-min-dialog .el-input-group__append{
+  padding: 0 10px;
+}
+.material_common_del {
+  font-size: 18px;
+  color: #c0c4cc;
+  cursor: pointer;
+}
+/****************** add by jinhua start for file******************************/
+.action-document-view_seafile-form-line .el-form-item__content{
+  display: flex;
+}
+.action-document-view_seafile-form-line .file_up_div{
+  min-width: 450px;
+  display: flex;
+}
+.action-document-view_seafile-form-line .file_up_div .el-upload {
+  float: left;
+}
+.action-document-view_seafile-form-line .el-select--mini,.action-document-view_seafile-form-line .el-input--suffix {
+  width: 120px;
+}
+.action-document-view_seafile-form-line .el-form-item__label{
+  line-height: 32px !important;
+}
+.action-document-view_seafile-form-line .el-checkbox {
+  margin-left: 20px;
+}
+.action-document-view_seafile-form-line .el-upload-list--text {
+  margin-left: 65px;
+}
+.action-document-view_file-add svg, .action-document-view_file-del svg{
+  padding: 2px !important;
+}
+.action-document-view_seafile-form-line .el-upload-list__item:first-child{
+  margin-top: 5px !important;
+}
+.action-document-view_seafile-form-line .el-upload-list__item{
+  max-width: 380px;
+}
+.action-document-view_file-add{
+  position: absolute;
+  left: -65px;
+  top: 8px;
+  padding: 0 !important;
+}
+.action-document-view_file-del{
+  position: absolute;
+  left: -100px;
+  top: 8px;
+  padding: 0 !important;
+}
+/****************** add by jinhua end for file******************************/
+/****************** add by jinhua start for datetime******************************/
+.el-date-table td.end-date span, .el-date-table td.start-date span {
+  background-color: #fabf40;
+  color:#FFFFFF !important;
+}
+.el-picker-panel__footer .el-button--text {
+  color: #c0c4cc;
+  border-color: transparent;
+}
+.el-picker-panel__footer .el-button--text:hover {
+  color: #fabf40;
+}
+.el-date-table td.today span {
+  color: #fabf40;
+}
+.el-date-table td span:hover{
+  color: #fabf40;
+}
+.el-picker-panel__footer .is-plain{
+  color: #fabf40;
+  border: 1px solid #fabf40;
+}
+.el-picker-panel__footer .is-plain:hover{
+  color: #fabf40;
+  border: 1px solid #fabf40;
+}
+.el-time-panel__btn.confirm {
+  color: #fabf40;
+}
+.el-date-table td.current:not(.disabled) span {
+  color: #fff;
+  background-color: #fabf40;
+}
+.el-year-table td .cell:hover, .el-year-table td.current:not(.disabled) .cell {
+  color: #fabf40;
+}
+.el-month-table td .cell:hover, .el-month-table td.current:not(.disabled) .cell {
+  color: #fabf40;
+}
+.el-date-picker__header-label:hover{
+  color: #fabf40;
+}
+.el-range-editor.is-active, .el-range-editor.is-active:hover {
+  border-color: #fabf40;
+}
+
+/****************** add by jinhua end for datetime******************************/
+/*************** add by jinhua start for readonly delete************/
+.readonly_close_btn{
+  position: absolute;
+  left: -25px;
+  top: 6px;
+  display: none;
+  cursor: pointer;
+  color: #C0C4CC;
+}
+.readonly_close_btn:hover{
+  color: #909399;
+}
+.el-input-group:hover > .el-input-group__append .readonly_close_btn{
+  display: block;
+}
+/*************** add by jinhua end for readonly delete******************/
+/*********************** add by zhangxuebing start *****************************/
+.adjustInputCol,.adjustInputUnit{
+  width:350px;
+}
+.adjustInputCol .adjustInputCascading{
+  width:50%;
+  float:left;
+}
+.adjustInputCol .el-input-number--mini{
+  width:100%;
+}
+.adjustInputDes{
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 0 10px;
+}
+.adjustInputUnit .el-col:nth-child(1){
+  width: 60%;
+}
+.adjustInputUnit .el-col:nth-child(2){
+  width: 40%;
+}
+/*********************** add by zhangxuebing end *****************************/
+/*************** add by jinhua begin for  margin/padding******************/
+.margin_lr20{
+  margin: 0 20px;
+}
+/*************** add by jinhua end for  margin/padding******************/
+.word_much_overflow .el-form-item__content , .text_much_overflow_self, .text_much_overflow_self input{
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+/*************** add by xieguixin begin for  fixed table ******************/
+body .el-table th.gutter{
+  display: table-cell!important;
+}
+/*************** add by xieguixin end for  fixed table ******************/
+/*************** add by xieguixin begin for Loading ******************/
+
+.el-loading-spinner .path {
+  animation: loading-dash 1.5s ease-in-out infinite;
+  stroke-dasharray: 90, 150;
+  stroke-dashoffset: 0;
+  stroke-width: 2px;
+  stroke: #fabf40;
+  stroke-linecap: round;
+}
+
+.el-loading-spinner .el-loading-text {
+  color: #000;
+  margin: 3px 0;
+  font-size: 14px;
+}
+.el-autocomplete {
+  width: 100%;
+  max-width: 350px;
+}

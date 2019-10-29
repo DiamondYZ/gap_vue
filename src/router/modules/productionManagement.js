@@ -13,6 +13,12 @@ const productionRouter = {
   },
   children: [
     {
+      path: 'self-task',
+      component: () => import('@/views/production/self-task'),
+      name: 'SelfTask',
+      meta: { title: '待完成任务' }
+    },
+    {
       path: 'plant',
       component: () => import('@/views/production/plant'),
       name: 'Plant',

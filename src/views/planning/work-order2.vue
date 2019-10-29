@@ -9,12 +9,11 @@
         <el-collapse-item title="筛选搜索" name="1">
           <el-card class="filter-container" shadow="never">
             <div>
-
               <el-button
                 style="float: right"
                 type="primary"
-                size="small"
                 icon="el-icon-search"
+                size="small"
                 @click="getList()"
               >
                 查询
@@ -30,11 +29,25 @@
             </div>
             <div style="margin-top: 15px">
               <el-form :inline="true" :model="search_data" size="small" label-width="140px">
-                <el-form-item label="输入搜索：">
+                <el-form-item label="搜索条件">
                   <el-input
                     v-model="search_data.customCondition"
                     style="width: 203px"
-                    placeholder="编号、名称、描述"
+                    placeholder="编号、描述"
+                  />
+                </el-form-item>
+                <el-form-item label="生产单元：">
+                  <el-input
+                    v-model="search_data.productionCellCondition"
+                    style="width: 203px"
+                    placeholder="生产单元编号、描述"
+                  />
+                </el-form-item>
+                <el-form-item label="产品：">
+                  <el-input
+                    v-model="search_data.productionCondition"
+                    style="width: 203px"
+                    placeholder="产品编号、名称、描述"
                   />
                 </el-form-item>
               </el-form>
@@ -42,35 +55,54 @@
           </el-card>
         </el-collapse-item>
       </el-collapse>
-
-      <toolbar>
-        <toolbar-group>
-          <el-button type="border-orange" @click="add()"><i class="el-icon-plus"/>
-            新增</el-button>
-          <el-button type="border-orange" :disabled="deleteBtnDisabled" @click="deleteSelectedRow()">
-            删除</el-button>
-        </toolbar-group>
-      </toolbar>
+      <div style="float: right;margin:20px 30px">
+        <el-button
+          type="success"
+          size="small"
+          :disabled="statusDict!=='saved'"
+          @click="setStatus('issued')"
+        >下发
+        </el-button>
+        <el-button
+          type="info"
+          size="small"
+          plain
+          :disabled="statusDict!=='issued'"
+          @click="setStatus('completed')"
+        >完成
+        </el-button>
+        <el-button type="primary" size="small" icon="view" @click="add()"><i class="el-icon-plus"/>新增
+        </el-button>
+        <el-button
+          type="danger"
+          size="small"
+          icon="el-icon-delete"
+          :disabled="deleteBtnDisabled"
+          @click="deleteSelectedRow()"
+        >
+          删除
+        </el-button>
+      </div>
 
       <div class="fillcontain">
         <div class="table_container">
           <el-table
-            ref="handSelect_multipleTable"
+            ref="ownerTable"
             v-loading="loading"
             :data="tableData"
             :cell-style="rowStyle"
             border
-            style="width: 100%"
-            size="mini"
-            max-height="500"
-            align="center"
+            stripe
             :header-cell-style="setHeaderRowStyle"
+            tooltip-effect="light"
+            highlight-current-row
             @row-click="showRowDetail"
             @select="selectTable"
             @select-all="selectAll"
           >
             <el-table-column type="selection" align="center" width="60"/>
             <el-table-column
+              show-overflow-tooltip
               v-for="(item,index) in tableTitleList"
               :prop="item.prop"
               :label="item.name"
@@ -91,19 +123,25 @@
       <show-detail-form
         ref="detailForm"
         :page-info="pageInfo"
-        :form-configs="productionBaseFormConfigs"
+        :form-configs="workOrderFormConfigs"
         @getList="getList(nowPage)"
       />
       <dialog-table
-        ref="dialogStaffSelectTable"
-        :dialog-info="dialogStaffInfo"
-        :form-configs="productionBaseFormConfigs"
+        ref="dialogProductSelectTable"
+        :dialog-info="dialogProductInfo"
+        :form-configs="workOrderFormConfigs"
         :table-title="tableTitle"
       />
       <dialog-table
-        ref="dialogProvinceSelectTable"
-        :dialog-info="dialogProvinceInfo"
-        :form-configs="productionBaseFormConfigs"
+        ref="dialogProductionCellSelectTable"
+        :dialog-info="dialogProductionCellInfo"
+        :form-configs="workOrderFormConfigs"
+        :table-title="tableTitle"
+      />
+      <dialog-table
+        ref="dialogProductionOrderSelectTable"
+        :dialog-info="dialogProductionOrderInfo"
+        :form-configs="workOrderFormConfigs"
         :table-title="tableTitle"
       />
     </el-card>
@@ -114,7 +152,7 @@
 
     import ShowDetailForm from '@/components/Form/show-detail-form.vue'
     import DialogTable from '@/components/Form/dialog-table.vue'
-    import {productionBaseFormConfigs} from '../../components/Form/form-configs.js'
+    import {workOrderFormConfigs} from '../../components/Form/form-configs.js'
 
     export default {
         components: {
@@ -124,21 +162,28 @@
         data() {
             return {
                 pageInfo: {
-                    interfaceName: 'production-base', // 接口名称
-                    listTitle: '生产基地列表',
-                    detailTitle: '生产基地详细信息'
+                    interfaceName: 'work-order', // 接口名称
+                    listTitle: '工单列表',
+                    detailTitle: '工单详细信息'
                 }, // 页面信息
-                dialogStaffInfo: {
-                    selectDialogTitle: '选择人员',
-                    dialogAxiosName: 'manager',
-                    dialogId: 'managerId',
+                dialogProductInfo: {
+                    selectDialogTitle: '产品',
+                    dialogAxiosName: 'product',
+                    dialogId: 'productId',
                     selectOptions: [],
                     tableTitleList: []
                 },
-                dialogProvinceInfo: {
-                    selectDialogTitle: '选择省份',
-                    dialogAxiosName: 'province',
-                    dialogId: 'provinceId',
+                dialogProductionCellInfo: {
+                    selectDialogTitle: '生产单元',
+                    dialogAxiosName: 'productionCell',
+                    dialogId: 'productionCellId',
+                    selectOptions: [],
+                    tableTitleList: []
+                },
+                dialogProductionOrderInfo: {
+                    selectDialogTitle: '生产订单',
+                    dialogAxiosName: 'productionOrder',
+                    dialogId: 'productionOrderId',
                     selectOptions: [],
                     tableTitleList: []
                 },
@@ -148,21 +193,12 @@
                 showForm: false, // 是否显示表单0
                 formStatus: '', // 表单状态  是否可点击
                 tableTitleList: [
-                    // {prop: 'lineNumber', name: '行号'},
-                    {prop: 'number', name: '编号'},
-                    {prop: 'name', name: '名称'},
-                    {prop: 'description', name: '描述'},
-                    {prop: 'managerName', name: '负责人'},
-                    {prop: 'area', name: '总面积'},
-                    {prop: 'areaUnitDict', name: '面积单位'},
-                    {prop: 'altitude', name: '海拔'},
-                    {prop: 'province', name: '省份'},
-                    {prop: 'city', name: '城市'},
-                    {prop: 'district', name: '区/县'},
-                    {prop: 'street', name: '街道(乡镇)'},
-                    {prop: 'lat', name: '纬度'},
-                    {prop: 'lng', name: '经度'},
-                    // {prop: 'overview', name: '简介'}
+                    {prop: 'productionOrderNumber', name: '生产订单编号'},
+                    {prop: 'number', name: '工单编号'},
+                    {prop: 'description', name: '工单描述'},
+                    {prop: 'productionCellNumber', name: '生产单元'},
+                    {prop: 'productName', name: '产品'},
+                    {prop: 'statusDict', name: '状态'}
                 ], // 表格头信息
                 tableData: [], // 表格数据
                 formData: {}, // 表单数据
@@ -171,8 +207,9 @@
                 nowPage: 1, // 当前页
                 pageSize: 10, // 每页显示多少条
                 pageTotal: 0, // 总条数
+                statusDict: '', // 控制状态按钮  状态
                 activeNames: [],
-                productionBaseFormConfigs,
+                workOrderFormConfigs,
                 tableTitle: []
             }
         },
@@ -184,33 +221,42 @@
         watch: {
             listeningClickDialog(val) {
                 if (val) {
-                    let urlValue = val
-                    if (val === 'manager') {
-                        urlValue = 'staff'
+                    let param
+                    let urlValue
+                    if (val === 'productionCell') {
+                        urlValue = 'production-cell'
+                    } else if (val === 'productionOrder') {
+                        urlValue = 'production-order'
+                    } else {
+                        urlValue = val
                     }
-                    const param = {url: urlValue + '/getPullDownList'}
+                    param = {url: urlValue + '/getPullDownList'}
                     this.$store.dispatch('common/getSelectOptionsList', param).then((res) => {
-                        if (val === 'manager') {
-                            this.dialogStaffInfo.selectOptions = res.data
-                            this.dialogStaffInfo.tableTitleList = [
+                        if (val === 'product') {
+                            this.dialogProductInfo.selectOptions = res.data
+                            this.dialogProductInfo.tableTitleList = [
                                 {prop: 'number', name: '编号'},
                                 {prop: 'name', name: '名称'},
-                                {prop: 'description', name: '描述'},
-                                {prop: 'departmentName', name: '部门'},
-                                {prop: 'position', name: '职位'},
-                                {prop: 'entryDate', name: '入职日期'}
-                                // {prop: 'statusDict', name: '状态'}
+                                {prop: 'description', name: '描述'}
                             ] // 表格头信息
-                            this.$refs.dialogStaffSelectTable.showTable()
+                            this.$refs.dialogProductSelectTable.showTable()
                         }
-                        if (val === 'province') {
-                            this.dialogProvinceInfo.selectOptions = res.data
-                            this.dialogProvinceInfo.tableTitleList = [
-                                {prop: 'provinceName', name: '名称'},
-                                {prop: 'shortName', name: '简称'},
-                                {prop: 'provinceCode', name: '编号'},
+                        if (val === 'productionCell') {
+                            this.dialogProductionCellInfo.selectOptions = res.data
+                            this.dialogProductionCellInfo.tableTitleList = [
+                                {prop: 'number', name: '编号'},
+                                {prop: 'description', name: '描述'},
+                                {prop: 'managerName', name: '负责人'}
                             ] // 表格头信息
-                            this.$refs.dialogProvinceSelectTable.showTable()
+                            this.$refs.dialogProductionCellSelectTable.showTable()
+                        }
+                        if (val === 'productionOrder') {
+                            this.dialogProductionOrderInfo.selectOptions = res.data
+                            this.dialogProductionOrderInfo.tableTitleList = [
+                                {prop: 'number', name: '编号'},
+                                {prop: 'description', name: '描述'},
+                            ] // 表格头信息
+                            this.$refs.dialogProductionOrderSelectTable.showTable()
                         }
                     })
                         .catch(() => {
@@ -223,17 +269,16 @@
             this.getList()
         },
         created() {
-            this.$store.dispatch('common/getPullDownList', {classCode: 'AREA_UNIT_DICT'}) // 面积单位
-            // const param = {
-            //     url: 'province/getPullDownList',
-            //     storageName: 'provinceSelect'
-            // }
-            // this.$store.dispatch('common/getSelectList', param)   // 省份列表下拉
+            this.$store.dispatch('common/getPullDownList', {classCode: 'DISPATCH_LIST_STATUS'}) // 工单状态
+            this.$store.dispatch('common/getPullDownList', {classCode: 'QUANTITY_UNIT_DICT'}) // 数量单位
         },
         methods: {
             formatRole(row, column) {
-                if (column.property === 'areaUnitDict') {
-                    const statusArr = JSON.parse(localStorage.getItem('AREA_UNIT_DICT'))
+                if (column.property === 'statusDict') {
+                    const statusArr = JSON.parse(localStorage.getItem('DISPATCH_LIST_STATUS'))
+                    return this.getArrayMapVal(statusArr, row[column.property])
+                } else if (column.property === 'unitDict') {
+                    const statusArr = JSON.parse(localStorage.getItem('QUANTITY_UNIT_DICT'))
                     return this.getArrayMapVal(statusArr, row[column.property])
                 } else {
                     return row[column.property]
@@ -290,7 +335,7 @@
             // 点击row显示详细数据
             showRowDetail(row) {
                 // 点击选中复选框
-                //    this.$refs.handSelect_multipleTable.toggleRowSelection(row);
+                //    	this.$refs.handSelect_multipleTable.toggleRowSelection(row);
                 this.clickLineId = row.id
                 this.$refs.detailForm.getDetailData(row.id)
             },
@@ -397,6 +442,7 @@
                 const selected = rows.length && rows.indexOf(row) !== -1
                 if (selected) {
                     this.rowIds.push(row.id)
+                    this.statusDict = row.statusDict
                 } else {
                     this.rowIds.splice(this.rowIds.indexOf(row.id), 1)
                 }
@@ -418,9 +464,37 @@
             setDeleteBtn() {
                 if (this.rowIds.length === 0) {
                     this.deleteBtnDisabled = true
+                    this.statusDict = ''
                 } else {
                     this.deleteBtnDisabled = false
                 }
+            },
+            // 状态管理
+            // 发布
+            setStatus(state) {
+                if (this.rowIds.length !== 1) {
+                    this.$message({
+                        message: '请更改一条数据转态',
+                        type: 'warning'
+                    })
+                    return
+                }
+                const data = {
+                    'id': this.rowIds[0]
+                }
+                const param = {
+                    url: '/' + this.pageInfo.interfaceName + '/' + state,
+                    data: data
+                }
+                this.$store.dispatch('common/setDataState', param)
+                    .then((res) => {
+                        this.deleteBtnDisabled = true
+                        this.rowIds.length = 0
+                        this.refresh('更新成功！')
+                    })
+                    .catch(() => {
+
+                    })
             }
         }
     }

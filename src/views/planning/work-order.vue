@@ -1,15 +1,11 @@
 <template>
   <div class="app-container">
     <el-card class="operate-container" shadow="never">
-      <div style="margin-bottom: 20px;">
-        <i class="el-icon-tickets" style="margin-top: 5px;font-size: 22px"/>
-        <span style="margin-top: 5px;font-size: 22px">{{ pageInfo.listTitle }}</span>
-      </div>
+      <div style="font-size: larger; margin: 10px 0px">{{ pageInfo.listTitle }}</div>
       <el-collapse v-model="activeNames">
-        <el-collapse-item title="筛选搜索" name="1">
+        <el-collapse-item title="查询条件" name="1">
           <el-card class="filter-container" shadow="never">
             <div>
-
               <el-button
                 style="float: right"
                 type="primary"
@@ -30,7 +26,7 @@
             </div>
             <div style="margin-top: 15px">
               <el-form :inline="true" :model="search_data" size="small" label-width="140px">
-                <el-form-item label="输入搜索：">
+                <el-form-item label="搜索条件">
                   <el-input
                     v-model="search_data.customCondition"
                     style="width: 203px"
@@ -41,14 +37,14 @@
                   <el-input
                     v-model="search_data.productionCellCondition"
                     style="width: 203px"
-                    placeholder="生产单元的编号、描述"
+                    placeholder="生产单元编号、描述"
                   />
                 </el-form-item>
                 <el-form-item label="产品：">
                   <el-input
                     v-model="search_data.productionCondition"
                     style="width: 203px"
-                    placeholder="产品的编号、名称、描述"
+                    placeholder="产品编号、名称、描述"
                   />
                 </el-form-item>
               </el-form>
@@ -57,52 +53,49 @@
         </el-collapse-item>
       </el-collapse>
       <div style="float: right;margin:20px 30px">
-        <el-button
-          type="success"
-          size="small"
-          :disabled="statusDict!=='saved'"
-          @click="setStatus('issued')"
-        >下发
-        </el-button>
-        <el-button
-          type="info"
-          size="small"
-          plain
-          :disabled="statusDict!=='issued'"
-          @click="setStatus('completed')"
-        >完成
-        </el-button>
-        <el-button type="primary" size="small" icon="view" @click="add()"><i class="el-icon-plus"/>新增
-        </el-button>
-        <el-button
-          type="danger"
-          size="small"
-          icon="el-icon-delete"
-          :disabled="deleteBtnDisabled"
-          @click="deleteSelectedRow()"
-        >
-          删除
-        </el-button>
+        <toolbar>
+          <toolbar-group>
+            <el-button type="success" size="small" :disabled="statusDict!=='saved'" @click="setStatus('issued')">
+              下发</el-button>
+            <el-button type="info" size="small" plain :disabled="statusDict!=='issued'" @click="setStatus('completed')">
+              完成</el-button>
+            <el-button type="border-orange" @click="add()">
+              新增</el-button>
+            <el-button type="border-orange" @click="deleteSelectedRow()" :disabled="deleteBtnDisabled">
+              删除</el-button>
+          </toolbar-group>
+        </toolbar>
+<!--        <el-button type="primary" size="small" icon="view" @click="add()"><i class="el-icon-plus"/>新增-->
+<!--        </el-button>-->
+<!--        <el-button-->
+<!--          type="danger"-->
+<!--          size="small"-->
+<!--          icon="el-icon-delete"-->
+<!--          :disabled="deleteBtnDisabled"-->
+<!--          @click="deleteSelectedRow()"-->
+<!--        >-->
+<!--          删除-->
+<!--        </el-button>-->
       </div>
-
       <div class="fillcontain">
         <div class="table_container">
           <el-table
-            ref="handSelect_multipleTable"
+            ref="table"
             v-loading="loading"
             :data="tableData"
             :cell-style="rowStyle"
             border
-            style="width: 100%"
-            max-height="500"
-            align="center"
+            stripe
+            highlight-current-row
             :header-cell-style="setHeaderRowStyle"
+            tooltip-effect="light"
             @row-click="showRowDetail"
             @select="selectTable"
             @select-all="selectAll"
           >
             <el-table-column type="selection" align="center" width="60"/>
             <el-table-column
+              show-overflow-tooltip
               v-for="(item,index) in tableTitleList"
               :prop="item.prop"
               :label="item.name"
@@ -152,10 +145,17 @@
 
     import ShowDetailForm from '@/components/Form/show-detail-form.vue'
     import DialogTable from '@/components/Form/dialog-table.vue'
+    import Toolbar from '@/components/toolbar/Toolbar'
+    import ToolbarGroup from '@/components/toolbar/ToolbarGroup'
+    import QueryForm from '@/components/Form/QueryForm'
+    import Titlebar from '@/components/titlebar/Index'
     import {workOrderFormConfigs} from '../../components/Form/form-configs.js'
 
     export default {
         components: {
+            Titlebar,
+            Toolbar,
+            ToolbarGroup,
             'show-detail-form': ShowDetailForm,
             'dialog-table': DialogTable
         },

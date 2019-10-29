@@ -9,12 +9,11 @@
         <el-collapse-item title="筛选搜索" name="1">
           <el-card class="filter-container" shadow="never">
             <div>
-
               <el-button
                 style="float: right"
                 type="primary"
-                size="small"
                 icon="el-icon-search"
+                size="small"
                 @click="getList()"
               >
                 查询
@@ -31,26 +30,13 @@
             <div style="margin-top: 15px">
               <el-form :inline="true" :model="search_data" size="small" label-width="140px">
                 <el-form-item label="输入搜索：">
-                  <el-input
-                    v-model="search_data.customCondition"
-                    style="width: 203px"
-                    placeholder="编号、名称、描述"
-                  />
+                  <el-input v-model="search_data.customCondition" style="width: 203px" placeholder="编号"/>
                 </el-form-item>
               </el-form>
             </div>
           </el-card>
         </el-collapse-item>
       </el-collapse>
-
-      <toolbar>
-        <toolbar-group>
-          <el-button type="border-orange" @click="add()"><i class="el-icon-plus"/>
-            新增</el-button>
-          <el-button type="border-orange" :disabled="deleteBtnDisabled" @click="deleteSelectedRow()">
-            删除</el-button>
-        </toolbar-group>
-      </toolbar>
 
       <div class="fillcontain">
         <div class="table_container">
@@ -61,7 +47,6 @@
             :cell-style="rowStyle"
             border
             style="width: 100%"
-            size="mini"
             max-height="500"
             align="center"
             :header-cell-style="setHeaderRowStyle"
@@ -91,20 +76,8 @@
       <show-detail-form
         ref="detailForm"
         :page-info="pageInfo"
-        :form-configs="productionBaseFormConfigs"
-        @getList="getList(nowPage)"
-      />
-      <dialog-table
-        ref="dialogStaffSelectTable"
-        :dialog-info="dialogStaffInfo"
-        :form-configs="productionBaseFormConfigs"
-        :table-title="tableTitle"
-      />
-      <dialog-table
-        ref="dialogProvinceSelectTable"
-        :dialog-info="dialogProvinceInfo"
-        :form-configs="productionBaseFormConfigs"
-        :table-title="tableTitle"
+        :form-configs="selfTaskFormConfigs"
+        @getList="getList()"
       />
     </el-card>
   </div>
@@ -113,56 +86,35 @@
 <script>
 
     import ShowDetailForm from '@/components/Form/show-detail-form.vue'
-    import DialogTable from '@/components/Form/dialog-table.vue'
-    import {productionBaseFormConfigs} from '../../components/Form/form-configs.js'
+    import {selfTaskFormConfigs, formData} from '../../components/Form/form-configs.js'
 
     export default {
         components: {
-            'show-detail-form': ShowDetailForm,
-            'dialog-table': DialogTable
+            'show-detail-form': ShowDetailForm
         },
         data() {
             return {
                 pageInfo: {
-                    interfaceName: 'production-base', // 接口名称
-                    listTitle: '生产基地列表',
-                    detailTitle: '生产基地详细信息'
+                    interfaceName: 'task', // 接口名称
+                    listTitle: '待完成任务列表',
+                    detailTitle: '待完成任务详细信息'
                 }, // 页面信息
-                dialogStaffInfo: {
-                    selectDialogTitle: '选择人员',
-                    dialogAxiosName: 'manager',
-                    dialogId: 'managerId',
-                    selectOptions: [],
-                    tableTitleList: []
-                },
-                dialogProvinceInfo: {
-                    selectDialogTitle: '选择省份',
-                    dialogAxiosName: 'province',
-                    dialogId: 'provinceId',
-                    selectOptions: [],
-                    tableTitleList: []
-                },
                 search_data: {}, // 搜索条件
                 clickLineId: '', // 当前点击行id
                 deleteBtnDisabled: true, // 删除id
                 showForm: false, // 是否显示表单0
                 formStatus: '', // 表单状态  是否可点击
                 tableTitleList: [
-                    // {prop: 'lineNumber', name: '行号'},
-                    {prop: 'number', name: '编号'},
-                    {prop: 'name', name: '名称'},
-                    {prop: 'description', name: '描述'},
-                    {prop: 'managerName', name: '负责人'},
-                    {prop: 'area', name: '总面积'},
-                    {prop: 'areaUnitDict', name: '面积单位'},
-                    {prop: 'altitude', name: '海拔'},
-                    {prop: 'province', name: '省份'},
-                    {prop: 'city', name: '城市'},
-                    {prop: 'district', name: '区/县'},
-                    {prop: 'street', name: '街道(乡镇)'},
-                    {prop: 'lat', name: '纬度'},
-                    {prop: 'lng', name: '经度'},
-                    // {prop: 'overview', name: '简介'}
+                    {prop: 'number', name: '任务编号'},
+                    // {prop: 'description', name: '描述'},
+                    {prop: 'taskTypeDict', name: '类型'},
+                    {prop: 'productName', name: '产品'},
+                    {prop: 'quantity', name: '数量'},
+                    {prop: 'unitDict', name: '单位'},
+                    {prop: 'statusDict', name: '状态'},
+                    {prop: 'generateTime', name: '生成时间'},
+                    {prop: 'issuedTime', name: '发布时间'},
+                    {prop: 'completeTime', name: '完成时间'},
                 ], // 表格头信息
                 tableData: [], // 表格数据
                 formData: {}, // 表单数据
@@ -172,68 +124,28 @@
                 pageSize: 10, // 每页显示多少条
                 pageTotal: 0, // 总条数
                 activeNames: [],
-                productionBaseFormConfigs,
-                tableTitle: []
+                selfTaskFormConfigs
             }
         },
-        computed: {
-            listeningClickDialog() {
-                return this.$store.state.common.selectToGetOptionsProp
-            }
-        },
-        watch: {
-            listeningClickDialog(val) {
-                if (val) {
-                    let urlValue = val
-                    if (val === 'manager') {
-                        urlValue = 'staff'
-                    }
-                    const param = {url: urlValue + '/getPullDownList'}
-                    this.$store.dispatch('common/getSelectOptionsList', param).then((res) => {
-                        if (val === 'manager') {
-                            this.dialogStaffInfo.selectOptions = res.data
-                            this.dialogStaffInfo.tableTitleList = [
-                                {prop: 'number', name: '编号'},
-                                {prop: 'name', name: '名称'},
-                                {prop: 'description', name: '描述'},
-                                {prop: 'departmentName', name: '部门'},
-                                {prop: 'position', name: '职位'},
-                                {prop: 'entryDate', name: '入职日期'}
-                                // {prop: 'statusDict', name: '状态'}
-                            ] // 表格头信息
-                            this.$refs.dialogStaffSelectTable.showTable()
-                        }
-                        if (val === 'province') {
-                            this.dialogProvinceInfo.selectOptions = res.data
-                            this.dialogProvinceInfo.tableTitleList = [
-                                {prop: 'provinceName', name: '名称'},
-                                {prop: 'shortName', name: '简称'},
-                                {prop: 'provinceCode', name: '编号'},
-                            ] // 表格头信息
-                            this.$refs.dialogProvinceSelectTable.showTable()
-                        }
-                    })
-                        .catch(() => {
-
-                        })
-                }
-            }
+        computed: {},
+        created() {
+            this.$store.dispatch('common/getPullDownList', {classCode: 'PRODUCTION_TASK_STATUS'}) // 任务状态
+            this.$store.dispatch('common/getPullDownList', {classCode: 'QUANTITY_UNIT_DICT'}) // 数量单位
+            this.$store.dispatch('common/getPullDownList', {classCode: 'TASK_TYPE'}) // 任务类型
         },
         mounted() {
             this.getList()
         },
-        created() {
-            this.$store.dispatch('common/getPullDownList', {classCode: 'AREA_UNIT_DICT'}) // 面积单位
-            // const param = {
-            //     url: 'province/getPullDownList',
-            //     storageName: 'provinceSelect'
-            // }
-            // this.$store.dispatch('common/getSelectList', param)   // 省份列表下拉
-        },
         methods: {
             formatRole(row, column) {
-                if (column.property === 'areaUnitDict') {
-                    const statusArr = JSON.parse(localStorage.getItem('AREA_UNIT_DICT'))
+                if (column.property === 'statusDict') {
+                    const statusArr = JSON.parse(localStorage.getItem('PRODUCTION_TASK_STATUS'))
+                    return this.getArrayMapVal(statusArr, row[column.property])
+                } else if (column.property === 'unitDict') {
+                    const statusArr = JSON.parse(localStorage.getItem('QUANTITY_UNIT_DICT'))
+                    return this.getArrayMapVal(statusArr, row[column.property])
+                } else if (column.property === 'taskTypeDict') {
+                    const statusArr = JSON.parse(localStorage.getItem('TASK_TYPE'))
                     return this.getArrayMapVal(statusArr, row[column.property])
                 } else {
                     return row[column.property]
@@ -290,7 +202,7 @@
             // 点击row显示详细数据
             showRowDetail(row) {
                 // 点击选中复选框
-                //    this.$refs.handSelect_multipleTable.toggleRowSelection(row);
+                //    	this.$refs.handSelect_multipleTable.toggleRowSelection(row);
                 this.clickLineId = row.id
                 this.$refs.detailForm.getDetailData(row.id)
             },
@@ -323,6 +235,7 @@
                     console.log(data)
                 })
                 const data = this.formData
+                data.token = '18aad253349dacb94e9ea0863a7d664d'
 
                 if (this.formStatus === 'edit') {
                     data.id = this.clickLineId

@@ -408,6 +408,37 @@ export const taskFormConfigs = [
   { type: 'datePicker', formItemProp: { label: '完成时间', prop: 'completeTime', disable: true }, elementProp: { size: 'medium' }},
   { type: 'dialog', formItemProp: { label: '物料', prop: 'materialName', id: 'material' }, elementProp: { size: 'medium' }}
 ]
+// 待完成任务
+export const selfTaskFormConfigs = [
+  { type: 'input', formItemProp: { label: '工单', prop: 'workOrderNumber', id: 'workOrder' }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '任务编号', prop: 'number' }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '任务描述', prop: 'description' }, elementProp: { size: 'medium' }},
+  {
+    type: 'select',
+    formItemProp: { label: '任务类型', prop: 'taskTypeDict' },
+    optionList: setArrayMapVal(JSON.parse(localStorage.getItem('TASK_TYPE')))
+  },
+  {
+    type: 'select',
+    formItemProp: { label: '状态', prop: 'statusDict', disable: true },
+    optionList: setArrayMapVal(JSON.parse(localStorage.getItem('PRODUCTION_TASK_STATUS')))
+  },
+  { type: 'dialog', formItemProp: { label: '产品', prop: 'productName', id: 'product' }, elementProp: { size: 'medium' }},
+  { type: 'input', formItemProp: { label: '数量', prop: 'quantity' }, elementProp: { size: 'medium' }},
+  {
+    type: 'select',
+    formItemProp: { label: '单位', prop: 'unitDict' },
+    optionList: setArrayMapVal(JSON.parse(localStorage.getItem('QUANTITY_UNIT_DICT')))
+  },
+  { type: 'datePicker', formItemProp: { label: '计划开始时间', prop: 'planBeginTime' }, elementProp: { size: 'medium' }},
+  { type: 'datePicker', formItemProp: { label: '计划结束时间', prop: 'planEndTime' }, elementProp: { size: 'medium' }},
+  { type: 'datePicker', formItemProp: { label: '实际开始时间', prop: 'beginTime', disable: true }, elementProp: { size: 'medium' }},
+  { type: 'datePicker', formItemProp: { label: '实际结束时间', prop: 'endTime', disable: true }, elementProp: { size: 'medium' }},
+  { type: 'datePicker', formItemProp: { label: '生成时间', prop: 'generateTime', disable: true }, elementProp: { size: 'medium' }},
+  { type: 'datePicker', formItemProp: { label: '发布时间', prop: 'issuedTime', disable: true }, elementProp: { size: 'medium' }},
+  { type: 'datePicker', formItemProp: { label: '完成时间', prop: 'completeTime', disable: true }, elementProp: { size: 'medium' }},
+  { type: 'dialog', formItemProp: { label: '物料', prop: 'materialName', id: 'material' }, elementProp: { size: 'medium' }}
+]
 // 公司
 export const companyFormConfigs = [
   { type: 'input', formItemProp: { label: '公司名称', prop: 'name' }, elementProp: { size: 'medium' }},
@@ -736,9 +767,9 @@ export const productionBaseFormConfigs = [
   { type: 'dialog', formItemProp: { label: '负责人', prop: 'managerName', id: 'manager' }, elementProp: { size: 'medium' }},
   { type: 'dialog', formItemProp: { label: '省份', prop: 'provinceName', id: 'province' }, elementProp: { size: 'medium' }},
   // { type: 'input', formItemProp: { label: '省份', prop: 'province' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '城市', prop: 'city' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '区/县', prop: 'district' }, elementProp: { size: 'medium' }},
-  { type: 'input', formItemProp: { label: '街道(乡镇)', prop: 'street' }, elementProp: { size: 'medium' }},
+  // { type: 'input', formItemProp: { label: '城市', prop: 'city' }, elementProp: { size: 'medium' }},
+  // { type: 'input', formItemProp: { label: '区/县', prop: 'district' }, elementProp: { size: 'medium' }},
+  // { type: 'input', formItemProp: { label: '街道(乡镇)', prop: 'street' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '纬度', prop: 'lat' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '经度', prop: 'lng' }, elementProp: { size: 'medium' }},
   { type: 'input', formItemProp: { label: '海拔', prop: 'altitude' }, elementProp: { size: 'medium' }},

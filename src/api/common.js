@@ -99,3 +99,17 @@ export function getQiniuToken(data) {
   })
 }
 
+// 省份下拉取值
+export function getProvinceList(param) {
+  const data = {
+    'entity': {
+      'classCode': param.classCode
+    }
+  }
+  return request({
+    url: '/province/getPullDownList',
+    method: 'post',
+    data
+  })
+}
+
