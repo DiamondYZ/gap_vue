@@ -270,9 +270,9 @@ a:hover {
 .el-textarea__inner:focus {
   border-color: #FABF40;
 }
-.el-button.is-disabled, .el-button.is-disabled:focus, .el-button.is-disabled:hover {
-  background-color: transparent;
-}
+//.el-button.is-disabled, .el-button.is-disabled:focus, .el-button.is-disabled:hover {
+//  background-color: transparent;
+//}
 .el-input.is-active .el-input__inner, .el-input__inner:focus,
 .el-select .el-input.is-focus .el-input__inner,.el-select .el-input__inner:focus {
   border-color: #FABF40;
@@ -711,13 +711,13 @@ a:hover {
 }
 /****************** add by jinhua end for tree******************************/
 /************ override element ui css end **********************/
-.wis-table {
+.table {
   display: table;
 }
-.wis-row {
+.row {
   display: table-row;
 }
-.wis-cell {
+.cell {
   display: table-cell;
 }
 .text-left {
@@ -769,10 +769,10 @@ a:hover {
 .table-title i:hover {
   color: #fabf40;
 }
-.wis-right-line,.wis-bottom-line {
+.right-line,.bottom-line {
   position: relative;
 }
-.wis-right-line::after {
+.right-line::after {
   content: "";
   position: absolute;
   top: 0;
@@ -781,11 +781,11 @@ a:hover {
   width: 1px;
   background-color: #cccccc;
 }
-.wis-right-line-offset-10::after {
+.right-line-offset-10::after {
   right: 10px;
 }
 
-.wis-bottom-line::after {
+.bottom-line::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -797,15 +797,15 @@ a:hover {
 .common-flex-parts{
   display: flex;
 }
-.wis-disabled-min-dialog .wis-disabled-min-dialog-input input{
+.disabled-min-dialog .disabled-min-dialog-input input{
   width: 150px;
   padding: 0 10px;
 }
-.wis-disabled-min-dialog .wis-disabled-min-dialog-select input{
+.disabled-min-dialog .disabled-min-dialog-select input{
   width: 140px;
   padding: 0 10px;
 }
-.wis-disabled-min-dialog .el-input-group__append{
+.disabled-min-dialog .el-input-group__append{
   padding: 0 10px;
 }
 .material_common_del {

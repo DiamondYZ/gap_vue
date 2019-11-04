@@ -13,14 +13,14 @@
                 style="float: right"
                 type="primary"
                 icon="el-icon-search"
-                size="small"
+                size="mini"
                 @click="getList()"
               >
                 查询
               </el-button>
               <el-button
                 style="float: right;margin-right: 15px"
-                size="small"
+                size="mini"
                 @click="refreshSearch()"
               >
                 <i class="el-icon-refresh"/>
@@ -28,7 +28,7 @@
               </el-button>
             </div>
             <div style="margin-top: 15px">
-              <el-form :inline="true" :model="search_data" size="small" label-width="140px">
+              <el-form :inline="true" :model="search_data" size="mini" label-width="140px">
                 <el-form-item label="输入搜索：">
                   <el-input
                     v-model="search_data.customCondition"
@@ -37,7 +37,7 @@
                   />
                 </el-form-item>
                 <el-form-item label="是否可用">
-                  <el-select v-model="search_data.isValid" class="item-choose" size="small">
+                  <el-select v-model="search_data.isValid" class="item-choose" size="mini">
                     <el-option label="可用" value="1"/>
                     <el-option label="不可用" value="0"/>
                   </el-select>
@@ -47,10 +47,10 @@
           </el-card>
         </el-collapse-item>
       </el-collapse>
-      <div style="float: right;margin:20px 30px">
-        <el-button type="primary" size="small" icon="view" @click="add()"><i class="el-icon-plus"/>新增
+      <div style="float: left;margin:20px 30px">
+        <el-button type="primary" size="mini" icon="view" @click="add()"><i class="el-icon-plus"/>新增
         </el-button>
-        <el-button type="primary" size="small" icon="el-icon-delete" :disabled="deleteBtnDisabled"
+        <el-button type="primary" size="mini" icon="el-icon-delete" :disabled="deleteBtnDisabled"
                    @click="deleteSelectedRow()">
           删除
         </el-button>
@@ -71,6 +71,8 @@
             @row-click="showRowDetail"
             @select="selectTable"
             @select-all="selectAll"
+            :row-class-name="tableRowClassName"
+            :row-style="selectedHighlight"
           >
             <el-table-column type="selection" align="center" width="60"/>
             <el-table-column
@@ -211,7 +213,7 @@
             // 点击row显示详细数据
             showRowDetail(row) {
                 // 点击选中复选框
-                //    this.$refs.handSelect_multipleTable.toggleRowSelection(row);
+                // this.$refs.handSelect_multipleTable.toggleRowSelection(row);
                 this.clickLineId = row.id
                 this.$refs.detailForm.getDetailData(row.id)
             },
@@ -367,6 +369,17 @@
 
   .el-table .success-row {
     background: #ebf1fb;
+  }
+
+
+  .el-table--striped .el-table__body tr.el-table__row--striped.current-row td,
+  .el-table__body tr.current-row > td {
+    background-color: #a0cfff;
+  }
+
+  .el-table--striped .el-table__body tr.hover-row.el-table__row--striped > td,
+  .el-table__body tr.hover-row > td {
+    background-color: #d9ecff !important;
   }
 
   .pagination {

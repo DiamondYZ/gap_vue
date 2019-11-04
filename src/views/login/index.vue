@@ -1,6 +1,5 @@
 <template>
-  <div class="login-container">
-
+  <div class="login-container" >
     <el-card class="login-form-layout">
       <el-form autoComplete="on"
                :model="loginForm"
@@ -94,8 +93,8 @@
       }
       return {
         loginForm: {
-          username: '13000000002',
-          password: 'c9351e5cf153923f052ebe1462cca93a'
+          username: '',
+          password: ''
         },
         loginRules: {
           username: [{ required: true, trigger: 'blur' }],
@@ -257,6 +256,10 @@
     border-radius: 5px;
     color: #454545;
   }
+  }
+
+  .backgroundDiv{
+    backgroundImage:  '@/assets/login_center_bg.png'
   }
 </style>
 

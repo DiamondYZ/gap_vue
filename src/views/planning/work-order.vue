@@ -52,7 +52,7 @@
           </el-card>
         </el-collapse-item>
       </el-collapse>
-      <div style="float: right;margin:20px 30px">
+      <div style="float: left;margin:20px 30px">
         <toolbar>
           <toolbar-group>
             <el-button type="success" size="small" :disabled="statusDict!=='saved'" @click="setStatus('issued')">
