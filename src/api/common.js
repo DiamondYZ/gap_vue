@@ -1,9 +1,13 @@
 import request from '@/utils/request'
+import store from '@/store'
+import { getToken } from '@/utils/auth'
 
 export function getList(param) {
   const data = param.data
-  const userToken = '18aad253349dacb94e9ea0863a7d664d'
-  data.userToken = userToken
+  if (store.getters.token) {
+    const userToken = getToken()
+    data.userToken = userToken
+  }
   return request({
     url: '/' + param.name + '/getList',
     method: 'post',
@@ -13,6 +17,10 @@ export function getList(param) {
 
 export function getDetail(param) {
   const data = param.data
+  if (store.getters.token) {
+    const userToken = getToken()
+    data.userToken = userToken
+  }
   return request({
     url: '/' + param.name + '/get',
     method: 'post',
@@ -22,6 +30,10 @@ export function getDetail(param) {
 
 export function deleteDetail(param) {
   const data = param.data
+  if (store.getters.token) {
+    const userToken = getToken()
+    data.userToken = userToken
+  }
   return request({
     url: '/' + param.name + '/remove',
     method: 'post',
@@ -31,6 +43,10 @@ export function deleteDetail(param) {
 
 export function saveDetail(param) {
   const data = param.data
+  if (store.getters.token) {
+    const userToken = getToken()
+    data.userToken = userToken
+  }
   return request({
     url: '/' + param.name + '/post',
     method: 'post',
@@ -40,6 +56,10 @@ export function saveDetail(param) {
 
 export function editDetail(param) {
   const data = param.data
+  if (store.getters.token) {
+    const userToken = getToken()
+    data.userToken = userToken
+  }
   return request({
     url: '/' + param.name + '/put',
     method: 'post',
@@ -49,6 +69,10 @@ export function editDetail(param) {
 
 export function selectSecondLevelTableList(param) {
   const data = param.data
+  if (store.getters.token) {
+    const userToken = getToken()
+    data.userToken = userToken
+  }
   return request({
     url: '/' + param.url + '-detail/getList',
     method: 'post',
@@ -63,6 +87,10 @@ export function getPullDownList(param) {
       'classCode': param.classCode
     }
   }
+  if (store.getters.token) {
+    const userToken = getToken()
+    data.userToken = userToken
+  }
   return request({
     url: '/lookup-item/getPullDownList',
     method: 'post',
@@ -74,6 +102,10 @@ export function getSelectList(url) {
   const data = {
     'entity': {}
   }
+  if (store.getters.token) {
+    const userToken = getToken()
+    data.userToken = userToken
+  }
   return request({
     url: url,
     method: 'post',
@@ -84,6 +116,10 @@ export function getSelectList(url) {
 // 改变数据状态
 export function setDataState(param) {
   const data = param.data
+  if (store.getters.token) {
+    const userToken = getToken()
+    data.userToken = userToken
+  }
   return request({
     url: param.url,
     method: 'post',
@@ -92,6 +128,10 @@ export function setDataState(param) {
 }
 
 export function getQiniuToken(data) {
+  if (store.getters.token) {
+    const userToken = getToken()
+    data.userToken = userToken
+  }
   return request({
     url: '/uploadToken/get',
     method: 'post',
@@ -105,6 +145,10 @@ export function getProvinceList(param) {
     'entity': {
       'classCode': param.classCode
     }
+  }
+  if (store.getters.token) {
+    const userToken = getToken()
+    data.userToken = userToken
   }
   return request({
     url: '/province/getPullDownList',

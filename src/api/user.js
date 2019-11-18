@@ -1,4 +1,6 @@
 import request from '@/utils/request'
+import store from '@/store'
+import { getToken } from '@/utils/auth'
 
 export function login(data) {
   return request({
@@ -17,8 +19,14 @@ export function getInfo(token) {
 }
 
 export function logout() {
+  let data
+  if (store.getters.token) {
+    const userToken = getToken()
+    data.userToken = userToken
+  }
   return request({
-    url: '/user/logout',
-    method: 'post'
+    url: '/logout',
+    method: 'post',
+    data
   })
 }

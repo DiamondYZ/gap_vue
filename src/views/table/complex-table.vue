@@ -31,6 +31,7 @@
       :data="list"
       border
       fit
+      align:center
       highlight-current-row
       style="width: 100%;"
       @sort-change="sortChange"
