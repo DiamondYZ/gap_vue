@@ -10,8 +10,8 @@
       <el-row :gutter="20">
         <el-col
           v-for="(item,key) in formConfigs"
-          :span="12"
           :key="key"
+          :span="12"
         >
           <el-form-item
             v-bind="getFormItemBind(item.formItemProp)"
@@ -26,8 +26,8 @@
               v-if="item.type == 'dialog'"
               :disabled="formStatus==='show' || item.formItemProp.disable"
               readonly
-              v-bind="getElementBind(item.elementProp)"
               v-model="form[item.formItemProp.prop]"
+              v-bind="getElementBind(item.elementProp)"
               @click.native="setSelectId(item.formItemProp.id)"
             />
             <el-select
@@ -35,51 +35,52 @@
               v-model="form[item.formItemProp.prop]"
               :disabled="formStatus==='show' || item.formItemProp.disable"
               v-bind="getElementBind(item.elementProp)"
->
+            >
               <el-option
                 v-for="opt in item.optionList"
                 :key="opt.label"
                 v-bind="opt"
-/>
+              />
             </el-select>
             <el-date-picker
               v-else-if="item.type==='datePicker'"
-              :disabled="formStatus==='show' || item.formItemProp.disable"
               v-model="form[item.formItemProp.prop]"
+              :disabled="formStatus==='show' || item.formItemProp.disable"
               value-format="yyyy-MM-dd"
               v-bind="getElementBind(item.elementProp)"
-/>
+            />
             <el-switch
               v-else-if="item.type === 'switch'"
               :disabled="formStatus==='show' || item.formItemProp.disable"
-              active-value="1"
               v-model="form[item.formItemProp.prop]"
+              active-value="1"
               inactive-value="0"
               v-bind="getElementBind(item.elementProp)"
-/>
+            />
             <el-checkbox-group
               v-else-if="item.type==='checkboxGroup'"
               v-model="form[item.formItemProp.prop]"
               :disabled="formStatus==='show'"
               v-bind="getElementBind(item.elementProp)"
->
+            >
               <el-checkbox
                 v-for="opt in item.optionList"
                 :key="opt.label"
                 v-bind="opt"
-/>
+              />
             </el-checkbox-group>
             <el-radio-group
               v-else-if="item.type==='radioGroup'"
               v-model="form[item.formItemProp.prop]"
               :disabled="formStatus==='show'"
               v-bind="getElementBind(item.elementProp)"
->
+            >
               <el-radio
                 v-for="opt in item.optionList"
                 :key="opt.label"
                 :value="opt.value"
-                v-bind="opt" />
+                v-bind="opt"
+/>
             </el-radio-group>
             <el-upload
               v-else-if="item.type==='img'"
@@ -190,9 +191,9 @@ export default {
       immediate: true
     },
     listeningSelectedValue(val) {
-      let key1 = this.$store.state.common.selectToGetOptionsProp + 'Id'
-                let key2 = this.$store.state.common.selectToGetOptionsProp + 'Name'
-                this.form[key1] = val.id
+      const key1 = this.$store.state.common.selectToGetOptionsProp + 'Id'
+      let key2 = this.$store.state.common.selectToGetOptionsProp + 'Name'
+      this.form[key1] = val.id
       this.form[key2] = val.name
     }
   },
@@ -246,7 +247,7 @@ export default {
       this.getQiniuToken()
     },
     getQiniuToken: function() {
-      let param = {
+      const param = {
         'entity': {
           'jwt': localStorage.getItem('token')
         }
@@ -263,15 +264,15 @@ export default {
     beforeAvatarUpload: function(file) {
       this.qiniuData.key = file.name
       const isJPG = file.type === 'image/jpeg'
-                const isPNG = file.type === 'image/png'
-                const isLt2M = file.size / 1024 / 1024 < 2
+      const isPNG = file.type === 'image/png'
+      const isLt2M = file.size / 1024 / 1024 < 2
       if (!isJPG && !isPNG) {
         this.$message.error('图片只能是 JPG/PNG 格式!')
-                    return false
+        return false
       }
       if (!isLt2M) {
         this.$message.error('图片大小不能超过 2MB!')
-                    return false
+        return false
       }
     },
     handleAvatarSuccess: function(res, file) {
