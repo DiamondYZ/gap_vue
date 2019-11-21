@@ -25,8 +25,8 @@
             <el-input
               v-if="item.type == 'dialog'"
               :disabled="formStatus==='show' || item.formItemProp.disable"
-              readonly
               v-model="form[item.formItemProp.prop]"
+              readonly
               v-bind="getElementBind(item.elementProp)"
               @click.native="setSelectId(item.formItemProp.id)"
             />
@@ -51,8 +51,8 @@
             />
             <el-switch
               v-else-if="item.type === 'switch'"
-              :disabled="formStatus==='show' || item.formItemProp.disable"
               v-model="form[item.formItemProp.prop]"
+              :disabled="formStatus==='show' || item.formItemProp.disable"
               active-value="1"
               inactive-value="0"
               v-bind="getElementBind(item.elementProp)"
@@ -80,7 +80,7 @@
                 :key="opt.label"
                 :value="opt.value"
                 v-bind="opt"
-/>
+              />
             </el-radio-group>
             <el-upload
               v-else-if="item.type==='img'"
@@ -192,7 +192,7 @@ export default {
     },
     listeningSelectedValue(val) {
       const key1 = this.$store.state.common.selectToGetOptionsProp + 'Id'
-      let key2 = this.$store.state.common.selectToGetOptionsProp + 'Name'
+      const key2 = this.$store.state.common.selectToGetOptionsProp + 'Name'
       this.form[key1] = val.id
       this.form[key2] = val.name
     }
