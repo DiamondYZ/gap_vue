@@ -6,67 +6,57 @@
         <span style="margin-top: 5px;font-size: 22px">{{ pageInfo.listTitle }}</span>
       </div>
       <el-collapse v-model="activeNames">
-        <el-collapse-item title="筛选搜索" name="1">
+        <el-collapse-item title="查询条件" name="1">
           <el-card class="filter-container" shadow="never">
             <div>
-
-              <el-button
-                style="float: right"
-                type="primary"
-                icon="el-icon-search"
-                size="small"
-                @click="getList()"
-              >
+              <el-button style="float: right" type="primary" icon="el-icon-search" size="mini" @click="getList()">
                 查询
               </el-button>
-              <el-button
-                style="float: right;margin-right: 15px"
-                size="small"
-                @click="refreshSearch()"
-              >
+              <el-button style="float: right;margin-right: 15px" size="mini" @click="refreshSearch()">
                 <i class="el-icon-refresh" />
                 重置
               </el-button>
             </div>
             <div style="margin-top: 15px">
-              <el-form :inline="true" :model="search_data" size="small" label-width="140px">
-                <el-form-item label="输入搜索：">
+              <el-form :inline="true" :model="search_data" size="mini" label-width="140px">
+                <el-form-item label="">
                   <el-input
                     v-model="search_data.customCondition"
                     style="width: 203px"
+                    size="mini"
                     placeholder="订单编号、订单描述"
                   />
                 </el-form-item>
-                <el-form-item label="状态：">
-                  <el-select v-model="search_data.statusDict" class="item-choose" size="small">
-                    <el-option label="" value="" />
-                    <el-option label="状态1" value="0" />
-                    <el-option label="状态2" value="1" />
-                  </el-select>
-                </el-form-item>
+<!--                <el-form-item label="状态：">-->
+<!--                  <el-select v-model="search_data.statusDict" class="item-choose" size="mini">-->
+<!--                    <el-option label="" value="" />-->
+<!--                    <el-option label="状态1" value="0" />-->
+<!--                    <el-option label="状态2" value="1" />-->
+<!--                  </el-select>-->
+<!--                </el-form-item>-->
               </el-form>
             </div>
           </el-card>
         </el-collapse-item>
       </el-collapse>
+      <div style="float: left;margin:20px 30px">
+        <el-button type="primary" size="mini" icon="view" @click="add()"><i class="el-icon-plus" />新增
+        </el-button>
+        <el-button type="danger" size="mini" icon="el-icon-delete" :disabled="deleteBtnDisabled" @click="deleteSelectedRow()">
+          删除
+        </el-button>
+      </div>
       <div style="float: right;margin:20px 30px">
-        <el-button type="primary" size="small" :disabled="statusDict!=='unissued'" @click="setStatus('issued')">发布
+        <el-button type="primary" size="mini" :disabled="statusDict!=='unissued'" @click="setStatus('issued')">发布
         </el-button>
-        <el-button type="success" size="small" :disabled="statusDict!=='issue'" @click="setStatus('deliver')">交付
+        <el-button type="success" size="mini" :disabled="statusDict!=='issue'" @click="setStatus('deliver')">交付
         </el-button>
-        <el-button type="info" size="small" :disabled="statusDict!=='deliver'" @click="setStatus('settled')">结算
+        <el-button type="info" size="mini" :disabled="statusDict!=='deliver'" @click="setStatus('settled')">结算
         </el-button>
-        <el-button
-          type="warning"
-          size="small"
+        <el-button type="warning" size="mini"
           :disabled="statusDict==='cancel'||statusDict==='settled'||statusDict===''"
           @click="setStatus('cancel')"
         >取消
-        </el-button>
-        <el-button type="primary" size="small" icon="view" @click="add()"><i class="el-icon-plus" />新增
-        </el-button>
-        <el-button type="danger" size="small" icon="el-icon-delete" :disabled="deleteBtnDisabled" @click="deleteSelectedRow()">
-          删除
         </el-button>
       </div>
 

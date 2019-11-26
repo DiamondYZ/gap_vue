@@ -6,7 +6,7 @@
         <span style="margin-top: 5px;font-size: 22px">{{pageInfo.listTitle}}</span>
       </div>
       <el-collapse v-model="activeNames">
-        <el-collapse-item title="筛选搜索" name="1">
+        <el-collapse-item title="查询条件" name="1">
           <el-card class="filter-container" shadow="never">
             <div>
               <el-button
@@ -14,19 +14,19 @@
                 type="primary"
                 icon="el-icon-search"
                 @click='getList()'
-                size="small">
+                size="mini">
                 查询
               </el-button>
               <el-button
                 style="float: right;margin-right: 15px"
-                size="small" @click='refreshSearch()'>
+                size="mini" @click='refreshSearch()'>
                 <i class="el-icon-refresh"></i>
                 重置
               </el-button>
             </div>
             <div style="margin-top: 15px">
-              <el-form :inline="true" :model="search_data" size="small" label-width="140px">
-                <el-form-item label="输入搜索：">
+              <el-form :inline="true" :model="search_data" size="mini" label-width="140px">
+                <el-form-item label="">
                   <el-input style="width: 203px" v-model="search_data.customCondition"
                             placeholder="部门编号、名称、描述"></el-input>
                 </el-form-item>
@@ -35,10 +35,10 @@
           </el-card>
         </el-collapse-item>
       </el-collapse>
-      <div style="float: right;margin:20px 30px">
-        <el-button type="primary" size="small" icon="view" @click='add()'><i class="el-icon-plus"/>新增
+      <div style="float: left;margin:20px 30px">
+        <el-button type="primary" size="mini" icon="view" @click='add()'><i class="el-icon-plus"/>新增
         </el-button>
-        <el-button type="danger" size="small" icon="el-icon-delete" @click='deleteSelectedRow()' :disabled="deleteBtnDisabled">
+        <el-button type="danger" size="mini" icon="el-icon-delete" @click='deleteSelectedRow()' :disabled="deleteBtnDisabled">
           删除
         </el-button>
       </div>

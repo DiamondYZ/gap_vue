@@ -29,7 +29,7 @@
             </div>
             <div style="margin-top: 15px">
               <el-form :inline="true" :model="search_data" size="mini" label-width="140px">
-                <el-form-item label="输入搜索：">
+                <el-form-item label="">
                   <el-input
                     v-model="search_data.customCondition"
                     style="width: 203px"
@@ -50,7 +50,7 @@
       <div style="float: left;margin:20px 30px">
         <el-button type="primary" size="mini" icon="view" @click="add()"><i class="el-icon-plus"/>新增
         </el-button>
-        <el-button type="primary" size="mini" icon="el-icon-delete" :disabled="deleteBtnDisabled"
+        <el-button type="danger" size="mini" icon="el-icon-delete" :disabled="deleteBtnDisabled"
                    @click="deleteSelectedRow()">
           删除
         </el-button>

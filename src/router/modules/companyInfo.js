@@ -27,7 +27,7 @@ const companyRouter = {
     {
       path: 'staff-list',
       component: () => import('@/views/company/staff-list'),
-      name: 'taffInfo',
+      name: 'StaffInfo',
       meta: { title: '员工' }
     }
   ]

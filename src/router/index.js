@@ -28,6 +28,8 @@ import productionManagement from './modules/productionManagement'
 import knowledgeBaseManagement from './modules/knowledgeBaseManagement'
 // 用户管理
 import user from './modules/user'
+// 溯源管理
+import tracingManagement from './modules/tracingManagement'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -132,18 +134,19 @@ export const asyncRoutes = [
   productionManagement,
   knowledgeBaseManagement,
   user,
-  {
-    path: '/tracing',
-    component: Layout,
-    children: [
-      {
-        path: 'tracing',
-        component: () => import('@/views/tracing/tracing'),
-        name: 'Tracing',
-        meta: { title: '溯源管理', icon: 'documentation', noCache: true }
-      }
-    ]
-  },
+  tracingManagement,
+  // {
+  //   path: '/tracing',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'tracing',
+  //       component: () => import('@/views/tracing/tracing'),
+  //       name: 'Tracing',
+  //       meta: { title: '溯源管理', icon: 'documentation', noCache: true }
+  //     }
+  //   ]
+  // },
   { path: '*', redirect: '/404', hidden: true }
 ]
 

@@ -273,6 +273,7 @@
     width: 100%;
     /*background-color: $bg;*/
     overflow: hidden;
+  }
 
   .login-form {
     position: relative;
@@ -287,12 +288,11 @@
     font-size: 14px;
     color: #fff;
     margin-bottom: 10px;
-
-  span {
-  &:first-of-type {
-     margin-right: 16px;
-   }
-  }
+    span {
+      &:first-of-type {
+         margin-right: 16px;
+       }
+    }
   }
 
   .svg-container {
@@ -305,6 +305,7 @@
 
   .title-container {
     position: relative;
+  }
 
   .title {
     font-size: 26px;
@@ -321,7 +322,6 @@
     font-size: 18px;
     right: 0px;
     cursor: pointer;
-  }
   }
 
   .show-pwd {
@@ -344,7 +344,6 @@
     .thirdparty-button {
       display: none;
     }
-  }
   }
   .login-container .el-form-item {
     background-color: #fff;

@@ -2,7 +2,7 @@
 
 import Layout from '@/layout'
 
-const companyRouter = {
+const resourceManagementRouter = {
   path: '/resourceManagement',
   component: Layout,
   redirect: '/resourceManagement/resource-management',
@@ -92,4 +92,4 @@ const companyRouter = {
     }
   ]
 }
-export default companyRouter
+export default resourceManagementRouter

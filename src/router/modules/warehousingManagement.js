@@ -9,7 +9,7 @@ const companyRouter = {
   name: 'WarehousingManagement',
   meta: {
     title: '仓储管理',
-    icon: 'list'
+    icon: 'warehouse'
   },
   children: [
     {

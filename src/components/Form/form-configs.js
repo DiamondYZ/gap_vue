@@ -460,15 +460,15 @@ export const companyFormConfigs = [
   { type: 'input', formItemProp: { label: '营业执照编号', prop: 'licenseNumber' }, elementProp: { size: 'mini' }},
   {
     type: 'select',
-    formItemProp: { label: '状态', prop: 'statusDict' },
+    formItemProp: { label: '公司状态', prop: 'statusDict' },
     optionList: setArrayMapVal(JSON.parse(localStorage.getItem('ENTERPRISE_STATUS_DICT')))
   },
   { type: 'input', formItemProp: { label: '员工人数', prop: 'staffsNumber' }, elementProp: { size: 'mini' }},
-  { type: 'input', formItemProp: { label: '公司简介', prop: 'overview' }, elementProp: { size: 'mini' }},
-  { type: 'img', formItemProp: { label: '图片', prop: 'picPath' }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '注册资金', prop: 'registeredCapital' }, elementProp: { size: 'mini' }},
   { type: 'datePicker', formItemProp: { label: '注册日期', prop: 'registrationDate' }, elementProp: { size: 'mini' }},
-  { type: 'input', formItemProp: { label: '备注', prop: 'remark' }, elementProp: { size: 'mini' }}
+  { type: 'input', formItemProp: { label: '备注', prop: 'remark' }, elementProp: { type: 'textarea', size: 'mini' }},
+  { type: 'input', formItemProp: { label: '公司简介', prop: 'overview' }, elementProp: { type: 'textarea', size: 'mini' }},
+  { type: 'img', formItemProp: { label: '图片', prop: 'picPath' }, elementProp: { size: 'mini' }}
 ]
 
 // 部门
@@ -478,7 +478,7 @@ export const departmentFormConfigs = [
   { type: 'input', formItemProp: { label: '描述', prop: 'description' }, elementProp: { size: 'mini' }},
   { type: 'dialog', formItemProp: { label: '负责人', prop: 'managerName', id: 'manager' }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '编制人数', prop: 'staffsNumber' }, elementProp: { size: 'mini' }},
-  { type: 'input', formItemProp: { label: '备注', prop: 'remark' }, elementProp: { size: 'mini' }}
+  { type: 'input', formItemProp: { label: '备注', prop: 'remark' }, elementProp: { type: 'textarea', size: 'mini' }}
 ]
 // 人员
 export const staffFormConfigs = [
@@ -510,7 +510,7 @@ export const staffFormConfigs = [
     formItemProp: { label: '状态', prop: 'statusDict' },
     optionList: setArrayMapVal(JSON.parse(localStorage.getItem('EMPLOYEE_STATUS')))
   },
-  { type: 'input', formItemProp: { label: '备注', prop: 'remark' }, elementProp: { size: 'mini' }}
+  { type: 'input', formItemProp: { label: '备注', prop: 'remark' }, elementProp: { type: 'textarea', size: 'mini' }}
 ]
 // 产品类型
 export const productTypeFormConfigs = [
@@ -634,16 +634,11 @@ export const equipmentModelFormConfigs = [
   { type: 'input', formItemProp: { label: '编号', prop: 'number' }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '名称', prop: 'name' }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '描述', prop: 'description' }, elementProp: { size: 'mini' }},
-  // {
-  //   type: 'select',
-  //   formItemProp: { label: '是否启用', prop: 'isValid' },
-  //   optionList: setArrayMapVal(JSON.parse(localStorage.getItem('IS_VALID')))
-  // },
-  { type: 'input', formItemProp: { label: '备注', prop: 'remark' }, elementProp: { type: 'textarea' }},
+  { type: 'input', formItemProp: { label: '备注', prop: 'remark' }, elementProp: { type: 'textarea', size: 'mini' }},
   { type: 'img', formItemProp: { label: '', prop: 'picPath' }, elementProp: { size: 'mini' }},
   {
     type: 'switch',
-    formItemProp: { label: '是否启用', prop: 'isValid' },
+    formItemProp: { label: '启用', prop: 'isValid' },
     elementProp: { size: 'mini' }
   }
 ]
@@ -658,8 +653,7 @@ export const equipmentFormConfigs = [
   },
   { type: 'dialog', formItemProp: { label: '设备类型', prop: 'equipmentTypeName', id: 'equipmentType' }, elementProp: { size: 'mini' }},
   { type: 'dialog', formItemProp: { label: '设备型号', prop: 'equipmentModelName', id: 'equipmentModel' }, elementProp: { size: 'mini' }},
-  { type: 'dialog', formItemProp: { label: '制造商', prop: 'manufacturerId', id: 'manufacturer' }, elementProp: { size: 'mini' }},
-  { type: 'input', formItemProp: { label: '制造商', prop: 'manufacturerId' }, elementProp: { size: 'mini' }},
+  { type: 'dialog', formItemProp: { label: '制造商', prop: 'manufacturerName', id: 'manufacturer' }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '出厂序列号', prop: 'serialNumber' }, elementProp: { size: 'mini' }},
   { type: 'datePicker', formItemProp: { label: '设备到厂日期', prop: 'arrivalDate' }, elementProp: { size: 'mini' }},
   { type: 'datePicker', formItemProp: { label: '生产日期', prop: 'produceDate' }, elementProp: { size: 'mini' }},
@@ -791,11 +785,6 @@ export const productionBaseStaffFormConfigs = [
 export const productionCellFormConfigs = [
   { type: 'input', formItemProp: { label: '编号', prop: 'number' }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '描述', prop: 'description' }, elementProp: { size: 'mini' }},
-  {
-    type: 'select',
-    formItemProp: { label: '状态', prop: 'statusDict' },
-    optionList: setArrayMapVal(JSON.parse(localStorage.getItem('PRODUCTION_CELL_STATUS_DICT')))
-  },
   { type: 'dialog', formItemProp: { label: '生产基地', prop: 'productionBaseName', id: 'productionBase' }, elementProp: { size: 'mini' }},
   { type: 'dialog', formItemProp: { label: '负责人', prop: 'managerName', id: 'manager' }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '面积', prop: 'area' }, elementProp: { size: 'mini' }},
@@ -803,6 +792,11 @@ export const productionCellFormConfigs = [
     type: 'select',
     formItemProp: { label: '面积单位', prop: 'areaUnitDict' },
     optionList: setArrayMapVal(JSON.parse(localStorage.getItem('AREA_UNIT_DICT')))
+  },
+  {
+    type: 'select',
+    formItemProp: { label: '状态', prop: 'statusDict' },
+    optionList: setArrayMapVal(JSON.parse(localStorage.getItem('PRODUCTION_CELL_STATUS_DICT')))
   }
 ]
 // 库房

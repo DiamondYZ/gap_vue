@@ -80,7 +80,7 @@
             return {
                 pageInfo: {
                     interfaceName: 'company',   //接口名称
-                    listTitle: '公司列表',
+                    listTitle: '公司',
                     detailTitle: '公司详细信息'
                 },   //页面信息
                 search_data: {},          //搜索条件
