@@ -42,13 +42,13 @@
 <!--                <el-form-item label="设备型号">-->
 <!--                  <el-input v-model="search_data.equipmentModelId" style="width: 203px" placeholder="" />-->
 <!--                </el-form-item>-->
-                <el-form-item label="设备状态">
-                  <el-select v-model="search_data.availableStatus" class="item-choose" size="mini">
-                    <el-option label="" value="" />
-                    <el-option label="设备状态1" value="0" />
-                    <el-option label="设备状态2" value="1" />
-                  </el-select>
-                </el-form-item>
+<!--                <el-form-item label="设备状态">-->
+<!--                  <el-select v-model="search_data.availableStatus" class="item-choose" size="mini">-->
+<!--                    <el-option label="" value="" />-->
+<!--                    <el-option label="设备状态1" value="0" />-->
+<!--                    <el-option label="设备状态2" value="1" />-->
+<!--                  </el-select>-->
+<!--                </el-form-item>-->
               </el-form>
             </div>
           </el-card>

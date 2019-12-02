@@ -476,7 +476,8 @@ a:hover {
 }
 
 .el-table--striped .el-table__body tr.el-table__row--striped td {
-  background-color: #f1f1f1;
+  background-color: #f19944;
+  text-align: center;
 }
 
 .el-table--border {
@@ -489,19 +490,21 @@ a:hover {
   text-align: center;
 }
 
+/* 用来设置当前页面element全局table 选中某行时的背景色*/
 .el-table--enable-row-hover .el-table__body tr:hover > td {
-  background-color: #fff5d7;
+  background-color: #f19944;
 }
 
 .el-table--striped .el-table__body tr.el-table__row--striped.current-row td,
 .el-table__body tr.current-row > td,
 .el-table__body tr.hover-row.current-row > td,
 .el-table__body tr.hover-row.el-table__row--striped.current-row > td {
-  background-color: #fac040;
+  background-color: #f19944;
 }
 
+/* 用来设置当前页面element全局table 鼠标移入某行时的背景色*/
 .el-table__body tr.el-table__row.current-row:hover > td {
-  background-color: #fac040;
+  background-color: #f19944;
 }
 
 .el-table td, .el-table th.is-leaf {

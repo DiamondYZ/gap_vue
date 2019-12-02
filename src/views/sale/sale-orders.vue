@@ -46,7 +46,7 @@
           删除
         </el-button>
       </div>
-      <div style="float: right;margin:20px 30px">
+      <div style="float: inherit;margin:20px 30px">
         <el-button type="primary" size="mini" :disabled="statusDict!=='unissued'" @click="setStatus('issued')">发布
         </el-button>
         <el-button type="success" size="mini" :disabled="statusDict!=='issue'" @click="setStatus('deliver')">交付

@@ -44,11 +44,14 @@
       <div class="fillcontain">
         <div class="table_container">
           <el-table v-loading="loading" :data="tableData" :cell-style="rowStyle" ref="handSelect_multipleTable"
+                    :highlight-current-row="true"
                     border style="width: 100%" max-height="500"
-                    @row-click="showRowDetail" align='center' @select="selectTable" @select-all="selectAll"
+                    @row-click="showRowDetail" align='center'
+                    @select="selectTable"
+                    @select-all="selectAll"
                     :header-cell-style="setHeaderRowStyle">
-            <el-table-column type="selection" align='center' width="60">
-            </el-table-column>
+<!--            <el-table-column type="selection" align='center' width="60">-->
+<!--            </el-table-column>-->
             <el-table-column :prop="item.prop" :label="item.name" v-for="(item,index) in tableTitleList"
                              :formatter="formatRole" align='center'></el-table-column>
           </el-table>
@@ -89,16 +92,13 @@
                 showForm: false,       //是否显示表单0
                 formStatus: '',        //表单状态  是否可点击
                 tableTitleList: [
-                    {prop: 'address', name: '企业地址'},
-                    {prop: 'code', name: '公司代码'},
+                    {prop: 'name', name: '公司名称'},
                     {prop: 'companyTypeDict', name: '企业类型'},
-                    {prop: 'description', name: '描述'},
                     {prop: 'foundDate', name: '成立日期'},
                     {prop: 'legalRepresentative', name: '法定代表人'},
-                    {prop: 'name', name: '公司名称'},
-                    {prop: 'registeredCapital', name: '注册资金'},
+                    // {prop: 'registeredCapital', name: '注册资金'},
                     {prop: 'registrationDate', name: '注册日期'},
-                    {prop: 'staffsNumber', name: '员工人数'},
+                    // {prop: 'staffsNumber', name: '员工人数'},
                     {prop: 'statusDict', name: '状态'}
                 ],  //表格头信息
                 tableData: [],    //表格数据
@@ -187,7 +187,7 @@
             // 点击row显示详细数据
             showRowDetail(row) {
                 //点击选中复选框
-//    	this.$refs.handSelect_multipleTable.toggleRowSelection(row);
+   	            this.$refs.handSelect_multipleTable.toggleRowSelection(row);
                 this.clickLineId = row.id
                 this.$refs.detailForm.getDetailData(row.id)
             },
@@ -338,11 +338,15 @@
   }
 
   .el-table .warning-row {
-    background: #f7faff;
+    background: #f19944;
   }
 
   .el-table .success-row {
-    background: #ebf1fb;
+    background: #f19944;
+  }
+
+  .current-row > td {
+    background: #218af3 !important;
   }
 
   .pagination {

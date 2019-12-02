@@ -257,11 +257,13 @@ export const saleOrderFormConfigs = [
 // 销售订单明细
 export const saleOrderDetailFormConfigs = [
   { type: 'dialog', formItemProp: { label: '销售订单', prop: 'saleOrderNumber', id: 'saleOrder' }, elementProp: { size: 'mini' }},
-  // { type: 'input', formItemProp: { label: '订单编号', prop: 'saleOrderNumber' }, elementProp: { size: 'mini' }},
   { type: 'dialog', formItemProp: { label: '产品', prop: 'productName', id: 'product' }, elementProp: { size: 'mini' }},
-  // { type: 'input', formItemProp: { label: '产品', prop: 'productName' }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '数量', prop: 'quantity' }, elementProp: { size: 'mini' }},
-  { type: 'input', formItemProp: { label: '单位', prop: 'unitDict' }, elementProp: { size: 'mini' }},
+  {
+    type: 'select',
+    formItemProp: { label: '单位', prop: 'unitDict' },
+    optionList: setArrayMapVal(JSON.parse(localStorage.getItem('QUANTITY_UNIT_DICT')))
+  },
   { type: 'input', formItemProp: { label: '单价', prop: 'unitPrice' }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '总价', prop: 'totalPrice' }, elementProp: { size: 'mini' }},
   { type: 'datePicker', formItemProp: { label: '交付时间', prop: 'deliveryTime' }, elementProp: { size: 'mini' }}
@@ -517,7 +519,7 @@ export const productTypeFormConfigs = [
   { type: 'input', formItemProp: { label: '编号', prop: 'number' }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '名称', prop: 'name' }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '描述', prop: 'description' }, elementProp: { size: 'mini' }},
-  { type: 'input', formItemProp: { label: '备注', prop: 'remark' }, elementProp: { size: 'mini' }}
+  { type: 'input', formItemProp: { label: '备注', prop: 'remark' }, elementProp: { type: 'textarea', size: 'mini' }}
 ]
 // 产品
 export const productFormConfigs = [
@@ -572,7 +574,7 @@ export const materialTypeFormConfigs = [
   { type: 'input', formItemProp: { label: '编号', prop: 'number' }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '名称', prop: 'name' }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '描述', prop: 'description' }, elementProp: { size: 'mini' }},
-  { type: 'input', formItemProp: { label: '备注', prop: 'remark' }, elementProp: { size: 'mini' }}
+  { type: 'input', formItemProp: { label: '备注', prop: 'remark' }, elementProp: { type: 'textarea', size: 'mini' }}
 
 ]
 // 物料
@@ -622,7 +624,7 @@ export const equipmentTypeFormConfigs = [
   },
   { type: 'input', formItemProp: { label: '监管标准', prop: 'superviseStandard' }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '监管单位', prop: 'superviseDept' }, elementProp: { size: 'mini' }},
-  { type: 'input', formItemProp: { label: '备注', prop: 'remark' }, elementProp: { type: 'textarea' }},
+  { type: 'input', formItemProp: { label: '备注', prop: 'remark' }, elementProp: { type: 'textarea', size: 'mini' }},
   {
     type: 'switch',
     formItemProp: { label: '是否有效', prop: 'isValid' },
@@ -720,14 +722,14 @@ export const implementTypeFormConfigs = [
   { type: 'input', formItemProp: { label: '编号', prop: 'number' }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '名称', prop: 'name' }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '描述', prop: 'description' }, elementProp: { size: 'mini' }},
-  { type: 'input', formItemProp: { label: '备注', prop: 'remark' }, elementProp: { size: 'mini' }}
+  { type: 'input', formItemProp: { label: '备注', prop: 'remark' }, elementProp: { type: 'textarea', size: 'mini' }}
 ]
 // 机具型号
 export const implementModelFormConfigs = [
   { type: 'input', formItemProp: { label: '编号', prop: 'number' }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '名称', prop: 'name' }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '描述', prop: 'description' }, elementProp: { size: 'mini' }},
-  { type: 'input', formItemProp: { label: '备注', prop: 'remark' }, elementProp: { type: 'textarea' }},
+  { type: 'input', formItemProp: { label: '备注', prop: 'remark' }, elementProp: { type: 'textarea', size: 'mini' }},
   { type: 'img', formItemProp: { label: '图片', prop: 'photoPath' }, elementProp: { size: 'mini' }},
   {
     type: 'switch',
@@ -743,14 +745,14 @@ export const implementFormConfigs = [
   { type: 'dialog', formItemProp: { label: '机具类型', prop: 'implementTypeName', id: 'implementType' }, elementProp: { size: 'mini' }},
   { type: 'dialog', formItemProp: { label: '机具型号', prop: 'implementModelName', id: 'implementModel' }, elementProp: { size: 'mini' }},
   { type: 'dialog', formItemProp: { label: '生产基地', prop: 'productionBaseName', id: 'productionBase' }, elementProp: { size: 'mini' }},
-  { type: 'input', formItemProp: { label: '批次编号', prop: 'batchNumber' }, elementProp: { size: 'mini' }},
-  { type: 'input', formItemProp: { label: '备注', prop: 'remark' }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '数量', prop: 'quantity' }, elementProp: { size: 'mini' }},
   {
     type: 'select',
     formItemProp: { label: '单位', prop: 'quantityUnitDict' },
     optionList: setArrayMapVal(JSON.parse(localStorage.getItem('QUANTITY_UNIT_DICT')))
   },
+  { type: 'input', formItemProp: { label: '批次编号', prop: 'batchNumber' }, elementProp: { size: 'mini' }},
+  { type: 'input', formItemProp: { label: '备注', prop: 'remark' }, elementProp: { type: 'textarea', size: 'mini' }},
   { type: 'img', formItemProp: { label: '图片', prop: 'picPath' }, elementProp: { size: 'mini' }}
 ]
 // 生产基地
