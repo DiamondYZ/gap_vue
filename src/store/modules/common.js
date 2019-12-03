@@ -8,7 +8,8 @@ import {
   getSelectList,
   setDataState,
   getQiniuToken,
-  selectSecondLevelTableList
+  selectSecondLevelTableList,
+  requestCustomMethod
 } from '@/api/common'
 
 const state = {
@@ -173,6 +174,15 @@ const actions = {
   // 清空下拉属性
   setSelectedValue({ commit }, param) {
     commit('setSelectedValue', param)
+  },
+  requestCustomMethod({ commit }, param) {
+    return new Promise((resolve, reject) => {
+      requestCustomMethod(param).then(response => {
+        resolve(response)
+      }).catch(error => {
+        reject(error)
+      })
+    })
   }
 }
 

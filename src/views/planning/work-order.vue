@@ -10,14 +10,14 @@
                 style="float: right"
                 type="primary"
                 icon="el-icon-search"
-                size="small"
+                size="mini"
                 @click="getList()"
               >
                 查询
               </el-button>
               <el-button
                 style="float: right;margin-right: 15px"
-                size="small"
+                size="mini"
                 @click="refreshSearch()"
               >
                 <i class="el-icon-refresh"/>
@@ -25,25 +25,25 @@
               </el-button>
             </div>
             <div style="margin-top: 15px">
-              <el-form :inline="true" :model="search_data" size="small" label-width="140px">
-                <el-form-item label="搜索条件">
+              <el-form :inline="true" :model="search_data" size="mini" label-width="140px">
+                <el-form-item label="">
                   <el-input
                     v-model="search_data.customCondition"
-                    style="width: 203px"
+                    style="width: 163px"
                     placeholder="编号、描述"
                   />
                 </el-form-item>
-                <el-form-item label="生产单元：">
+                <el-form-item label="生产单元">
                   <el-input
                     v-model="search_data.productionCellCondition"
-                    style="width: 203px"
+                    style="width: 163px"
                     placeholder="生产单元编号、描述"
                   />
                 </el-form-item>
-                <el-form-item label="产品：">
+                <el-form-item label="产品">
                   <el-input
                     v-model="search_data.productionCondition"
-                    style="width: 203px"
+                    style="width: 163px"
                     placeholder="产品编号、名称、描述"
                   />
                 </el-form-item>
@@ -53,29 +53,18 @@
         </el-collapse-item>
       </el-collapse>
       <div style="float: left;margin:20px 30px">
-        <toolbar>
-          <toolbar-group>
-            <el-button type="success" size="small" :disabled="statusDict!=='saved'" @click="setStatus('issued')">
+        <el-button type="primary" size="mini" icon="view" @click="add()"><i class="el-icon-plus" />
+          新增
+        </el-button>
+        <el-button type="danger" icon="el-icon-delete" @click="deleteSelectedRow()" :disabled="deleteBtnDisabled">
+          删除
+        </el-button>
+      </div>
+      <div style="float: inherit;margin:20px 30px">
+            <el-button type="success" size="mini" :disabled="statusDict!=='saved'" @click="setStatus('issued')">
               下发</el-button>
-            <el-button type="info" size="small" plain :disabled="statusDict!=='issued'" @click="setStatus('completed')">
+            <el-button type="info" size="mini" plain :disabled="statusDict!=='issued'" @click="setStatus('completed')">
               完成</el-button>
-            <el-button type="border-orange" @click="add()">
-              新增</el-button>
-            <el-button type="border-orange" @click="deleteSelectedRow()" :disabled="deleteBtnDisabled">
-              删除</el-button>
-          </toolbar-group>
-        </toolbar>
-<!--        <el-button type="primary" size="small" icon="view" @click="add()"><i class="el-icon-plus"/>新增-->
-<!--        </el-button>-->
-<!--        <el-button-->
-<!--          type="danger"-->
-<!--          size="small"-->
-<!--          icon="el-icon-delete"-->
-<!--          :disabled="deleteBtnDisabled"-->
-<!--          @click="deleteSelectedRow()"-->
-<!--        >-->
-<!--          删除-->
-<!--        </el-button>-->
       </div>
       <div class="fillcontain">
         <div class="table_container">

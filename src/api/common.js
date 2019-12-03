@@ -157,3 +157,17 @@ export function getProvinceList(param) {
   })
 }
 
+//调用特殊方法
+export function requestCustomMethod(param) {
+  const data = param.data
+  if (store.getters.token) {
+    const userToken = getToken()
+    data.userToken = userToken
+  }
+  return request({
+    url: '/' + param.name + '/' + param.methodName,
+    method: 'post',
+    data
+  })
+}
+

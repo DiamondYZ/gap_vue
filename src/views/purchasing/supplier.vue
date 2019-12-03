@@ -6,7 +6,7 @@
         <span style="margin-top: 5px;font-size: 22px">{{ pageInfo.listTitle }}</span>
       </div>
       <el-collapse v-model="activeNames">
-        <el-collapse-item title="筛选搜索" name="1">
+        <el-collapse-item title="查询条件" name="1">
           <el-card class="filter-container" shadow="never">
             <div>
 
@@ -14,14 +14,14 @@
                 style="float: right"
                 type="primary"
                 icon="el-icon-search"
-                size="small"
+                size="mini"
                 @click="getList()"
               >
                 查询
               </el-button>
               <el-button
                 style="float: right;margin-right: 15px"
-                size="small"
+                size="mini"
                 @click="refreshSearch()"
               >
                 <i class="el-icon-refresh" />
@@ -29,43 +29,37 @@
               </el-button>
             </div>
             <div style="margin-top: 15px">
-              <el-form :inline="true" :model="search_data" size="small" label-width="140px">
-                <el-form-item label="模糊查询">
+              <el-form :inline="true" :model="search_data" size="mini" label-width="140px">
+                <el-form-item label="">
                   <el-input
                     v-model="search_data.customCondition"
                     style="width: 203px"
-                    placeholder="编号、名称、联系人名称、联系人电话、法定代表人、地址"
+                    placeholder="编号、名称、联系人"
                   />
                 </el-form-item>
-                <el-form-item label="状态">
-                  <el-select v-model="search_data.statusDict" class="item-choose" size="mini">
+<!--                <el-form-item label="状态">-->
+<!--                  <el-select v-model="search_data.statusDict" class="item-choose" size="mini">-->
 <!--                    <el-option label="" value="" />-->
 <!--                    <el-option label="状态1" value="0" />-->
 <!--                    <el-option label="状态2" value="1" />-->
-                  </el-select>
-                </el-form-item>
-                <el-form-item label="公司类型">
-                  <el-select v-model="search_data.companyTypeDict" class="item-choose" size="small">
-                    <el-option label="" value="" />
-                    <el-option label="公司类型1" value="0" />
-                    <el-option label="公司类型2" value="1" />
-                  </el-select>
-                </el-form-item>
+<!--                  </el-select>-->
+<!--                </el-form-item>-->
+<!--                <el-form-item label="公司类型">-->
+<!--                  <el-select v-model="search_data.companyTypeDict" class="item-choose" size="mini">-->
+<!--                    <el-option label="" value="" />-->
+<!--                    <el-option label="公司类型1" value="0" />-->
+<!--                    <el-option label="公司类型2" value="1" />-->
+<!--                  </el-select>-->
+<!--                </el-form-item>-->
               </el-form>
             </div>
           </el-card>
         </el-collapse-item>
       </el-collapse>
-      <div style="float: right;margin:20px 30px">
-        <el-button type="primary" size="small" icon="view" @click="add()"><i class="el-icon-plus" />新增
+      <div style="float: left;margin:20px 30px">
+        <el-button type="primary" size="mini" icon="view" @click="add()"><i class="el-icon-plus" />新增
         </el-button>
-        <el-button
-          type="danger"
-          size="small"
-          icon="el-icon-delete"
-          :disabled="deleteBtnDisabled"
-          @click="deleteSelectedRow()"
-        >
+        <el-button type="danger" size="mini" icon="el-icon-delete"  :disabled="deleteBtnDisabled" @click="deleteSelectedRow()">
           删除
         </el-button>
       </div>

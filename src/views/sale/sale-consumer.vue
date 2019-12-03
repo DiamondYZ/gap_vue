@@ -55,10 +55,10 @@
           </el-card>
         </el-collapse-item>
       </el-collapse>
-      <div style="float: right;margin:20px 30px">
+      <div style="float: left;margin:20px 30px">
         <el-button type="primary" size="mini" icon="view" @click="add()"><i class="el-icon-plus" />新增
         </el-button>
-        <el-button type="primary" size="mini" icon="view" :disabled="deleteBtnDisabled" @click="deleteSelectedRow()">
+        <el-button type="danger" size="mini" icon="view" :disabled="deleteBtnDisabled" @click="deleteSelectedRow()">
           <i class="el-icon-delete" />删除
         </el-button>
       </div>

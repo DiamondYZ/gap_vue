@@ -15,20 +15,20 @@
       <!--                type="primary"-->
       <!--                icon="el-icon-search"-->
       <!--                @click='getList()'-->
-      <!--                size="small">-->
+      <!--                size="mini">-->
       <!--                查询-->
       <!--              </el-button>-->
       <!--              <el-button-->
       <!--                style="float: right;margin-right: 15px"-->
-      <!--                size="small" @click='refreshSearch()'>-->
+      <!--                size="mini" @click='refreshSearch()'>-->
       <!--                <i class="el-icon-refresh"></i>-->
       <!--                重置-->
       <!--              </el-button>-->
       <!--            </div>-->
       <!--&lt;!&ndash;            <div style="margin-top: 15px">&ndash;&gt;-->
-      <!--&lt;!&ndash;              <el-form :inline="true" :model="search_data" size="small" label-width="140px">&ndash;&gt;-->
+      <!--&lt;!&ndash;              <el-form :inline="true" :model="search_data" size="mini" label-width="140px">&ndash;&gt;-->
       <!--&lt;!&ndash;                <el-form-item label="库存：">&ndash;&gt;-->
-      <!--&lt;!&ndash;                  <el-select class="item-choose" v-model="search_data.stockId" size="small">&ndash;&gt;-->
+      <!--&lt;!&ndash;                  <el-select class="item-choose" v-model="search_data.stockId" size="mini">&ndash;&gt;-->
       <!--&lt;!&ndash;                    <el-option label="" value=""></el-option>&ndash;&gt;-->
       <!--&lt;!&ndash;                    <el-option label="库存1" value="0"></el-option>&ndash;&gt;-->
       <!--&lt;!&ndash;                    <el-option label="库存2" value="1"></el-option>&ndash;&gt;-->
@@ -39,12 +39,12 @@
       <!--          </el-card>-->
       <!--        </el-collapse-item>-->
       <!--      </el-collapse>-->
-      <div style="float: right;margin:20px 30px">
-        <el-button type="primary" size="small" icon="view" @click="add()"><i class="el-icon-plus" />新增
+      <div style="float: left;margin:20px 30px">
+        <el-button type="primary" size="mini" icon="view" @click="add()"><i class="el-icon-plus" />新增
         </el-button>
         <el-button
           type="danger"
-          size="small"
+          size="mini"
           icon="el-icon-delete"
           :disabled="deleteBtnDisabled"
           @click="deleteSelectedRow()"

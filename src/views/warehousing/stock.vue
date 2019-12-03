@@ -5,58 +5,8 @@
         <i class="el-icon-tickets" style="margin-top: 5px;font-size: 22px"/>
         <span style="margin-top: 5px;font-size: 22px">{{ pageInfo.listTitle }}</span>
       </div>
-      <el-collapse v-model="activeNames">
-        <!--        <el-collapse-item title="筛选搜索" name="1">-->
-        <!--          <el-card class="filter-container" shadow="never">-->
-        <!--            <div>-->
-
-        <!--              <el-button-->
-        <!--                style="float: right"-->
-        <!--                type="primary"-->
-        <!--                icon="el-icon-search"-->
-        <!--                size="small"-->
-        <!--                @click="getList()"-->
-        <!--              >-->
-        <!--                查询-->
-        <!--              </el-button>-->
-        <!--              <el-button-->
-        <!--                style="float: right;margin-right: 15px"-->
-        <!--                size="small"-->
-        <!--                @click="refreshSearch()"-->
-        <!--              >-->
-        <!--                <i class="el-icon-refresh" />-->
-        <!--                重置-->
-        <!--              </el-button>-->
-        <!--            </div>-->
-        <!--            <div style="margin-top: 15px">-->
-        <!--              <el-form :inline="true" :model="search_data" size="small" label-width="140px">-->
-        <!--                <el-form-item label="库房：">-->
-        <!--                  <el-select v-model="search_data.warehouseId" class="item-choose" size="small">-->
-        <!--                    <el-option label="" value="" />-->
-        <!--                    <el-option label="库房1" value="0" />-->
-        <!--                    <el-option label="库房2" value="1" />-->
-        <!--                  </el-select>-->
-        <!--                </el-form-item>-->
-        <!--                <el-form-item label="物料：">-->
-        <!--                  <el-select v-model="search_data.materialId" class="item-choose" size="small">-->
-        <!--                    <el-option label="" value="" />-->
-        <!--                    <el-option label="物料1" value="0" />-->
-        <!--                    <el-option label="物料2" value="1" />-->
-        <!--                  </el-select>-->
-        <!--                </el-form-item>-->
-        <!--              </el-form>-->
-        <!--            </div>-->
-        <!--          </el-card>-->
-        <!--        </el-collapse-item>-->
-      </el-collapse>
-      <!--      <div style="float: right;margin:20px 30px">-->
-      <!--        <el-button type="primary" size="small" icon="view" @click="add()"><i class="el-icon-plus" />新增-->
-      <!--        </el-button>-->
-      <!--        <el-button  type="danger" size="small" icon="el-icon-delete" :disabled="deleteBtnDisabled" @click="deleteSelectedRow()">-->
-      <!--          删除-->
-      <!--        </el-button>-->
-      <!--      </div>-->
-
+<!--      <el-collapse v-model="activeNames">-->
+<!--      </el-collapse>-->
       <div class="fillcontain">
         <div class="table_container">
           <el-table
