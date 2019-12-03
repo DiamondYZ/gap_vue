@@ -26,7 +26,7 @@ service.interceptors.request.use(
       // please modify it according to the actual situation
       // config.headers['X-Token'] = getToken()
       config.headers['token'] = getToken()
-    }else {
+    } else {
       config.headers['isLoginFlag'] = 'true'
     }
     return config
