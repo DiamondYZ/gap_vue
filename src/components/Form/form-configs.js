@@ -278,26 +278,8 @@ export const supplierFormConfigs = [
     formItemProp: { label: '状态', prop: 'statusDict' },
     optionList: setArrayMapVal(JSON.parse(localStorage.getItem('ENTERPRISE_STATUS_DICT')))
   },
-  {
-    type: 'input',
-    formItemProp: {
-      label: '联系人名称',
-      prop: 'contactName'
-    },
-    elementProp: {
-      size: 'mini'
-    }
-  },
-  {
-    type: 'input',
-    formItemProp: {
-      label: '联系人电话',
-      prop: 'contactPhone'
-    },
-    elementProp: {
-      size: 'mini'
-    }
-  },
+  { type: 'input', formItemProp: { label: '联系人名称', prop: 'contactName' }, elementProp: { size: 'mini' }},
+  { type: 'input', formItemProp: { label: '联系人电话', prop: 'contactPhone' }, elementProp: { size: 'mini' }},
   { type: 'datePicker', formItemProp: { label: '注册日期', prop: 'registrationDate' }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '邮箱', prop: 'email' }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '经营范围', prop: 'businessScope' }, elementProp: { size: 'mini' }},
@@ -321,6 +303,20 @@ export const purchaseOrderFormConfigs = [
   { type: 'input', formItemProp: { label: '状态', prop: 'statusDict' }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '供应商', prop: 'supplierId' }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '采购员', prop: 'operatorId' }, elementProp: { size: 'mini' }}
+]
+// 采购订单明细
+export const purchaseOrderDetailFormConfigs = [
+  { type: 'dialog', formItemProp: { label: '采购订单', prop: 'purchaseOrderNumber', id: 'purchaseOrder' }, elementProp: { size: 'mini' }},
+  { type: 'dialog', formItemProp: { label: '产品', prop: 'productName', id: 'product' }, elementProp: { size: 'mini' }},
+  { type: 'input', formItemProp: { label: '数量', prop: 'quantity' }, elementProp: { size: 'mini' }},
+  {
+    type: 'select',
+    formItemProp: { label: '单位', prop: 'unitDict' },
+    optionList: setArrayMapVal(JSON.parse(localStorage.getItem('QUANTITY_UNIT_DICT')))
+  },
+  { type: 'input', formItemProp: { label: '单价', prop: 'unitPrice' }, elementProp: { size: 'mini' }},
+  { type: 'input', formItemProp: { label: '总价', prop: 'totalPrice' }, elementProp: { size: 'mini' }},
+  { type: 'datePicker', formItemProp: { label: '交付时间', prop: 'deliveryTime' }, elementProp: { size: 'mini' }}
 ]
 // 生产计划
 export const productionPlanFormConfigs = [
@@ -1050,13 +1046,13 @@ export const storeSopFormConfigs = [
     formItemProp: { label: '温度单位', prop: 'temperatureUnitDict' },
     optionList: setArrayMapVal(JSON.parse(localStorage.getItem('TEMPERATURE_UNIT')))
   },
-  { type: 'input', formItemProp: { label: '最小湿度', prop: 'minimumHumidity' }, elementProp: { size: 'mini' }},
-  { type: 'input', formItemProp: { label: '最大湿度', prop: 'maximumHumidity' }, elementProp: { size: 'mini' }},
   {
     type: 'select',
     formItemProp: { label: '湿度单位', prop: 'humidityUnitDict' },
     optionList: setArrayMapVal(JSON.parse(localStorage.getItem('HUMIDITY_UNIT_DICT')))
   },
+  { type: 'input', formItemProp: { label: '最小湿度', prop: 'minimumHumidity' }, elementProp: { size: 'mini' }},
+  { type: 'input', formItemProp: { label: '最大湿度', prop: 'maximumHumidity' }, elementProp: { size: 'mini' }},
   { type: 'img', formItemProp: { label: '图片', prop: 'picPath' }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '内容', prop: 'content' }, elementProp: { size: 'large', type: 'textarea' }}
 ]

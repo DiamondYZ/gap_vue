@@ -29,14 +29,12 @@
             </div>
             <div style="margin-top: 15px">
               <el-form :inline="true" :model="search_data" size="mini" label-width="140px">
-                <el-form-item label="任务">
-                  <el-input v-model="search_data.customCondition" style="width: 150px" placeholder="任务编号或描述"/>
-                </el-form-item>
-                <el-form-item label="责任人">
-                  <el-input v-model="search_data.managerCondition" style="width: 150px" placeholder="责任人编号或名称"/>
-                </el-form-item>
-                <el-form-item label="产品">
-                  <el-input v-model="search_data.productCondition" style="width: 150px" placeholder="产品编号或名称"/>
+                <el-form-item label="订单编号">
+                  <el-input
+                    v-model="search_data.customCondition"
+                    style="width: 203px"
+                    placeholder="订单编号"
+                  />
                 </el-form-item>
               </el-form>
             </div>
@@ -46,7 +44,8 @@
       <div style="float: left;margin:20px 30px">
         <el-button type="primary" size="mini" icon="view" @click="add()"><i class="el-icon-plus"/>新增
         </el-button>
-        <el-button type="danger" size="mini" icon="el-icon-delete" :disabled="deleteBtnDisabled" @click="deleteSelectedRow()">
+        <el-button type="danger" size="mini" icon="el-icon-delete" :disabled="deleteBtnDisabled"
+                   @click="deleteSelectedRow()">
           删除
         </el-button>
       </div>
@@ -72,7 +71,6 @@
               v-for="(item,index) in tableTitleList"
               :prop="item.prop"
               :label="item.name"
-              :formatter="formatRole"
               align="center"
             />
           </el-table>
@@ -89,13 +87,19 @@
       <show-detail-form
         ref="detailForm"
         :page-info="pageInfo"
-        :form-configs="plantFormConfigs"
+        :form-configs="purchaseOrderDetailFormConfigs"
         @getList="getList(nowPage)"
       />
       <dialog-table
-        ref="dialogTaskSelectTable"
-        :dialog-info="dialogTaskInfo"
-        :form-configs="plantFormConfigs"
+        ref="dialogProductSelectTable"
+        :dialog-info="dialogProductInfo"
+        :form-configs="purchaseOrderDetailFormConfigs"
+        :table-title="tableTitle"
+      />
+      <dialog-table
+        ref="dialogPurchaseOrderSelectTable"
+        :dialog-info="dialogPurchaseOrderInfo"
+        :form-configs="purchaseOrderDetailFormConfigs"
         :table-title="tableTitle"
       />
     </el-card>
@@ -106,7 +110,7 @@
 
     import ShowDetailForm from '@/components/Form/show-detail-form.vue'
     import DialogTable from '@/components/Form/dialog-table.vue'
-    import {plantFormConfigs, formData} from '../../components/Form/form-configs.js'
+    import {purchaseOrderDetailFormConfigs} from '../../components/Form/form-configs.js'
 
     export default {
         components: {
@@ -116,14 +120,22 @@
         data() {
             return {
                 pageInfo: {
-                    interfaceName: 'plant', // 接口名称
-                    listTitle: '种植列表',
-                    detailTitle: '种植详细信息'
+                    interfaceName: 'purchase-order-detail', // 接口名称
+                    listTitle: '采购订单明细列表',
+                    detailTitle: '采购订单详细信息',
+                    listDetailTitle: '采购订单明细列表'
                 }, // 页面信息
-                dialogTaskInfo: {
-                    selectDialogTitle: '任务',
-                    dialogAxiosName: 'task',
-                    dialogId: 'taskId',
+                dialogPurchaseOrderInfo: {
+                    selectDialogTitle: '采购订单',
+                    dialogAxiosName: 'purchaseOrder',
+                    dialogId: 'purchaseOrderId',
+                    selectOptions: [],
+                    tableTitleList: []
+                },
+                dialogProductInfo: {
+                    selectDialogTitle: '产品',
+                    dialogAxiosName: 'product',
+                    dialogId: 'productId',
                     selectOptions: [],
                     tableTitleList: []
                 },
@@ -133,14 +145,14 @@
                 showForm: false, // 是否显示表单0
                 formStatus: '', // 表单状态  是否可点击
                 tableTitleList: [
-                    {prop: 'taskNumber', name: '任务编号'},
-                    {prop: 'taskDescription', name: '任务描述'},
-                    {prop: 'productionCellNumber', name: '生产单元'},
-                    {prop: 'managerName', name: '责任人'},
+                    {prop: 'lineNumber', name: '行号'},
+                    {prop: 'purchaseOrderNumber', name: '订单编号'},
                     {prop: 'productName', name: '产品'},
-                    {prop: 'taskQuantity', name: '任务数量'},
-                    {prop: 'quantity', name: '本次完成数量'},
-                    {prop: 'unitDict', name: '单位'}
+                    {prop: 'quantity', name: '数量'},
+                    {prop: 'unitDict', name: '单位'},
+                    {prop: 'unitPrice', name: '单价'},
+                    {prop: 'totalPrice', name: '总价'},
+                    {prop: 'deliveryTime', name: '交付日期'}
                 ], // 表格头信息
                 tableData: [], // 表格数据
                 formData: {}, // 表单数据
@@ -149,9 +161,11 @@
                 nowPage: 1, // 当前页
                 pageSize: 10, // 每页显示多少条
                 pageTotal: 0, // 总条数
+                statusDict: '', // 控制状态按钮  状态
                 activeNames: [],
-                plantFormConfigs,
-                tableTitle: []
+                purchaseOrderDetailFormConfigs,
+                tableTitle: [],
+                tableDetailData: [], // 表格单条数据
             }
         },
         computed: {
@@ -164,58 +178,33 @@
                 if (val) {
                     let param
                     let urlValue
-                    if (val === 'manager') {
-                        urlValue = 'staff'
-                    } else if (val === 'productionBase') {
-                        urlValue = 'production-base'
-                    } else if (val === 'productionCell') {
-                        urlValue = 'production-cell'
+                    if (val === 'purchaseOrder') {
+                        urlValue = 'sale-order'
                     } else {
                         urlValue = val
                     }
                     param = {url: urlValue + '/getPullDownList'}
                     this.$store.dispatch('common/getSelectOptionsList', param).then((res) => {
-                        if (val === 'task') {
-                            this.dialogTaskInfo.selectOptions = res.data
-                            this.dialogTaskInfo.tableTitleList = [
+                        if (val === 'product') {
+                            this.dialogProductInfo.selectOptions = res.data
+                            this.dialogProductInfo.tableTitleList = [
                                 {prop: 'number', name: '编号'},
+                                {prop: 'name', name: '名称'},
                                 {prop: 'description', name: '描述'},
-                                {prop: 'quantity', name: '数量'},
-                                {prop: 'unitDict', name: '单位'},
                             ] // 表格头信息
-                            this.$refs.dialogTaskSelectTable.showTable()
+                            this.$refs.dialogProductSelectTable.showTable()
                         }
-                        // if (val === 'manager') {
-                        //   this.dialogStaffInfo.selectOptions = res.data
-                        //   this.dialogStaffInfo.tableTitleList = [
-                        //     { prop: 'number', name: '编号' },
-                        //     { prop: 'name', name: '名称' },
-                        //     { prop: 'description', name: '描述' },
-                        //     { prop: 'departmentName', name: '部门' },
-                        //     { prop: 'position', name: '职位' },
-                        //     { prop: 'entryDate', name: '入职日期' }
-                        //   ] // 表格头信息
-                        //   this.$refs.dialogStaffSelectTable.showTable()
-                        // }
-                        // if (val === 'productionCell') {
-                        //   this.dialogProductionCellInfo.selectOptions = res.data
-                        //   this.dialogProductionCellInfo.tableTitleList = [
-                        //     { prop: 'number', name: '编号' },
-                        //     { prop: 'name', name: '名称' },
-                        //     { prop: 'description', name: '描述' },
-                        //     { prop: 'managerName', name: '负责人' }
-                        //   ] // 表格头信息
-                        //   this.$refs.dialogProductionCellSelectTable.showTable()
-                        // }
-                        // if (val === 'product') {
-                        //   this.dialogProductInfo.selectOptions = res.data
-                        //   this.dialogProductInfo.tableTitleList = [
-                        //     { prop: 'number', name: '编号' },
-                        //     { prop: 'name', name: '名称' },
-                        //     { prop: 'description', name: '描述' }
-                        //   ] // 表格头信息
-                        //   this.$refs.dialogProductSelectTable.showTable()
-                        // }
+                        if (val === 'purchaseOrder') {
+                            this.dialogPurchaseOrderInfo.selectOptions = res.data
+                            this.dialogPurchaseOrderInfo.tableTitleList = [
+                                {prop: 'number', name: '订单编号'},
+                                {prop: 'description', name: '订单描述'},
+                                {prop: 'consumerName', name: '客户'},
+                                {prop: 'salesmanName', name: '业务员'},
+                                {prop: 'signingDate', name: '签订日期'}
+                            ] // 表格头信息
+                            this.$refs.dialogPurchaseOrderSelectTable.showTable()
+                        }
                     })
                         .catch(() => {
 
@@ -227,18 +216,20 @@
             this.getList()
         },
         created() {
+            this.$store.dispatch('common/getPullDownList', {classCode: 'SALE_ORDER_STATUS'}) // 采购订单状态
             this.$store.dispatch('common/getPullDownList', {classCode: 'QUANTITY_UNIT_DICT'}) // 数量单位
         },
         methods: {
             formatRole(row, column) {
                 if (column.property === 'unitDict') {
-                    const statusArr = JSON.parse(localStorage.getItem('QUANTITY_UNIT_DICT'))
-                    return this.getArrayMapVal(statusArr, row[column.property])
-                } else {
+                  let statusArr = JSON.parse(localStorage.getItem('QUANTITY_UNIT_DICT'))
+                  return this.getArrayMapVal(statusArr, row[column.property])
+                }
+              else {
                     return row[column.property]
                 }
             },
-            // 设置表头颜色
+            //设置表头颜色
             setHeaderRowStyle({row, rowIndex}) {
                 if (rowIndex === 0) {
                     return 'background:#eef2fe'
@@ -246,7 +237,7 @@
                     return ''
                 }
             },
-            // 隔行换色
+            //隔行换色
             rowStyle: function ({row, rowIndex}) {
                 if (rowIndex % 2 === 1) {
                     return 'background:#ebf1fb'
@@ -257,13 +248,13 @@
             refreshSearch: function () {
                 this.search_data = {}
             },
-            // 新增详细
+            //新增详细
             add() {
                 this.$refs.detailForm.add()
             },
-            // 获取表格数据
+            //获取表格数据
             getList() {
-                const data = {
+                let data = {
                     'entity': this.search_data,
                     'orders': [{
                         'asc': false,
@@ -272,7 +263,7 @@
                     'pageNum': this.nowPage,
                     'pageSize': this.pageSize
                 }
-                const param = {
+                let param = {
                     name: this.pageInfo.interfaceName,
                     data: data
                 }
@@ -288,12 +279,71 @@
             },
             // 点击row显示详细数据
             showRowDetail(row) {
-                // 点击选中复选框
-                //    	this.$refs.handSelect_multipleTable.toggleRowSelection(row);
+                //点击选中复选框
+//    	this.$refs.handSelect_multipleTable.toggleRowSelection(row);
                 this.clickLineId = row.id
                 this.$refs.detailForm.getDetailData(row.id)
             },
-            // 操作完成提示信息  并刷新表格
+            // 获取编辑信息
+            editDetail(row) {
+                window.event ? window.event.cancelBubble = true : e.stopPropagation()
+                let data = {
+                    'entity': {
+                        'id': this.clickLineId
+                    }
+                }
+                let param = {
+                    name: this.pageInfo.interfaceName,
+                    data: data
+                }
+                this.$store.dispatch('common/getDetail', param)
+                    .then((res) => {
+                        this.showForm = true
+                        this.formStatus = 'edit'
+                        this.formData = res.data
+                    })
+                    .catch(() => {
+
+                    })
+            },
+            //新增或修改数据
+            saveDetail() {
+                this.$refs.baseForm.validate(data => {
+                    this.formData = data
+                    console.log(data)
+                })
+                let data = this.formData
+
+                if (this.formStatus === 'edit') {
+                    data.id = this.clickLineId
+                    console.log(data)
+                    let param = {
+                        name: this.pageInfo.interfaceName,
+                        data: data
+                    }
+                    this.$store.dispatch('common/editDetail', param)
+                        .then((res) => {
+                            this.refresh('更新成功！')
+                            this.formStatus = 'show'
+                        })
+                        .catch(() => {
+
+                        })
+                } else {
+                    let param = {
+                        name: this.pageInfo.interfaceName,
+                        data: data
+                    }
+                    this.$store.dispatch('common/saveDetail', param)
+                        .then((res) => {
+                            this.refresh('保存成功！')
+                        })
+                        .catch(() => {
+
+                        })
+                }
+            },
+            //操作完成提示信息  并刷新表格
             refresh(info) {
                 this.$notify({
                     title: '成功',
@@ -307,17 +357,16 @@
                 this.nowPage = val
                 this.getList()
             },
-            // 批量删除
             deleteSelectedRow() {
                 console.log(this.rowIds)
                 this.$confirm('确认批量删除记录吗?', '提示', {
                     type: 'warning'
                 })
                     .then(() => {
-                        const data = {
+                        let data = {
                             'idsList': this.rowIds
                         }
-                        const param = {
+                        let param = {
                             name: this.pageInfo.interfaceName,
                             data: data
                         }
@@ -335,7 +384,7 @@
             },
             // 当用户手动勾选数据行的 Checkbox 时触发的事件
             selectTable(rows, row) {
-                const selected = rows.length && rows.indexOf(row) !== -1
+                let selected = rows.length && rows.indexOf(row) !== -1
                 if (selected) {
                     this.rowIds.push(row.id)
                 } else {

@@ -52,13 +52,7 @@
       <div style="float: left;margin:20px 30px">
         <el-button type="primary" size="mini" icon="view" @click="add()"><i class="el-icon-plus" />新增
         </el-button>
-        <el-button
-          type="danger"
-          size="mini"
-          icon="el-icon-delete"
-          :disabled="deleteBtnDisabled"
-          @click="deleteSelectedRow()"
-        >
+        <el-button type="danger" size="mini" icon="el-icon-delete"  :disabled="deleteBtnDisabled" @click="deleteSelectedRow()">
           删除
         </el-button>
       </div>

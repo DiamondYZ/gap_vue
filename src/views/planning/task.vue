@@ -34,28 +34,28 @@
                   <el-input
                     v-model="search_data.customCondition"
                     style="width: 203px"
-                    placeholder="编号、描述"
+                    placeholder="编号或描述"
                   />
                 </el-form-item>
                 <el-form-item label="工单">
                   <el-input
                     v-model="search_data.workOrderCondition"
                     style="width: 203px"
-                    placeholder="工单编号、描述"
+                    placeholder="工单编号或描述"
                   />
                 </el-form-item>
                 <el-form-item label="产品">
                   <el-input
                     v-model="search_data.productCondition"
                     style="width: 203px"
-                    placeholder="产品编号、名称、描述"
+                    placeholder="产品编号或名称"
                   />
                 </el-form-item>
                 <el-form-item label="物料">
                   <el-input
                     v-model="search_data.materialCondition"
                     style="width: 203px"
-                    placeholder="物料编号、名称、描述"
+                    placeholder="物料编号或名称"
                   />
                 </el-form-item>
 <!--                <el-form-item label="任务类型：">-->
@@ -229,7 +229,7 @@
                 tableTitleList: [
                     {prop: 'workOrderNumber', name: '工单编号'},
                     {prop: 'number', name: '任务编号'},
-                    {prop: 'description', name: '描述'},
+                    // {prop: 'description', name: '描述'},
                     {prop: 'taskTypeDict', name: '类型'},
                     {prop: 'productName', name: '产品'},
                     {prop: 'quantity', name: '数量'},
