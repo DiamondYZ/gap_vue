@@ -9,13 +9,7 @@
         <el-collapse-item title="查询条件" name="1">
           <el-card class="filter-container" shadow="never">
             <div>
-
-              <el-button
-                style="float: right"
-                type="primary"
-                size="mini"
-                @click="getList()"
-              >
+              <el-button style="float: right" type="primary" size="mini"  @click="getList()" icon="el-icon-search">
                 查询
               </el-button>
               <el-button

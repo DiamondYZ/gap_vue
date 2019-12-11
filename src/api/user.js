@@ -18,6 +18,18 @@ export function getInfo(token) {
   })
 }
 
+export function resetPassword(data) {
+  if (store.getters.token) {
+    const userToken = getToken()
+    data.userToken = userToken
+  }
+  return request({
+    url: '/password/reset',
+    method: 'post',
+    data
+  })
+}
+
 export function logout() {
   let data
   if (store.getters.token) {

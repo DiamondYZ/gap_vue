@@ -29,28 +29,31 @@
             </div>
             <div style="margin-top: 15px">
               <el-form :inline="true" :model="search_data" size="mini" label-width="140px">
-                <el-form-item label="任务">
-                  <el-input v-model="search_data.customCondition" style="width: 150px" placeholder="任务编号或描述"/>
-                </el-form-item>
-                <el-form-item label="责任人">
-                  <el-input v-model="search_data.managerCondition" style="width: 150px" placeholder="责任人编号或名称"/>
-                </el-form-item>
-                <el-form-item label="产品">
-                  <el-input v-model="search_data.productCondition" style="width: 150px" placeholder="产品编号或名称"/>
+                <el-form-item label="">
+                  <el-input
+                    v-model="search_data.customCondition"
+                    style="width: 203px"
+                    placeholder="编号、名称"
+                  />
                 </el-form-item>
               </el-form>
             </div>
           </el-card>
         </el-collapse-item>
       </el-collapse>
-      <div style="float: left;margin:20px 30px">
-        <el-button type="primary" size="mini" icon="view" @click="add()"><i class="el-icon-plus"/>新增
-        </el-button>
-        <el-button type="danger" size="mini" icon="el-icon-delete" :disabled="deleteBtnDisabled"
-                   @click="deleteSelectedRow()">
-          删除
-        </el-button>
-      </div>
+<!--      <div style="float: left;margin:20px 30px">-->
+<!--        <el-button type="primary" size="mini" icon="view" @click="add()"><i class="el-icon-plus"/>新增-->
+<!--        </el-button>-->
+<!--        <el-button-->
+<!--          type="danger"-->
+<!--          size="mini"-->
+<!--          icon="el-icon-delete"-->
+<!--          :disabled="deleteBtnDisabled"-->
+<!--          @click="deleteSelectedRow()"-->
+<!--        >-->
+<!--          删除-->
+<!--        </el-button>-->
+<!--      </div>-->
 
       <div class="fillcontain">
         <div class="table_container">
@@ -90,13 +93,13 @@
       <show-detail-form
         ref="detailForm"
         :page-info="pageInfo"
-        :form-configs="plantFormConfigs"
+        :form-configs="sysUserRoleFormConfigs"
         @getList="getList(nowPage)"
       />
       <dialog-table
-        ref="dialogTaskSelectTable"
-        :dialog-info="dialogTaskInfo"
-        :form-configs="plantFormConfigs"
+        ref="dialogSelectTable"
+        :dialog-info="dialogInfo"
+        :form-configs="sysUserRoleFormConfigs"
         :table-title="tableTitle"
       />
     </el-card>
@@ -107,7 +110,7 @@
 
   import ShowDetailForm from '@/components/Form/show-detail-form.vue'
   import DialogTable from '@/components/Form/dialog-table.vue'
-  import {plantFormConfigs, formData} from '../../components/Form/form-configs.js'
+  import {sysUserRoleFormConfigs} from '../../components/Form/form-configs.js'
 
   export default {
     components: {
@@ -117,14 +120,14 @@
     data() {
       return {
         pageInfo: {
-          interfaceName: 'plant', // 接口名称
-          listTitle: '种植列表',
-          detailTitle: '种植详细信息'
+          interfaceName: 'system-user-role', // 接口名称
+          listTitle: '用户角色分配列表',
+          detailTitle: '用户角色分配详情'
         }, // 页面信息
-        dialogTaskInfo: {
-          selectDialogTitle: '任务',
-          dialogAxiosName: 'task',
-          dialogId: 'taskId',
+        dialogInfo: {
+          selectDialogTitle: '系统角色',
+          dialogAxiosName: 'systemRole',
+          dialogId: 'systemRoleId',
           selectOptions: [],
           tableTitleList: []
         },
@@ -134,14 +137,11 @@
         showForm: false, // 是否显示表单0
         formStatus: '', // 表单状态  是否可点击
         tableTitleList: [
-          {prop: 'taskNumber', name: '任务编号'},
-          {prop: 'taskDescription', name: '任务描述'},
-          {prop: 'productionCellNumber', name: '生产单元'},
-          {prop: 'managerName', name: '责任人'},
-          {prop: 'productName', name: '产品'},
-          {prop: 'taskQuantity', name: '任务数量'},
-          {prop: 'quantity', name: '本次完成数量'},
-          {prop: 'unitDict', name: '单位'}
+          {prop: 'lineNumber', name: '行号'},
+          {prop: 'userAccount', name: '用户账号'},
+          {prop: 'userName', name: '用户名称'},
+          {prop: 'roleName', name: '角色名称'},
+          {prop: 'roleDescription', name: '角色描述'}
         ], // 表格头信息
         tableData: [], // 表格数据
         formData: {}, // 表单数据
@@ -151,7 +151,7 @@
         pageSize: 10, // 每页显示多少条
         pageTotal: 0, // 总条数
         activeNames: [],
-        plantFormConfigs,
+        sysUserRoleFormConfigs,
         tableTitle: []
       }
     },
@@ -163,29 +163,23 @@
     watch: {
       listeningClickDialog(val) {
         if (val) {
-          let param
-          let urlValue
-          if (val === 'manager') {
-            urlValue = 'staff'
-          } else if (val === 'productionBase') {
-            urlValue = 'production-base'
-          } else if (val === 'productionCell') {
-            urlValue = 'production-cell'
-          } else {
-            urlValue = val
+          let urlValue = val
+          if (val === 'role') {
+            urlValue = 'system-role'
           }
-          param = {url: urlValue + '/getPullDownList'}
+          const param = {
+            url: urlValue + '/getPullDownList'
+          }
           this.$store.dispatch('common/getSelectOptionsList', param).then((res) => {
-            if (val === 'task') {
-              this.dialogTaskInfo.selectOptions = res.data
-              this.dialogTaskInfo.tableTitleList = [
-                {prop: 'number', name: '编号'},
-                {prop: 'description', name: '描述'},
-                {prop: 'quantity', name: '数量'},
-                {prop: 'unitDict', name: '单位'},
+            this.dialogInfo.selectOptions = res.data
+            if (val === 'role') {
+              this.dialogInfo.tableTitleList = [
+                {prop: 'lineNumber', name: '行号'},
+                {prop: 'name', name: '角色名称'},
+                {prop: 'description', name: '角色描述'}
               ] // 表格头信息
-              this.$refs.dialogTaskSelectTable.showTable()
             }
+            this.$refs.dialogSelectTable.showTable()
           })
             .catch(() => {
 
@@ -193,16 +187,18 @@
         }
       }
     },
+    created() {
+      // this.$store.dispatch('common/getPullDownList', {classCode: 'TEMPERATURE_UNIT'}) // 温度单位
+      // this.$store.dispatch('common/getPullDownList', {classCode: 'IS_VALID'}) // 是否特殊需求
+      // this.$store.dispatch('common/getPullDownList', {classCode: 'STORAGE_UNIT_DICT'}) // 存储单位
+    },
     mounted() {
       this.getList()
     },
-    created() {
-      this.$store.dispatch('common/getPullDownList', {classCode: 'QUANTITY_UNIT_DICT'}) // 数量单位
-    },
     methods: {
       formatRole(row, column) {
-        if (column.property === 'unitDict') {
-          const statusArr = JSON.parse(localStorage.getItem('QUANTITY_UNIT_DICT'))
+        if (column.property === 'isSpecial') {
+          const statusArr = JSON.parse(localStorage.getItem('IS_VALID'))
           return this.getArrayMapVal(statusArr, row[column.property])
         } else {
           return row[column.property]
@@ -219,9 +215,9 @@
       // 隔行换色
       rowStyle: function ({row, rowIndex}) {
         if (rowIndex % 2 === 1) {
-          return 'background:#ebf1fb'
+          return 'text-align:center;background:#ebf1fb'
         } else {
-          return 'background:#fff'
+          return 'text-align:center;background:#fff'
         }
       },
       refreshSearch: function () {
@@ -259,9 +255,68 @@
       // 点击row显示详细数据
       showRowDetail(row) {
         // 点击选中复选框
-        //    	this.$refs.handSelect_multipleTable.toggleRowSelection(row);
+        //    this.$refs.handSelect_multipleTable.toggleRowSelection(row);
         this.clickLineId = row.id
         this.$refs.detailForm.getDetailData(row.id)
+      },
+      // 获取编辑信息
+      editDetail(row) {
+        window.event ? window.event.cancelBubble = true : e.stopPropagation()
+        const data = {
+          'entity': {
+            'id': this.clickLineId
+          }
+        }
+        const param = {
+          name: this.pageInfo.interfaceName,
+          data: data
+        }
+        this.$store.dispatch('common/getDetail', param)
+          .then((res) => {
+            this.showForm = true
+            this.formStatus = 'edit'
+            this.formData = res.data
+          })
+          .catch(() => {
+
+          })
+      },
+      // 新增或修改数据
+      saveDetail() {
+        this.$refs.baseForm.validate(data => {
+          this.formData = data
+          console.log(data)
+        })
+        const data = this.formData
+
+        if (this.formStatus === 'edit') {
+          data.id = this.clickLineId
+          console.log(data)
+          const param = {
+            name: this.pageInfo.interfaceName,
+            data: data
+          }
+          this.$store.dispatch('common/editDetail', param)
+            .then((res) => {
+              this.refresh('更新成功！')
+              this.formStatus = 'show'
+            })
+            .catch(() => {
+
+            })
+        } else {
+          const param = {
+            name: this.pageInfo.interfaceName,
+            data: data
+          }
+          this.$store.dispatch('common/saveDetail', param)
+            .then((res) => {
+              this.refresh('保存成功！')
+            })
+            .catch(() => {
+
+            })
+        }
       },
       // 操作完成提示信息  并刷新表格
       refresh(info) {
@@ -277,7 +332,6 @@
         this.nowPage = val
         this.getList()
       },
-      // 批量删除
       deleteSelectedRow() {
         console.log(this.rowIds)
         this.$confirm('确认批量删除记录吗?', '提示', {
@@ -336,8 +390,18 @@
     }
   }
 </script>
+<style>
+  .el-table td, .el-table th {
+    text-align: center;
+    align-content: center;
+    align: center;
+  }
 
-<style scoped>
+  .el-table_row {
+    align-content: center;
+    text-align: center;
+  }
+
   .el-table thead {
     color: #909399;
     font-weight: 500;
@@ -349,6 +413,37 @@
     padding: 10px;
     background: #fff;
     border-radius: 2px;
+  }
+
+  .pagination {
+    text-align: left;
+    margin-top: 20px;
+  }
+</style>
+<style scoped>
+  .el-table thead {
+    color: #909399;
+    font-weight: 500;
+    background: #eef2fe !important;
+    background: red !important;
+  }
+
+  .row {
+    display: table-row;
+    text-align: center;
+  }
+
+  .cell {
+    display: table-cell;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .table_container {
+    padding: 10px;
+    background: #fff;
+    border-radius: 2px;
+    text-align: center;
   }
 
   .el-table .warning-row {

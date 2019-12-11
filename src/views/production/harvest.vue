@@ -73,6 +73,7 @@
               v-for="(item,index) in tableTitleList"
               :prop="item.prop"
               :label="item.name"
+              :formatter="formatRole"
               align="center"
             />
           </el-table>
@@ -142,7 +143,18 @@
         mounted() {
             this.getList()
         },
+        created() {
+          this.$store.dispatch('common/getPullDownList', {classCode: 'QUANTITY_UNIT_DICT'}) // 数量单位
+        },
         methods: {
+            formatRole(row, column) {
+              if (column.property === 'unitDict') {
+                const statusArr = JSON.parse(localStorage.getItem('QUANTITY_UNIT_DICT'))
+                return this.getArrayMapVal(statusArr, row[column.property])
+              } else {
+                return row[column.property]
+              }
+            },
             // 设置表头颜色
             setHeaderRowStyle({row, rowIndex}) {
                 if (rowIndex === 0) {

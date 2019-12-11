@@ -516,7 +516,7 @@
             setStatus(state) {
                 if (this.rowIds.length !== 1) {
                     this.$message({
-                        message: '请更改一条数据转态',
+                        message: '请选择一条记录',
                         type: 'warning'
                     })
                     return

@@ -110,11 +110,12 @@
                     {prop: 'taskTypeDict', name: '类型'},
                     {prop: 'productName', name: '产品'},
                     {prop: 'quantity', name: '数量'},
+                    {prop: 'outstandingQuantity', name: '待完成数量'},
                     {prop: 'unitDict', name: '单位'},
                     {prop: 'statusDict', name: '状态'},
                     {prop: 'generateTime', name: '生成时间'},
                     {prop: 'issuedTime', name: '发布时间'},
-                    {prop: 'completeTime', name: '完成时间'},
+                    // {prop: 'completeTime', name: '完成时间'},
                 ], // 表格头信息
                 tableData: [], // 表格数据
                 formData: {}, // 表单数据

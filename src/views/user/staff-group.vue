@@ -6,38 +6,39 @@
         <span style="margin-top: 5px;font-size: 22px">{{pageInfo.listTitle}}</span>
       </div>
       <el-collapse v-model="activeNames">
-        <el-collapse-item title="筛选搜索" name="1">
+        <el-collapse-item title="查询条件" name="1">
           <el-card class="filter-container" shadow="never">
             <div>
               <el-button
                 style="float: right"
                 type="primary"
                 @click='getList()'
-                size="small">
+                icon="el-icon-search"
+                size="mini">
                 查询
               </el-button>
               <el-button
                 style="float: right;margin-right: 15px"
-                size="small" @click='refreshSearch()'>
+                size="mini" @click='refreshSearch()'>
                 <i class="el-icon-refresh"></i>
                 重置
               </el-button>
             </div>
             <div style="margin-top: 15px">
-              <el-form :inline="true" :model="search_data" size="small" label-width="140px">
-                <el-form-item label="输入搜索：">
-                  <el-input style="width: 203px" v-model="search_data.customCondition" placeholder="账号或公司名称"></el-input>
+              <el-form :inline="true" :model="search_data" size="mini" label-width="140px">
+                <el-form-item label="">
+                  <el-input style="width: 203px" v-model="search_data.customCondition" placeholder="名称或描述"></el-input>
                 </el-form-item>
               </el-form>
             </div>
           </el-card>
         </el-collapse-item>
       </el-collapse>
-      <div style="float: right;margin:20px 30px">
-        <el-button type="primary" size="small" icon="view" @click='add()'><i class="el-icon-plus"/>新增
+      <div style="float: left;margin:20px 30px">
+        <el-button type="primary" size="mini" icon="view" @click='add()'><i class="el-icon-plus"/>新增
         </el-button>
-        <el-button type="primary" size="small" icon="view" @click='deleteSelectedRow()' :disabled="deleteBtnDisabled">
-          批量删除
+        <el-button type="danger" size="mini" icon="view" @click='deleteSelectedRow()' :disabled="deleteBtnDisabled">
+          删除
         </el-button>
       </div>
 
@@ -79,9 +80,9 @@
     data() {
       return {
         pageInfo: {
-          interfaceName: 'staff-group',   //接口名称
-          listTitle: '用户组别列表',
-          detailTitle: '用户组别详细信息'
+          interfaceName: 'system-role',   //接口名称
+          listTitle: '用户角色列表',
+          detailTitle: '用户角色详细信息'
         },   //页面信息
         search_data: {},          //搜索条件
         clickLineId: '',       //当前点击行id
@@ -89,8 +90,8 @@
         showForm: false,       //是否显示表单0
         formStatus: '',        //表单状态  是否可点击
         tableTitleList: [
+          { prop: 'lineNumber', name: '行号' },
           { prop: 'name', name: '名称' },
-          { prop: 'number', name: '编号' },
           { prop: 'description', name: '描述' }
         ],  //表格头信息
         tableData: [],    //表格数据

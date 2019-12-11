@@ -45,14 +45,14 @@ const chartsRouter = {
       path: 'staff-group',
       component: () => import('@/views/user/staff-group'),
       name: 'StaffGroup',
-      meta: { title: '用户组别' }
+      meta: { title: '系统角色' }
     },
-    // {
-    //   path: 'users',
-    //   component: () => import('@/views/user/users'),
-    //   name: 'Users',
-    //   meta: { title: '用户组别' }
-    // },
+    {
+      path: 'users',
+      component: () => import('@/views/user/user-role'),
+      name: 'UserRole',
+      meta: { title: '用户角色分配' }
+    },
     {
       path: 'user-list',
       component: () => import('@/views/user/user-list'),

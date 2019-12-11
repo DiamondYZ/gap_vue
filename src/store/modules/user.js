@@ -1,6 +1,7 @@
 import { login, logout, getInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import router, { resetRouter } from '@/router'
+import {resetPassword} from "../../api/user";
 
 const state = {
   token: getToken(),
@@ -39,6 +40,21 @@ const actions = {
         localStorage.setItem('token', response.data)
         setToken(response.data)
         resolve()
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  },
+  // reset password
+  resetPassword({ commit }, userInfo) {
+    const { userId } = userInfo
+    return new Promise((resolve, reject) => {
+      resetPassword({ userId: userId }).then(response => {
+        const { data } = response
+        // commit('SET_TOKEN', response.data)
+        //         // localStorage.setItem('token', response.data)
+        //         // setToken(response.data)
+                resolve()
       }).catch(error => {
         reject(error)
       })

@@ -423,6 +423,7 @@ export const selfTaskFormConfigs = [
   },
   { type: 'dialog', formItemProp: { label: '产品', prop: 'productName', id: 'product' }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '数量', prop: 'quantity' }, elementProp: { size: 'mini' }},
+  { type: 'input', formItemProp: { label: '待完成数量', prop: 'outstandingQuantity' }, elementProp: { size: 'mini' }},
   {
     type: 'select',
     formItemProp: { label: '单位', prop: 'unitDict' },
@@ -434,8 +435,8 @@ export const selfTaskFormConfigs = [
   { type: 'datePicker', formItemProp: { label: '实际结束时间', prop: 'endTime', disable: true }, elementProp: { size: 'mini' }},
   { type: 'datePicker', formItemProp: { label: '生成时间', prop: 'generateTime', disable: true }, elementProp: { size: 'mini' }},
   { type: 'datePicker', formItemProp: { label: '发布时间', prop: 'issuedTime', disable: true }, elementProp: { size: 'mini' }},
-  { type: 'datePicker', formItemProp: { label: '完成时间', prop: 'completeTime', disable: true }, elementProp: { size: 'mini' }},
-  { type: 'dialog', formItemProp: { label: '物料', prop: 'materialName', id: 'material' }, elementProp: { size: 'mini' }}
+  { type: 'datePicker', formItemProp: { label: '完成时间', prop: 'completeTime', disable: true }, elementProp: { size: 'mini' }}
+  // { type: 'dialog', formItemProp: { label: '物料', prop: 'materialName', id: 'material' }, elementProp: { size: 'mini' }}
 ]
 // 公司
 export const companyFormConfigs = [
@@ -936,24 +937,27 @@ export const stockDetailFormConfigs = [
 
 // 包裝
 export const packagingFormConfigs = [
-  { type: 'input', formItemProp: { label: '品名', prop: 'brandName' }, elementProp: { size: 'mini' }},
-  { type: 'input', formItemProp: { label: '规格', prop: 'specification' }, elementProp: { size: 'mini' }},
-  { type: 'input', formItemProp: { label: '批号', prop: 'lotNumber' }, elementProp: { size: 'mini' }},
-  { type: 'input', formItemProp: { label: '产地', prop: 'origin' }, elementProp: { size: 'mini' }},
-  { type: 'input', formItemProp: { label: '包装', prop: 'packing' }, elementProp: { size: 'mini' }},
-  { type: 'input', formItemProp: { label: '生产单位', prop: 'productionUnit' }, elementProp: { size: 'mini' }},
-  { type: 'datePicker', formItemProp: { label: '日期', prop: 'packingTime' }, elementProp: { size: 'mini' }},
-  { type: 'input', formItemProp: { label: '本次完成数量', prop: 'quantity' }, elementProp: { size: 'mini' }},
+  // { type: 'input', formItemProp: { label: '品名', prop: 'brandName' }, elementProp: { size: 'mini' }},
+  // { type: 'input', formItemProp: { label: '规格', prop: 'specification' }, elementProp: { size: 'mini' }},
+  // { type: 'input', formItemProp: { label: '批号', prop: 'lotNumber' }, elementProp: { size: 'mini' }},
+  // { type: 'input', formItemProp: { label: '产地', prop: 'origin' }, elementProp: { size: 'mini' }},
+  // { type: 'input', formItemProp: { label: '包装', prop: 'packing' }, elementProp: { size: 'mini' }},
+  // { type: 'input', formItemProp: { label: '生产单位', prop: 'productionUnit' }, elementProp: { size: 'mini' }},
+  // { type: 'datePicker', formItemProp: { label: '日期', prop: 'packingTime' }, elementProp: { size: 'mini' }},
+  { type: 'input', formItemProp: { label: '任务编号', prop: 'taskNumber' }, elementProp: { size: 'mini' }},
+  { type: 'input', formItemProp: { label: '任务描述', prop: 'taskDescription', disable: true }, elementProp: { size: 'mini' }},
+  { type: 'input', formItemProp: { label: '产品', prop: 'productName', disable: true }, elementProp: { size: 'mini' }},
+  { type: 'input', formItemProp: { label: '任务数量', prop: 'taskQuantity', disable: true }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '生产基地', prop: 'productionBaseNumber', disable: true }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '生产单元', prop: 'productionCellNumber', disable: true }, elementProp: { size: 'mini' }},
-  { type: 'input', formItemProp: { label: '产品', prop: 'productName', disable: true }, elementProp: { size: 'mini' }},
-  { type: 'input', formItemProp: { label: '责任人', prop: 'managerName', disable: true }, elementProp: { size: 'mini' }},
-  { type: 'input', formItemProp: { label: '本次完成百分比', prop: 'percent', disable: true }, elementProp: { size: 'mini' }},
+  { type: 'input', formItemProp: { label: '本次完成数量', prop: 'quantity' }, elementProp: { size: 'mini' }},
   {
     type: 'select',
     formItemProp: { label: '单位', prop: 'unitDict', disable: true },
     optionList: setArrayMapVal(JSON.parse(localStorage.getItem('QUANTITY_UNIT_DICT')))
   },
+  { type: 'input', formItemProp: { label: '本次完成百分比', prop: 'percent', disable: true }, elementProp: { size: 'mini' }},
+  { type: 'input', formItemProp: { label: '责任人', prop: 'managerName', disable: true }, elementProp: { size: 'mini' }},
   { type: 'datePicker', formItemProp: { label: '开始时间', prop: 'beginTime' }, elementProp: { size: 'mini' }},
   { type: 'datePicker', formItemProp: { label: '结束时间', prop: 'endTime' }, elementProp: { size: 'mini' }},
   { type: 'img', formItemProp: { label: '图片', prop: 'picPath' }, elementProp: { size: 'mini' }},
@@ -963,10 +967,12 @@ export const packagingFormConfigs = [
 
 // 种植
 export const plantFormConfigs = [
-  { type: 'input', formItemProp: { label: '任务', prop: 'taskNumber' }, elementProp: { size: 'mini' }},
+  { type: 'input', formItemProp: { label: '任务编号', prop: 'taskNumber' }, elementProp: { size: 'mini' }},
+  { type: 'input', formItemProp: { label: '任务描述', prop: 'taskDescription', disable: true }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '生产基地', prop: 'productionBaseNumber', disable: true }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '生产单元', prop: 'productionCellNumber', disable: true }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '产品', prop: 'productName', disable: true }, elementProp: { size: 'mini' }},
+  { type: 'input', formItemProp: { label: '任务数量', prop: 'taskQuantity', disable: true }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '责任人', prop: 'managerName', disable: true }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '本次完成百分比', prop: 'percent', disable: true }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '本次完成数量', prop: 'quantity' }, elementProp: { size: 'mini' }},
@@ -983,10 +989,12 @@ export const plantFormConfigs = [
 
 // 加工
 export const processingFormConfigs = [
-  { type: 'input', formItemProp: { label: '任务', prop: 'taskNumber' }, elementProp: { size: 'mini' }},
+  { type: 'input', formItemProp: { label: '任务编号', prop: 'taskNumber' }, elementProp: { size: 'mini' }},
+  { type: 'input', formItemProp: { label: '任务描述', prop: 'taskDescription', disable: true }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '生产基地', prop: 'productionBaseNumber', disable: true }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '生产单元', prop: 'productionCellNumber', disable: true }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '产品', prop: 'productName', disable: true }, elementProp: { size: 'mini' }},
+  { type: 'input', formItemProp: { label: '任务数量', prop: 'taskQuantity', disable: true }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '责任人', prop: 'managerName', disable: true }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '本次完成百分比', prop: 'percent', disable: true }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '本次完成数量', prop: 'quantity' }, elementProp: { size: 'mini' }},
@@ -1003,10 +1011,12 @@ export const processingFormConfigs = [
 
 // 采收
 export const harvestFormConfigs = [
-  { type: 'input', formItemProp: { label: '任务', prop: 'taskNumber' }, elementProp: { size: 'mini' }},
+  { type: 'input', formItemProp: { label: '任务编号', prop: 'taskNumber' }, elementProp: { size: 'mini' }},
+  { type: 'input', formItemProp: { label: '任务描述', prop: 'taskDescription', disable: true }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '生产基地', prop: 'productionBaseNumber', disable: true }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '生产单元', prop: 'productionCellNumber', disable: true }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '产品', prop: 'productName', disable: true }, elementProp: { size: 'mini' }},
+  { type: 'input', formItemProp: { label: '任务数量', prop: 'taskQuantity', disable: true }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '责任人', prop: 'managerName', disable: true }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '本次完成百分比', prop: 'percent', disable: true }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '本次完成数量', prop: 'quantity' }, elementProp: { size: 'mini' }},
@@ -1083,22 +1093,30 @@ export const harvestSopFormConfigs = [
   { type: 'input', formItemProp: { label: '内容', prop: 'content' }, elementProp: { size: 'mini', type: 'textarea' }}
 ]
 
-// 用户组别
+// 系统角色
 export const staffGroupFormConfigs = [
   { type: 'input', formItemProp: { label: '名称', prop: 'name' }, elementProp: { size: 'mini' }},
-  { type: 'input', formItemProp: { label: '编号', prop: 'number' }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '描述', prop: 'description' }, elementProp: { size: 'mini' }}
 ]
 
 // 用户
 export const usersFormConfigs = [
   { type: 'input', formItemProp: { label: '账户', prop: 'account' }, elementProp: { size: 'mini' }},
-  // { type: 'input', formItemProp: { label: '密码', prop: 'password' }, elementProp: { size: 'mini' }},
-  // { type: 'input', formItemProp: { label: '确认密码', prop: 'confirmPassword' }, elementProp: { size: 'mini' }},
-  // { type: 'input', formItemProp: { label: '地址', prop: 'address' }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '编号', prop: 'number' }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '名称', prop: 'name' }, elementProp: { size: 'mini' }},
-  { type: 'input', formItemProp: { label: '描述', prop: 'description' }, elementProp: { size: 'mini' }}
+  { type: 'input', formItemProp: { label: '描述', prop: 'description' }, elementProp: { size: 'mini' }},
+  {
+    type: 'select',
+    formItemProp: { label: '状态', prop: 'statusDict', disable: true },
+    optionList: setArrayMapVal(JSON.parse(localStorage.getItem('SYSTEM_USER_STATUS')))
+  },
+]
+
+// 用户角色
+export const sysUserRoleFormConfigs = [
+  { type: 'input', formItemProp: { label: '用户账号', prop: 'userAccount', disable: true }, elementProp: { size: 'mini', disable: true }},
+  { type: 'input', formItemProp: { label: '用户名称', prop: 'userName', disable: true }, elementProp: { size: 'mini', disable: true }},
+  { type: 'dialog', formItemProp: { label: '角色', prop: 'roleDescription', id: 'role' }, elementProp: { size: 'mini' }},
 ]
 
 // 溯源记录
