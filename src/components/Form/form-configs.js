@@ -1101,8 +1101,8 @@ export const staffGroupFormConfigs = [
 
 // 用户
 export const usersFormConfigs = [
-  { type: 'input', formItemProp: { label: '账户', prop: 'account' }, elementProp: { size: 'mini' }},
-  { type: 'input', formItemProp: { label: '编号', prop: 'number' }, elementProp: { size: 'mini' }},
+  { type: 'input', formItemProp: { label: '账户', prop: 'account', disable: true }, elementProp: { size: 'mini' }},
+  { type: 'input', formItemProp: { label: '编号', prop: 'number', disable: true }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '名称', prop: 'name' }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '描述', prop: 'description' }, elementProp: { size: 'mini' }},
   {
