@@ -601,7 +601,7 @@ export const materialFormConfigs = [
 ]
 // 设备类型
 export const equipmentTypeFormConfigs = [
-  { type: 'input', formItemProp: { label: '编号', prop: 'number' }, elementProp: { size: 'mini'  }},
+  { type: 'input', formItemProp: { label: '编号', prop: 'number' }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '名称', prop: 'name' }, elementProp: { size: 'mini' }},
   { type: 'input', formItemProp: { label: '描述', prop: 'description' }, elementProp: { size: 'mini' }},
   {
@@ -911,7 +911,7 @@ export const stockFormConfigs = [
   },
   { type: 'input', formItemProp: { label: '仓库', prop: 'warehouseDescription', disable: true }, elementProp: { size: 'mini' }},
   // { type: 'dialog', formItemProp: { label: '仓库', prop: 'warehouseDescription', id: 'warehouse', disable: true }, elementProp: { size: 'mini' }},
-  { type: 'input', formItemProp: { label: '物料', prop: 'materialName', disable: true }, elementProp: { size: 'mini' }},
+  { type: 'input', formItemProp: { label: '物料', prop: 'materialName', disable: true }, elementProp: { size: 'mini' }}
   // { type: 'dialog', formItemProp: { label: '物料', prop: 'materialName', id: 'material', disable: true }, elementProp: { size: 'mini' }}
 ]
 
@@ -1109,14 +1109,14 @@ export const usersFormConfigs = [
     type: 'select',
     formItemProp: { label: '状态', prop: 'statusDict', disable: true },
     optionList: setArrayMapVal(JSON.parse(localStorage.getItem('SYSTEM_USER_STATUS')))
-  },
+  }
 ]
 
 // 用户角色
 export const sysUserRoleFormConfigs = [
   { type: 'input', formItemProp: { label: '用户账号', prop: 'userAccount', disable: true }, elementProp: { size: 'mini', disable: true }},
   { type: 'input', formItemProp: { label: '用户名称', prop: 'userName', disable: true }, elementProp: { size: 'mini', disable: true }},
-  { type: 'dialog', formItemProp: { label: '角色', prop: 'roleDescription', id: 'role' }, elementProp: { size: 'mini' }},
+  { type: 'dialog', formItemProp: { label: '角色', prop: 'roleDescription', id: 'role' }, elementProp: { size: 'mini' }}
 ]
 
 // 溯源记录
