@@ -156,7 +156,8 @@ export default {
         token: ''
       },
       // 七牛云上传储存区域的上传域名（华东、华北、华南、北美、东南亚）
-      upload_qiniu_url: 'https://up-z2.qiniup.com',
+      upload_qiniu_url: 'https://up-z1.qiniup.com',
+      // upload_qiniu_url: 'https://up-z2.qiniup.com',
       // upload_qiniu_url: "https://upload.qiniup.com",
       // 七牛云返回储存图片的子域名
       upload_qiniu_addr: this.$store.state.common.upload_qiniu_addr,

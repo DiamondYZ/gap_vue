@@ -13,7 +13,8 @@ import {
 } from '@/api/common'
 
 const state = {
-  upload_qiniu_addr: 'http://pz90rgn4x.bkt.clouddn.com/',
+  upload_qiniu_addr: 'http://q2dwz0ot2.bkt.clouddn.com/',
+  // upload_qiniu_addr: 'http://pz90rgn4x.bkt.clouddn.com/',
   selectToGetOptionsProp: '', // 判断点击选择弹出dialog
   selectedValue: '' // 存储选择的ID及name
 }

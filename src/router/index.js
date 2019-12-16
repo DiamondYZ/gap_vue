@@ -75,6 +75,11 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/logout',
+    component: () => import('@/views/login/index'),
+    hidden: true
+  },
+  {
     path: '/auth-redirect',
     component: () => import('@/views/login/auth-redirect'),
     hidden: true
@@ -135,18 +140,18 @@ export const asyncRoutes = [
   knowledgeBaseManagement,
   user,
   tracingManagement,
-  // {
-  //   path: '/tracing',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'tracing',
-  //       component: () => import('@/views/tracing/tracing'),
-  //       name: 'Tracing',
-  //       meta: { title: '溯源管理', icon: 'documentation', noCache: true }
-  //     }
-  //   ]
-  // },
+  {
+    path: '/databoard',
+    component: Layout,
+    children: [
+      {
+        path: 'databoard',
+        component: () => import('@/views/databoard/index'),
+        name: 'Databoard',
+        meta: { title: '看板', icon: 'documentation', noCache: true }
+      }
+    ]
+  },
   { path: '*', redirect: '/404', hidden: true }
 ]
 

@@ -6,20 +6,20 @@
         <span style="margin-top: 5px;font-size: 22px">{{ pageInfo.listTitle }}</span>
       </div>
       <el-collapse v-model="activeNames">
-        <el-collapse-item title="筛选搜索" name="1">
+        <el-collapse-item title="查询条件" name="1">
           <el-card class="filter-container" shadow="never">
             <div>
               <el-button
                 style="float: right"
                 type="primary"
-                size="small"
+                size="mini"
                 @click="getList()"
               >
                 查询
               </el-button>
               <el-button
                 style="float: right;margin-right: 15px"
-                size="small"
+                size="mini"
                 @click="refreshSearch()"
               >
                 <i class="el-icon-refresh"/>
@@ -27,7 +27,7 @@
               </el-button>
             </div>
             <div style="margin-top: 15px">
-              <el-form :inline="true" :model="search_data" size="small" label-width="140px">
+              <el-form :inline="true" :model="search_data" size="mini" label-width="140px">
                 <el-form-item label="输入搜索：">
                   <el-input v-model="search_data.customCondition" style="width: 203px" placeholder="账号或公司名称"/>
                 </el-form-item>

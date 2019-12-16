@@ -1,4 +1,6 @@
 import Vue from 'vue'
+// 将自动注册所有组件为全局组件
+import dataV from '@jiaminghi/data-view'
 
 import Cookies from 'js-cookie'
 
@@ -41,7 +43,7 @@ if (process.env.NODE_ENV === 'production') {
 Vue.use(Element, {
   size: Cookies.get('size') || 'mini', // set element-ui default size
   i18n: (key, value) => i18n.t(key, value)
-})
+},dataV)
 
 // register global utility filters
 Object.keys(filters).forEach(key => {

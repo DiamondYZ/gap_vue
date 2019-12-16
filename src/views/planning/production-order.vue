@@ -194,12 +194,50 @@ export default {
       pageTotal: 0, // 总条数
       statusDict: '', // 控制状态按钮  状态
       activeNames: [],
-      productionOrderFormConfigs
+      productionOrderFormConfigs,
+      tableTitle: []
     }
   },
   computed: {
     listeningClickDialog() {
       return this.$store.state.common.selectToGetOptionsProp
+    }
+  },
+  watch: {
+    listeningClickDialog(val) {
+      if (val) {
+        let param
+        let urlValue
+        if (val === 'productionBase') {
+          urlValue = 'production-base'
+        } else {
+          urlValue = val
+        }
+        param = {url: urlValue + '/getPullDownList'}
+        this.$store.dispatch('common/getSelectOptionsList', param).then((res) => {
+          if (val === 'productionBase') {
+            this.dialogProductionBaseInfo.selectOptions = res.data
+            this.dialogProductionBaseInfo.tableTitleList = [
+              {prop: 'number', name: '编号'},
+              {prop: 'name', name: '名称'},
+              {prop: 'description', name: '描述'}
+            ] // 表格头信息
+            this.$refs.dialogProductionBaseSelectTable.showTable()
+          }
+          if (val === 'product') {
+            this.dialogProductInfo.selectOptions = res.data
+            this.dialogProductInfo.tableTitleList = [
+              {prop: 'number', name: '编号'},
+              {prop: 'name', name: '名称'},
+              {prop: 'description', name: '描述'}
+            ] // 表格头信息
+            this.$refs.dialogProductSelectTable.showTable()
+          }
+        })
+          .catch(() => {
+
+          })
+      }
     }
   },
   mounted() {

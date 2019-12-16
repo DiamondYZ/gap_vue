@@ -259,7 +259,8 @@
   }
 
   .backgroundDiv{
-    backgroundImage:  '@/assets/login_center_bg.png'
+    /*backgroundImage:  '@/assets/login_center_bg.png'*/
+    backgroundImage:  '@/assets/bg.jpg'
   }
 </style>
 

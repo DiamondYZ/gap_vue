@@ -341,7 +341,7 @@ export const productionOrderFormConfigs = [
   },
   {
     type: 'select',
-    formItemProp: { label: '状态', prop: 'statusDict' },
+    formItemProp: { label: '状态', prop: 'statusDict', disable: true },
     optionList: setArrayMapVal(JSON.parse(localStorage.getItem('PRODUCTION_ORDER_STATUS')))
   }
 ]
