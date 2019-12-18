@@ -9,7 +9,8 @@ import {
   setDataState,
   getQiniuToken,
   selectSecondLevelTableList,
-  requestCustomMethod
+  requestCustomMethod,
+  hierachicalQuery
 } from '@/api/common'
 
 const state = {
@@ -96,7 +97,15 @@ const actions = {
   getPullDownList({ commit }, param) {
     commit('getPullDownList', param)
   },
-
+  hierachicalQuery({ commit }, param) {
+    return new Promise((resolve, reject) => {
+      getList(param).then(response => {
+        resolve(response)
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  },
   // 二级表格
   selectSecondLevelTableList({ dispatch, commit }, param) {
     return new Promise((resolve, reject) => {
@@ -143,7 +152,7 @@ const actions = {
       })
     })
   },
-  // 该数据状态
+  // 改数据状态
   setDataState({ commit }, param) {
     return new Promise((resolve, reject) => {
       setDataState(param).then(response => {
@@ -153,7 +162,7 @@ const actions = {
       })
     })
   },
-  // 该数据状态
+  // 获取七牛token
   getQiniuToken({ commit }, param) {
     return new Promise((resolve, reject) => {
       getQiniuToken(param).then(response => {

@@ -42,6 +42,7 @@
             return {
                 clickLineId: '',       //当前点击行id
                 clickLineName: '',       //当前点击行名称
+                clickLineCode: '',       //当前点击行代码
                 tableData: [],    //表格数据
                 loading: false,
                 nowPage: 1, //当前页
@@ -108,6 +109,7 @@
                 let param = {
                     id: this.clickLineId,
                     name: this.clickLineName,
+                    code: this.clickLineCode
                 }
                 this.$store.dispatch('common/setSelectedValue', param)
                     .then((res) => {

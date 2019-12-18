@@ -157,6 +157,24 @@ export function getProvinceList(param) {
   })
 }
 
+// 级联查询
+export function hierachicalQuery(param) {
+  const data = {
+    'entity': {
+      'superCode': param.superCode
+    }
+  }
+  if (store.getters.token) {
+    const userToken = getToken()
+    data.userToken = userToken
+  }
+  return request({
+    url: param.url,
+    method: 'post',
+    data
+  })
+}
+
 //调用特殊方法
 export function requestCustomMethod(param) {
   const data = param.data
@@ -170,4 +188,6 @@ export function requestCustomMethod(param) {
     data
   })
 }
+
+
 
