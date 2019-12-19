@@ -100,7 +100,7 @@
             showRowDetail(row) {
                 this.clickLineId = row.id
                 this.clickLineName = row.name
-                this.clickLineCode = row.provinceCode
+                this.clickLineCode = row.superCode
             },
             cancel() {
                 this.$store.dispatch('common/set_options_empty_value')

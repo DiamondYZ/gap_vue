@@ -760,6 +760,7 @@ export const productionBaseFormConfigs = [
   { type: 'dialog', formItemProp: { label: '负责人', prop: 'managerName', id: 'manager' }, elementProp: { size: 'mini' }},
   { type: 'dialog', formItemProp: { label: '省份', prop: 'provinceName', id: 'province' }, elementProp: { size: 'mini' }},
   { type: 'dialog', formItemProp: { label: '城市', prop: 'cityName', id: 'city' }, elementProp: { size: 'mini' }},
+  { type: 'dialog', formItemProp: { label: '区/县', prop: 'areaName', id: 'area' }, elementProp: { size: 'mini' }},
   // { type: 'input', formItemProp: { label: '省份', prop: 'province' }, elementProp: { size: 'mini' }},
   // { type: 'input', formItemProp: { label: '城市', prop: 'city' }, elementProp: { size: 'mini' }},
   // { type: 'input', formItemProp: { label: '区/县', prop: 'district' }, elementProp: { size: 'mini' }},

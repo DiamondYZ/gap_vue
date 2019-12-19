@@ -112,6 +112,12 @@
         :form-configs="productionBaseFormConfigs"
         :table-title="tableTitle"
       />
+      <dialog-table
+        ref="dialogAreaSelectTable"
+        :dialog-info="dialogAreaInfo"
+        :form-configs="productionBaseFormConfigs"
+        :table-title="tableTitle"
+      />
     </el-card>
   </div>
 </template>
@@ -155,6 +161,14 @@
           selectOptions: [],
           tableTitleList: []
         },
+        dialogAreaInfo: {
+          selectDialogTitle: '选择区县',
+          dialogAxiosName: 'area',
+          dialogId: 'areaId',
+          selectOptions: [],
+          tableTitleList: []
+        },
+
         search_data: {}, // 搜索条件
         clickLineId: '', // 当前点击行id
         deleteBtnDisabled: true, // 删除id
@@ -171,7 +185,7 @@
           {prop: 'altitude', name: '海拔'},
           {prop: 'provinceName', name: '省份'},
           {prop: 'cityName', name: '城市'},
-          {prop: 'districtName', name: '区/县'},
+          {prop: 'areaName', name: '区/县'},
           // {prop: 'streetName', name: '街道(乡镇)'},
           {prop: 'lat', name: '纬度'},
           {prop: 'lng', name: '经度'},
@@ -202,12 +216,15 @@
           if (val === 'manager') {
             urlValue = 'staff'
           }
-          if (val === 'city'){
-            param = {url: urlValue + '/getPullDownList',param:{"provinceCode":this.$store.state.common.selectedValue.code}}
-          }else{
+          if (val === 'city' || val == 'area') {
+            param = {
+              url: urlValue + '/getPullDownList',
+              param: {"superCode": this.$store.state.common.selectedValue.code}
+            }
+          } else {
             param = {url: urlValue + '/getPullDownList'}
           }
-          param = {url: urlValue + '/getPullDownList'}
+          // param = {url: urlValue + '/getPullDownList'}
           this.$store.dispatch('common/getSelectOptionsList', param).then((res) => {
             if (val === 'manager') {
               this.dialogStaffInfo.selectOptions = res.data
@@ -239,6 +256,15 @@
                 {prop: 'cityCode', name: '代码'},
               ] // 表格头信息
               this.$refs.dialogCitySelectTable.showTable()
+            }
+            if (val === 'area') {
+              this.dialogAreaInfo.selectOptions = res.data
+              this.dialogAreaInfo.tableTitleList = [
+                {prop: 'areaName', name: '名称'},
+                {prop: 'shortName', name: '简称'},
+                {prop: 'areaCode', name: '代码'},
+              ] // 表格头信息
+              this.$refs.dialogAreaSelectTable.showTable()
             }
           })
             .catch(() => {
