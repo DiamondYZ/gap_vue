@@ -196,15 +196,16 @@ export default {
       const key2 = this.$store.state.common.selectToGetOptionsProp + 'Name'
       this.form[key1] = val.id
       this.form[key2] = val.name
+      this.$forceUpdate();
     }
   },
   created() {
     this.getQiniuToken()
     this.img_url = this.formData.picPath
-    console.log(this.formStatus)
   },
   methods: {
     getFormItemBind(props) {
+      if (typeof callback === 'function') callback()
       const bind = Object.assign({}, props)
       return bind
     },
@@ -232,7 +233,6 @@ export default {
       if (typeof callback === 'function') callback()
     },
     handleChange(data) {
-      console.log(data)
       this.form.account = data
     },
     setSelectId(prop) {

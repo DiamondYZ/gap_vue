@@ -98,9 +98,14 @@ export function getPullDownList(param) {
   })
 }
 // 部门等下拉取值
-export function getSelectList(url) {
-  const data = {
+export function getSelectList(url, param) {
+  let data = {
     'entity': {}
+  }
+  if(param){
+    data = {
+      'entity': param
+    }
   }
   if (store.getters.token) {
     const userToken = getToken()

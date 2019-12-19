@@ -145,11 +145,24 @@ const actions = {
   // 取下拉数据
   getSelectOptionsList({ dispatch, commit }, param) {
     return new Promise((resolve, reject) => {
-      getSelectList(param.url).then(response => {
-        resolve(response)
-      }).catch(error => {
-        reject(error)
-      })
+      // getSelectList(param.url).then(response => {
+      //   resolve(response)
+      // }).catch(error => {
+      //   reject(error)
+      // })
+      if(param.param){
+        getSelectList(param.url,param.param).then(response => {
+          resolve(response)
+        }).catch(error => {
+          reject(error)
+        })
+      }else{
+        getSelectList(param.url).then(response => {
+          resolve(response)
+        }).catch(error => {
+          reject(error)
+          })
+      }
     })
   },
   // 改数据状态

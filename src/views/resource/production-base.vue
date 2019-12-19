@@ -58,7 +58,7 @@
             ref="handSelect_multipleTable"
             v-loading="loading"
             :data="tableData"
-            :cell-style="rowStyle"
+            highlight-current-row
             border
             style="width: 100%"
             size="mini"
@@ -201,6 +201,11 @@
           let param
           if (val === 'manager') {
             urlValue = 'staff'
+          }
+          if (val === 'city'){
+            param = {url: urlValue + '/getPullDownList',param:{"provinceCode":this.$store.state.common.selectedValue.code}}
+          }else{
+            param = {url: urlValue + '/getPullDownList'}
           }
           param = {url: urlValue + '/getPullDownList'}
           this.$store.dispatch('common/getSelectOptionsList', param).then((res) => {

@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <el-dialog :title="dialogInfo.selectDialogTitle" :visible.sync="dialogTableVisible">
+    <el-dialog :title="dialogInfo.selectDialogTitle" :visible.sync="dialogTableVisible" :before-close="cancel">
       <div class="table_container">
 
         <el-table v-loading="loading" :data="dialogInfo.selectOptions" :cell-style="rowStyle" border style="width: 100%"
@@ -100,6 +100,7 @@
             showRowDetail(row) {
                 this.clickLineId = row.id
                 this.clickLineName = row.name
+                this.clickLineCode = row.provinceCode
             },
             cancel() {
                 this.$store.dispatch('common/set_options_empty_value')
